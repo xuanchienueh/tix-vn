@@ -1,0 +1,182 @@
+#header-diner {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      .navbar {
+          justify-content: space-between;
+          width: 90%;
+          margin: 0 auto;
+          .navbar-brand {
+              font-size: 3rem;
+              color: $text-white1;
+              font-weight: $fw-1;
+          }
+      }
+      .search_menu {
+          display: inline-flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 0 1rem;
+          .change_theme,
+          .menu {
+              width: 40px;
+              height: 40px;
+              background-color: transparent;
+              border: none;
+              i {
+                  font-size: 2rem;
+                  color: white;
+              }
+          }
+          .change_theme {
+              .fa-moon {
+                  display: none;
+              }
+          }
+          .form-inline {
+              display: inline-flex;
+              justify-content: center;
+              align-items: center;
+              background-color: $bg-dark1;
+              height: 3.4rem;
+              border-radius: $radius;
+              button,
+              input {
+                  color: $text-white2;
+                  border: none;
+              }
+              input {
+                  margin-right: 0 !important;
+                  background-color: transparent;
+                  border: 0px solid;
+                  padding: 10px 10px 10px 20px;
+                  font-size: 1.3rem;
+                  &:focus {
+                      box-shadow: none;
+                  }
+              }
+          }
+          .modal {
+              background-color: rgba(0, 0, 0, 0.5);
+              .modal-dialog {
+                  max-width: 100%;
+              }
+          }
+          #menu_Modal .modal-content {
+              background-color: transparent;
+              border: none;
+              .modal-header {
+                  border-bottom: none;
+                  margin-right: 40px;
+                  .close {
+                      background-color: $primary-color;
+                      color: $text-white1;
+                      opacity: 1;
+                      border-radius: $radius;
+                      position: relative;
+                      i {
+                          text-align: center;
+                          position: absolute;
+                          transform: translate(-50%, -50%);
+                          font-size: 1.5rem;
+                      }
+                  }
+              }
+              .modal-body {
+                  text-align: center;
+                  line-height: 3rem;
+                  li {
+                      width: 200px;
+                      margin: 8px auto;
+                      &:hover a {
+                          color: $primary-color;
+                      }
+                      a {
+                          color: $text-white1;
+                          font-size: 1.5rem;
+                          font-weight: $fw-1;
+                          width: 100%;
+                          display: block;
+                      }
+                  }
+              }
+          }
+      }
+  }
+
+  // start cài đặt responsive
+ $res_mobile: "only screen and (max-width: 767px)";
+ $res_tablet: "only screen and (min-width: 768px) and (max-width: 991px)";
+ $res_PC: "only screen and (min-width: 992px)";
+ @mixin responsive_mobile() {
+     @media #{$res_mobile} {
+         @content;
+     }
+ }
+ @mixin responsive_tablet() {
+     @media #{$res_tablet} {
+         @content;
+     }
+ }
+ @mixin responsive_PC() {
+     @media #{$res_PC} {
+         @content;
+     }
+ }
+ // end cài đặt responsive
+ @include responsive_mobile {
+    #header-diner {
+        .form-inline {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        .search_menu {
+            #menu_Modal .modal-content {
+                .modal-header {
+                    margin-top: 40px;
+                    .close {
+                        height: 40px;
+                        width: 40px;
+                    }
+                }
+            }
+        }
+    }
+ }
+@include responsive_tablet {
+      #banner {
+            height: 600px;
+            background-position: left;
+            .banner_content {
+                top: 220px;
+                left: 50%;
+                transform: translateX(-50%);
+                h3 {
+                    font-size: 2.5rem;
+                }
+                button {
+                    padding: 0.7rem 2.5rem;
+                    border: 2px solid $text-white1;
+                }
+            }
+        }
+}
+@include responsive_PC {
+      .row {
+            max-width: 1200px;
+        }
+        #header-diner {
+            .search_menu {
+                #menu_Modal .modal-content {
+                    .modal-header .close {
+                        height: 50px;
+                        width: 50px;
+                    }
+                }
+            }
+        }
+       
+}

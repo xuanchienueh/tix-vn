@@ -1,0 +1,121 @@
+#banner {
+      width: 100%;
+      background-image: linear-gradient(to right, #ff6600, rgba(5, 3, 0, 0.2)), url("https://demo.w3layouts.com/demos_new/template_demo/01-02-2021/diner-liberty-demo_Free/668605264/web/assets/images/banner1.jpg");
+      background-size: cover;
+      height: 800px;
+      background-attachment: fixed;
+      .banner_content {
+          position: absolute;
+          .banner_content_primary {
+              h3 {
+                  font-weight: $fw-1;
+              }
+              p {
+                  color: $text-white1;
+                  font-size: 1.3rem;
+                  line-height: 1.8;
+                  margin-top: 2rem;
+              }
+              button {
+                  &:hover span,
+                  &:hover i {
+                      color: $primary-color;
+                  }
+                  span,
+                  i {
+                      font-size: 1.5rem;
+                      font-weight: $fw-1;
+                      color: $text-white1;
+                  }
+              }
+          }
+      }
+  }
+ // start cài đặt responsive
+ $res_mobile: "only screen and (max-width: 767px)";
+ $res_tablet: "only screen and (min-width: 768px) and (max-width: 991px)";
+ $res_PC: "only screen and (min-width: 992px)";
+ @mixin responsive_mobile() {
+     @media #{$res_mobile} {
+         @content;
+     }
+ }
+ @mixin responsive_tablet() {
+     @media #{$res_tablet} {
+         @content;
+     }
+ }
+ @mixin responsive_PC() {
+     @media #{$res_PC} {
+         @content;
+     }
+ }
+ // end cài đặt responsive
+ @include responsive_mobile {
+      #banner {
+            height: 450px;
+            background-position: left;
+            .banner_content {
+                top: 115px;
+                left: 20px;
+            }
+        }
+ }
+@include responsive_tablet {
+      #banner {
+            height: 600px;
+            background-position: left;
+            .banner_content {
+                top: 220px;
+                left: 50%;
+                transform: translateX(-50%);
+                h3 {
+                    font-size: 2.5rem;
+                }
+                button {
+                    padding: 0.7rem 2.5rem;
+                    border: 2px solid $text-white1;
+                }
+            }
+        }
+}
+@include responsive_PC {
+      .row {
+            max-width: 1200px;
+        }
+        #banner {
+            height: 100vh;
+            background-position: center;
+            .banner_content {
+                top: 220px;
+                left: 50%;
+                transform: translateX(-50%);
+                .banner_content_primary {
+                    width: 90%;
+                    margin: 0 auto;
+                    padding-left: 16px;
+                }
+                h3 {
+                    font-size: 3.5rem;
+                }
+                p,
+                h3 {
+                    max-width: 600px;
+                }
+                button {
+                    padding: 1rem 3rem;
+                    border: 3px solid $text-white1;
+                    &:hover span,
+                    &:hover i {
+                        color: $primary-color;
+                    }
+                    span,
+                    i {
+                        font-size: 1.5rem;
+                        font-weight: $fw-1;
+                        color: $text-white1;
+                    }
+                }
+            }
+        }
+}

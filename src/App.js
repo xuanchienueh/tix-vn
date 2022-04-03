@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Header_home from "./components/header/Header_home";
+// import {  } from "reactstrap";
+import "./App.css";
+import Banner from "./components/banner";
+import About_us from "./components/About_us";
+import Restaurant from "./components/Restaurant";
+import Category from "./components/Category";
+import List_food from "./components/List_food";
+import Delicious from "./components/Delicious";
+import Blog_post from "./components/Blog_post";
+import Testimonials from "./components/Testimonials";
+import DemoUseTrail from "./react-spring/DemoUseTrail";
+import DemoUseTransition from "./react-spring/DemoUseTransition";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header_home />
+      <Banner />
+      <About_us />
+      <Restaurant />
+      <Category />
+      <List_food />
+      <Delicious />
+      <Blog_post />
+      <Testimonials />
+    </>
   );
 }
 
