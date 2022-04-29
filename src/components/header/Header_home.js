@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../../style/main.scss";
 import { Modal } from "react-bootstrap";
+import "../../style/main.scss";
 
 export default function Header_home() {
   const [show, setShow] = useState(false);
