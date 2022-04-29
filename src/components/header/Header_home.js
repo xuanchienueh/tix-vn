@@ -1,8 +1,11 @@
-import React from "react";
-// import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import React, { useState } from "react";
 import "../../style/main.scss";
+import { Modal } from "react-bootstrap";
 
 export default function Header_home() {
+  const [show, setShow] = useState(false);
+  let close = () => setShow(false);
+
   return (
     <header id="header-diner" className="container">
       <nav className="navbar navbar-expand-sm navbar-expand-md navbar-expand-lg">
@@ -25,56 +28,68 @@ export default function Header_home() {
             <i className="far fa-sun" />
             <i className="far fa-moon" />
           </button>
-          <button
-            className="menu"
-            data-toggle="modal"
-            data-target="#menu_Modal"
-          >
+          <button className="menu" onClick={() => setShow(!show)}>
             <i className="fas fa-bars" />
           </button>
           <div className="modal" id="menu_Modal">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                {/* Modal Header */}
-                <div className="modal-header">
-                  <button type="button" className="close" data-dismiss="modal">
-                    <i className="fas fa-times" />
-                  </button>
-                </div>
-                {/* Modal body */}
+            <Modal show={show} onHide={close}>
+              <Modal.Header className="modal-header">
+                <button type="button" className="close mr-5" onClick={close}>
+                  <i className="fas fa-times" />
+                </button>
+              </Modal.Header>
+              <Modal.Body>
                 <div className="modal-body">
                   <ul>
-                    <li>
-                      <a href="#">Home</a>
+                    <li className="text-center py-3">
+                      <a className="text-white font-weight-bold" href="#">
+                        Home
+                      </a>
                     </li>
-                    <li>
-                      <a href="#">About</a>
+                    <li className="text-center py-3">
+                      <a className="text-white font-weight-bold" href="#">
+                        About
+                      </a>
                     </li>
-                    <li>
-                      <a href="#">Services</a>
+                    <li className="text-center py-3">
+                      <a className="text-white font-weight-bold" href="#">
+                        Services
+                      </a>
                     </li>
-                    <li>
-                      <a href="#">Blog</a>
+                    <li className="text-center py-3">
+                      <a className="text-white font-weight-bold" href="#">
+                        Blog
+                      </a>
                     </li>
-                    <li>
-                      <a href="#">404</a>
+                    <li className="text-center py-3">
+                      <a className="text-white font-weight-bold" href="#">
+                        404
+                      </a>
                     </li>
-                    <li>
-                      <a href="#">Landing Page</a>{" "}
+                    <li className="text-center py-3">
+                      <a className="text-white font-weight-bold" href="#">
+                        Landing Page
+                      </a>
                     </li>
-                    <li>
-                      <a href="#">Contact</a>
+                    <li className="text-center py-3">
+                      <a className="text-white font-weight-bold" href="#">
+                        Contact
+                      </a>
                     </li>
-                    <li>
-                      <a href="#">Shot Codes</a>{" "}
+                    <li className="text-center py-3">
+                      <a className="text-white font-weight-bold" href="#">
+                        Shot Codes
+                      </a>
                     </li>
-                    <li>
-                      <a href="#">Email</a>
+                    <li className="text-center py-3">
+                      <a className="text-white font-weight-bold" href="#">
+                        Email
+                      </a>
                     </li>
                   </ul>
                 </div>
-              </div>
-            </div>
+              </Modal.Body>
+            </Modal>
           </div>
         </div>
       </nav>

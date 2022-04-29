@@ -1,0 +1,28 @@
+.modal-dialog {
+  max-width: 100%;
+  .modal-content {
+    background-color: transparent;
+    border: none;
+    .modal-header {
+      border: none;
+      button.close {
+        background-color: $primary-color;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        color: white;
+        opacity: 1;
+      }
+    }
+    .modal-body {
+      ul li {
+        a {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+.modal-backdop.show {
+  opacity: 0.7;
+}

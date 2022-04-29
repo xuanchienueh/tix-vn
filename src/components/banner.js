@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Banner() {
-  console.log("banner render");
   return (
     <section id="banner">
       <div className="banner_content container">
