@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import FBreducer from "./reducer/FBreducer";
+import themeReducer from "./reducer/themeReducer";
 
 const rootReducer = combineReducers({
-  FBreducer: FBreducer,
+  themeReducer: themeReducer,
 });
 
 export default rootReducer;

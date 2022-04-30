@@ -1,4 +1,4 @@
-export const add_action = (payload) => ({
-  type: "add",
+export const change_theme = (payload) => ({
+  type: "theme_theme",
   payload,
 });

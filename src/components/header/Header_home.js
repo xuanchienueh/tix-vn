@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import "../../style/main.scss";
 
-export default function Header_home() {
+export default function Header_home(props) {
   const [show, setShow] = useState(false);
+  let backgroundTheme = useSelector((state) => state.themeReducer.theme);
   let close = () => setShow(false);
+  const dispatch = useDispatch();
+  const handleTheme = () => {
+    backgroundTheme === "dark"
+      ? (backgroundTheme = "light")
+      : (backgroundTheme = "dark");
+    dispatch({ type: "change_theme", payload: backgroundTheme });
+  };
 
   return (
     <header id="header-diner" className="container">
@@ -24,8 +33,8 @@ export default function Header_home() {
               <i className="fas fa-search" />
             </button>
           </form>
-          <button className="change_theme">
-            <i className="far fa-sun" />
+          <button className="change_theme" onClick={handleTheme}>
+            <i className="fas fa-sun" />
             <i className="far fa-moon" />
           </button>
           <button className="menu" onClick={() => setShow(!show)}>

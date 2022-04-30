@@ -1,95 +1,111 @@
 #about_us {
-      background-color: $bg-dark3;
-      width: 100%;
-      .about_us {
-          width: 90%;
-          margin: 0 auto;
-          display: flex;
-          justify-content: space-between;
-          .about_title {
-              h3 {
-                  color: $text-white1;
-                  font-weight: $fw-1;
-              }
-              p {
-                  color: $primary-color;
-                  font-family: "Pacifico", cursive;
-              }
-          }
-          .about_content {
-              p,
-              span {
-                  color: $text-white2;
-              }
-          }
+  background-color: $bg-dark3;
+  width: 100%;
+  .about_us {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    .about_title {
+      h3 {
+        color: $text-white1;
+        font-weight: $fw-1;
       }
+      p {
+        color: $primary-color;
+        font-family: "Pacifico", cursive;
+      }
+    }
+    .about_content {
+      p,
+      span {
+        color: $text-white2;
+      }
+    }
   }
-  // start cài đặt responsive
+}
+.app_main.light {
+  #about_us {
+    background-color: $text-white1;
+    .about_title {
+      h3 {
+        color: $bg-dark1;
+      }
+    }
+    .about_content {
+      p,
+      span {
+        color: $bg-dark1;
+      }
+    }
+  }
+}
+// start cài đặt responsive
 $res_mobile: "only screen and (max-width: 767px)";
 $res_tablet: "only screen and (min-width: 768px) and (max-width: 991px)";
 $res_PC: "only screen and (min-width: 992px)";
 @mixin responsive_mobile() {
-    @media #{$res_mobile} {
-        @content;
-    }
+  @media #{$res_mobile} {
+    @content;
+  }
 }
 @mixin responsive_tablet() {
-    @media #{$res_tablet} {
-        @content;
-    }
+  @media #{$res_tablet} {
+    @content;
+  }
 }
 @mixin responsive_PC() {
-    @media #{$res_PC} {
-        @content;
-    }
+  @media #{$res_PC} {
+    @content;
+  }
 }
 // end cài đặt responsive
 @include responsive_mobile {
-      #about_us {
-            .about_us {
-                padding: 50px 0;
-                .about_title {
-                    h3 {
-                        font-size: 1.5rem;
-                    }
-                    p {
-                        font-size: 1.3rem;
-                    }
-                }
-                .about_content {
-                    p,
-                    span {
-                        font-size: 1rem;
-                    }
-                }
-            }
+  #about_us {
+    .about_us {
+      padding: 50px 0;
+      .about_title {
+        h3 {
+          font-size: 1.5rem;
         }
+        p {
+          font-size: 1.3rem;
+        }
+      }
+      .about_content {
+        p,
+        span {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
 }
 @include responsive_tablet {
-      #about_us {
-            .about_us {
-                padding: 100px 0;
-            }
-        }
+  #about_us {
+    .about_us {
+      padding: 100px 0;
+    }
+  }
 }
 @include responsive_PC {
-      #about_us {
-            .about_us {
-                padding: 100px 0;
-                .about_title {
-                    h3 {
-                        font-size: 3rem;
-                    }
-                    p {
-                        font-size: 1.5rem;
-                    }
-                }
-                .about_content {
-                    p,
-                    span {
-                        font-size: 1.5rem;
-                    }
-                }
-            }
+  #about_us {
+    .about_us {
+      padding: 100px 0;
+      .about_title {
+        h3 {
+          font-size: 3rem;
         }
+        p {
+          font-size: 1.5rem;
+        }
+      }
+      .about_content {
+        p,
+        span {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
 }

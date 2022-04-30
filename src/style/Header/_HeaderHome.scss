@@ -61,6 +61,17 @@
   }
 }
 
+// css cho them light
+.app_main.light {
+  #header-diner {
+    .form-inline {
+      background-color: white;
+      button {
+        color: $bg-dark1;
+      }
+    }
+  }
+}
 // start cài đặt responsive
 $res_mobile: "only screen and (max-width: 767px)";
 $res_tablet: "only screen and (min-width: 768px) and (max-width: 991px)";
