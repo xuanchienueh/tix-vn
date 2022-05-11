@@ -1,0 +1,11 @@
+.cardParent {
+  .datVe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    cursor: pointer;
+    color: white;
+    z-index: 2;
+  }
+}
