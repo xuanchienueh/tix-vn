@@ -1,4 +1,16 @@
 .cardParent {
+  cursor: pointer;
+  &:hover {
+    .datVe {
+      transform: scale(1);
+    }
+    span {
+      opacity: 0;
+    }
+    .openTrailer {
+      transform: scale(1);
+    }
+  }
   .datVe {
     display: flex;
     align-items: center;
@@ -7,5 +19,15 @@
     cursor: pointer;
     color: white;
     z-index: 2;
+    transform: scale(0);
+    transition: all 0.2s;
+  }
+  .openTrailer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    transition: all 0.2s;
   }
 }

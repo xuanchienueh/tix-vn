@@ -15,11 +15,20 @@ export default function CardAntd({ props }) {
     <div
       className={`max-w-xs p-3 rounded-md shadow-md bg-coolGray-50 text-coolGray-900 ${customCss["cardParent"]}`}
     >
-      <img
-        src={props.hinhAnh}
-        alt="1"
-        className="object-cover object-center w-full rounded-md h-72 bg-coolGray-500"
-      />
+      <div className={` relative`}>
+        <div
+          className={`${customCss["openTrailer"]} bg-gradient-to-t from-gray-800  inset-0`}
+        >
+          <div className="w-10 h-10 rounded-full border-solid border-2 border-white text-white flex items-center justify-center">
+            <i class="fas fa-play"></i>
+          </div>
+        </div>
+        <img
+          src={props.hinhAnh}
+          alt="1"
+          className="object-cover object-center w-full rounded-md h-72 bg-coolGray-500"
+        />
+      </div>
       <div className="mt-6 mb-2 flex align-items-center relative">
         <div
           class={`${customCss["datVe"]}  py-3 font-semibold rounded bg-[#fb4226] inset-0`}
