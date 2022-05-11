@@ -1,0 +1,24 @@
+.homepage {
+  .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list {
+    justify-content: center;
+  }
+  .ant-tabs-ink-bar {
+    display: none;
+  }
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: orangered;
+    font-weight: 600;
+  }
+
+  //   .ant-tabs-tab-btn:focus {
+  //     color: transparent;
+  //   }
+  .ant-tabs-tab {
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    &:hover {
+      transform: scale(1.2);
+      color: inherit;
+    }
+  }
+}

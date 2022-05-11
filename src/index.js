@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import "./index.css";
+import "antd/dist/antd.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import rootReducer from "./redux/rootReducer";
-const store = createStore(rootReducer);
+import { store } from "./redux/types/configStore";
+import "./index.css";
 
 ReactDOM.render(
   <Provider store={store}>
