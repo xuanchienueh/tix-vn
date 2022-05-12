@@ -7,7 +7,7 @@ import {
 const initialStateCarousel = {
   carousel: [],
   danhSachPhim: [],
-  openTrailer: { open: false, link: "", domElement: "" },
+  openTrailer: { link: "", domButtonOpenTrailer: "" },
 };
 
 const CarouselReducer = (state = initialStateCarousel, { type, payload }) => {
@@ -15,20 +15,17 @@ const CarouselReducer = (state = initialStateCarousel, { type, payload }) => {
     case GET_CAROUSEL:
       state.carousel = payload;
       return { ...state };
+
     case LAY_DANH_SACH_PHIM:
       return { ...state, danhSachPhim: payload };
 
-    case OPEN_MODAL_YOUTUBE: {
-      state.openTrailer.open = payload.open;
+    case OPEN_MODAL_YOUTUBE:
       state.openTrailer.link = payload.link;
-      if (payload.domElement) {
-        state.openTrailer.domElement = payload.domElement;
-      } else {
-        state.openTrailer.domElement = "";
+      if (payload.domButtonOpenTrailer) {
+        state.openTrailer.domButtonOpenTrailer = payload.domButtonOpenTrailer;
       }
-
       return { ...state };
-    }
+
     default:
       return state;
   }

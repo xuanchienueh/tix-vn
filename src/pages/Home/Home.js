@@ -7,6 +7,7 @@ import "./Home.scss";
 import { useDispatch } from "react-redux";
 import { layDanhSachPhim } from "../../redux/actions/CarouselAction/carousel";
 import ListMovie from "./ListMovie/ListMovie";
+import PageModal from "../Modal/PageModal";
 
 const { TabPane } = Tabs;
 
@@ -17,6 +18,7 @@ export default function Home(props) {
   const DangChieu = (value) => setDangChieu(value);
   return (
     <div className="homepage">
+      <PageModal />
       <div className="xl:max-w-[1100px] mx-auto">
         <Tabs defaultActiveKey="1" centered>
           <TabPane
