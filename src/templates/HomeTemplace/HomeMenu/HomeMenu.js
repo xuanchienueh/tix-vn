@@ -1,55 +1,33 @@
 import React, { useState } from "react";
-import { Tabs } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 
+import { Tabs } from "antd";
+import "antd/dist/antd.css";
+import "./HomeMenu.scss";
+import CumRap from "./CumRap";
 const { TabPane } = Tabs;
 
 export default function HomeMenu() {
-  const [state, setState] = useState({ tabPosition: "left" });
-
-  const { tabPosition } = state;
+  const { heThongRap } = useSelector((state) => state.QuanLyRapReducer);
+  function callback(key) {}
+  const renderHeThongRap = () =>
+    heThongRap.map((item) => {
+      return (
+        <TabPane
+          tab={<img width={50} src={item.logo} />}
+          key={item.maHeThongRap}
+        >
+          <CumRap props={item.lstCumRap} />
+        </TabPane>
+      );
+    });
+  console.log("component cha render");
+  console.log(heThongRap);
   return (
-    <>
-      <Tabs tabPosition={tabPosition}>
-        <TabPane
-          tab={
-            <img
-              src="https://haycafe.vn/wp-content/uploads/2022/02/Anh-avatar-ngau-chat-hinh-dai-dien-ngau.jpg"
-              className="rounded-full"
-              width={100}
-              height={50}
-            />
-          }
-          key="1"
-        >
-          Content of Tab 1
-        </TabPane>
-        <TabPane
-          tab={
-            <img
-              src="https://haycafe.vn/wp-content/uploads/2022/02/Hinh-anh-avatar-chat-ngau-quai-vat-tim.jpg"
-              className="rounded-full"
-              width={100}
-              height={50}
-            />
-          }
-          key="2"
-        >
-          Content of Tab 2
-        </TabPane>
-        <TabPane
-          tab={
-            <img
-              src="https://haycafe.vn/wp-content/uploads/2022/02/Hinh-anh-avatar-chat-ngau-ngam-la-bai.jpg"
-              className="rounded-full"
-              width={100}
-              height={50}
-            />
-          }
-          key="3"
-        >
-          Content of Tab 3
-        </TabPane>
+    <div className={`pr-0 container h-[500px] homeMenuscss overflow-y-scroll`}>
+      <Tabs defaultActiveKey="1" tabPosition="left" onTabClick={callback}>
+        {renderHeThongRap()}
       </Tabs>
-    </>
+    </div>
   );
 }

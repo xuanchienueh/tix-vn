@@ -59,8 +59,8 @@ export default function ListMovie({ props }) {
     <div className="relative">
       <div className="container px-[60px]">
         <Slider {...settings}>
-          {/* {props ? renderFilm(arrFilmDangChieu) : renderFilm(arrFilmSapChieu)} */}
-          {renderFilm(arrFilm)}
+          {props ? renderFilm(arrFilmDangChieu) : renderFilm(arrFilmSapChieu)}
+          {/* {renderFilm(arrFilm)} */}
         </Slider>
       </div>
     </div>

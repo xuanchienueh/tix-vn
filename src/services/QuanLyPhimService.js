@@ -8,7 +8,7 @@ export class QuanLyPhimService extends BaseServices {
   };
 
   LayDanhSachPhim = () => {
-    return this.get("/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP04");
+    return this.get("/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP03");
   };
 }
 export const qlPhimService = new QuanLyPhimService();
