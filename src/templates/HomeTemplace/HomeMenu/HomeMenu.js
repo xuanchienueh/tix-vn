@@ -21,10 +21,10 @@ export default function HomeMenu() {
         </TabPane>
       );
     });
-  console.log("component cha render");
-  console.log(heThongRap);
   return (
-    <div className={`pr-0 container h-[500px] homeMenuscss overflow-y-scroll`}>
+    <div
+      className={`pr-0  h-[500px] homeMenuscss overflow-y-scroll hidden xl:block`}
+    >
       <Tabs defaultActiveKey="1" tabPosition="left" onTabClick={callback}>
         {renderHeThongRap()}
       </Tabs>

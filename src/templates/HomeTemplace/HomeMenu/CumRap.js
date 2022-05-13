@@ -1,8 +1,6 @@
 import React, { memo } from "react";
 import { Tabs } from "antd";
 import "antd/dist/antd.css";
-import { layThongTinCumRap } from "../../../redux/actions/QuanLyRapAction/ActionName";
-import { LAY_THONG_TIN_CUM_RAP } from "../../../redux/actions/QuanLyRapAction/ConstName";
 import { NavLink } from "react-router-dom";
 import moment from "moment";
 const { TabPane } = Tabs;
@@ -20,8 +18,6 @@ const styleCss = {
 };
 
 function CumRap({ props }) {
-  console.log(props);
-
   return (
     <Tabs tabPosition="left" tabBarStyle={{ width: "400px" }}>
       {props.length > 0 &&
@@ -45,9 +41,18 @@ function CumRap({ props }) {
                 <div className="max-w-sm w-full lg:max-w-full lg:flex mt-2">
                   <div
                     className="h-14 lg:h-14 lg:w-12 flex-none bg-cover  lg:rounded-t-none text-center overflow-hidden"
-                    style={{ backgroundImage: `url("${phim.hinhAnh}")` }}
-                    title="Woman holding a mug"
-                  ></div>
+                    // style={{ backgroundImage: `url("${phim.hinhAnh}")` }}
+                  >
+                    <img
+                      src={phim.hinhAnh}
+                      alt={phim.tenPhim}
+                      onError={(e) => (
+                        (e.target.onerror = null),
+                        (e.target.src =
+                          "https://www.rabrotech.com/upload/default/image-not-found.png")
+                      )}
+                    />
+                  </div>
                   <div className="flex-grow border-gray-400 lg:border-l-0  lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-0 flex flex-col justify-between leading-normal ml-3">
                     <div>
                       <NavLink

@@ -40,7 +40,7 @@ export default function Home(props) {
           </TabPane>
         </Tabs>
       </div>
-      <div className="container">
+      <div className="container mx-auto xl:px-[80px]">
         <HomeMenu />
       </div>
     </div>
