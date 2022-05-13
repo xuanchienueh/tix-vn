@@ -68,6 +68,8 @@ export default function ListMovie({ props }) {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          nextArrow: <div />,
+          prevArrow: <div />,
         },
       },
     ],
