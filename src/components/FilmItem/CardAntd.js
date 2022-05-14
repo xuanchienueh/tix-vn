@@ -6,9 +6,9 @@ import { OPEN_MODAL_YOUTUBE } from "../../redux/actions/CarouselAction/ActionNam
 import customCss from "./CardAntd.module.scss";
 const styleCss = {
   display: "-webkit-box",
-  height: "1rem",
+  height: "1.3rem",
   fontSize: "1rem",
-  lineHeight: "1",
+  lineHeight: "1.8",
   WebkitLineClamp: "1" /* số dòng hiển thị */,
   WebkitBoxOrient: "vertical",
   overflow: "hidden",

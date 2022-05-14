@@ -17,10 +17,11 @@ const styleNotBlur = {
   color: "white",
   fontWeight: "bold",
   position: "absolute",
-  top: "6%",
+  top: "7%",
   left: "0px",
   zIndex: "1",
   width: "100%",
+  height: "106%",
 };
 
 export default function Detail() {
