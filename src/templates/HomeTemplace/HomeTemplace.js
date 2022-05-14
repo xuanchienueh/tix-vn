@@ -13,7 +13,6 @@ export const HomeTemplace = (props) => {
         return (
           <Fragment>
             <Header {...propsRoute} />
-            <HomeCarousel />
 
             <Component {...propsRoute} />
 

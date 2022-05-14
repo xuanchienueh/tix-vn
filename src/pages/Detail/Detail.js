@@ -1,38 +1,89 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Rate } from "antd";
+import { LayThongTinLichChieuPhim } from "../../redux/actions/QuanLyRapAction/ActionName";
+import LichChieuDetail from "./LichChieuDetail";
+const styleBlur = {
+  filter: "blur(3px)",
+  WebkitFilter: "blur(3px)",
+  height: "1000px",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+};
+const styleNotBlur = {
+  backgroundColor: "rgba(0,0,0,0.4)",
+  color: "white",
+  fontWeight: "bold",
+  position: "absolute",
+  top: "6%",
+  left: "0px",
+  zIndex: "1",
+  width: "100%",
+};
 
 export default function Detail() {
   let { id } = useParams();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(LayThongTinLichChieuPhim(id));
+    window.scrollTo(0, 10);
+  }, [id]);
+  let { ThongTinLichChieuPhim } = useSelector(
+    (state) => state.QuanLyRapReducer
+  );
+  // console.log(ThongTinLichChieuPhim);
 
   return (
-    <div className="mt-16 h-[700px]">
-      <section className="bg-coolGray-100 text-coolGray-800 mt-32">
-        <div className="container flex flex-col mx-auto lg:flex-row">
-          <div className="w-full lg:w-1/3">
-            <img
-              src="https://cdn.tgdd.vn/Files/2020/06/08/1261696/moi-tai-bo-hinh-nen-asus-rog-2020-moi-nhat_800x450.jpg"
-              alt="1"
-            />
-          </div>
-          <div className="flex w-full p-6 lg:w-2/3 md:p-8 lg:p-12">
-            <div>
-              <h2 className="text-3xl font-semibold leading-none">Kẻ thứ ba</h2>
-              <p className="mt-4 mb-8 text-sm">Tình trạng: Đang chiếu</p>
-              <p>
-                Kẻ Thứ 3 là bộ phim kể về hành trình tìm cách cứu vợ của Quang
-                Kha khi anh nhận ra anh đang có cơ hội rất lớn trong việc thay
-                đổi quá khứ, giúp người vợ của mình có thể sống lại. Nhưng trong
-                hành trình cứu vợ đó, anh đã khám phá ra những góc khuất của
-                người vợ mà anh rất mực yêu thương, vậy liệu anh có còn muốn cứu
-                vợ mình?
-              </p>
+    <>
+      <div
+        className="pt-0 lg:pt-20 relative "
+        style={{
+          ...styleBlur,
+          backgroundImage: `url("${ThongTinLichChieuPhim.hinhAnh}")`,
+        }}
+      ></div>
+      <div style={{ ...styleNotBlur }}>
+        <div className="container mx-auto">
+          <div className="py-20 lg:py-20 px-4 md:px-4  w-full lg:max-w-full md:flex items-center">
+            <div className=" w-60 mx-auto md:w-72 lg:w-80 flex-none   overflow-hidden">
+              <img
+                src={ThongTinLichChieuPhim.hinhAnh}
+                alt="1"
+                className="rounded-xl mb-4"
+              />
             </div>
-            <button className="self-start px-10 py-3 text-lg font-medium rounded-3xl bg-red-600 text-coolGray-50">
-              Get started
-            </button>
+            <div className="mx-0 lg:mx-[10%]  bg-black bg-opacity-25 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex  justify-between items-center leading-normal">
+              <div className="text-white">
+                <h1 className="text-white text-4xl font-bold ">
+                  {ThongTinLichChieuPhim.tenPhim}
+                </h1>
+                <p>
+                  Tình trạng:{" "}
+                  {ThongTinLichChieuPhim.dangChieu ? "Đang chiếu" : "Sắp chiếu"}
+                </p>
+                <div className="mt-4">
+                  Điểm IMBb:{"   "}
+                  <Rate
+                    disabled
+                    allowHalf
+                    count={5}
+                    defaultValue={ThongTinLichChieuPhim.danhGia / 2}
+                  />{" "}
+                  <span className="text-yellow-400 ml-2 text-2xl">
+                    {ThongTinLichChieuPhim.danhGia}
+                  </span>
+                </div>
+                <p className="mt-4">{ThongTinLichChieuPhim.moTa}</p>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-    </div>
+        <div className="container mx-auto bg-white rounded-xl w-4/5">
+          <LichChieuDetail props={ThongTinLichChieuPhim.heThongRapChieu} />
+        </div>
+      </div>
+    </>
   );
 }

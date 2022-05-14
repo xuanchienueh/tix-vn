@@ -10,6 +10,7 @@ import { layDanhSachPhim } from "../../redux/actions/CarouselAction/carousel";
 import ListMovie from "./ListMovie/ListMovie";
 import PageModal from "../Modal/PageModal";
 import { layDSRap } from "../../redux/actions/QuanLyRapAction/ActionName";
+import HomeCarousel from "../../templates/Layout/HomeCarousel/HomeCarousel";
 
 const { TabPane } = Tabs;
 
@@ -24,6 +25,8 @@ export default function Home(props) {
   return (
     <div className="homepage">
       <PageModal />
+      <HomeCarousel />
+
       <div className="xl:max-w-[1100px] mx-auto tabs-carousel">
         <Tabs defaultActiveKey="1" centered>
           <TabPane

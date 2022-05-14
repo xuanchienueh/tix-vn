@@ -7,6 +7,7 @@ import Contact from "./pages/Contact/Contact";
 import { HomeTemplace } from "./templates/HomeTemplace/HomeTemplace";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Detail from "./pages/Detail/Detail";
 
 const history = createBrowserHistory();
 
@@ -19,10 +20,11 @@ function App() {
         <HomeTemplace path="/login" exact Component={Login} />
         <HomeTemplace path="/register" exact Component={Register} />
         <HomeTemplace path="/home" exact Component={Home} />
+        <HomeTemplace path="/detail/:id" exact Component={Detail} />
         <HomeTemplace path="/" exact Component={Home} />
       </Switch>
     </Router>
   );
 }
-
+export { history };
 export default App;

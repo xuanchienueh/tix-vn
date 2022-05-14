@@ -18,9 +18,10 @@ const styleCss = {
 };
 
 function CumRap({ props }) {
+  // console.log(props);
   return (
     <Tabs tabPosition="left" tabBarStyle={{ width: "400px" }}>
-      {props.length > 0 &&
+      {Array.isArray(props) &&
         props.map((rapPhim, index) => (
           <TabPane
             tab={
@@ -38,7 +39,10 @@ function CumRap({ props }) {
           >
             {rapPhim.danhSachPhim?.map((phim, index) => (
               <>
-                <div className="max-w-sm w-full lg:max-w-full lg:flex mt-2">
+                <div
+                  className="max-w-sm w-full lg:max-w-full lg:flex mt-2"
+                  key={index}
+                >
                   <div
                     className="h-14 lg:h-14 lg:w-12 flex-none bg-cover  lg:rounded-t-none text-center overflow-hidden"
                     // style={{ backgroundImage: `url("${phim.hinhAnh}")` }}

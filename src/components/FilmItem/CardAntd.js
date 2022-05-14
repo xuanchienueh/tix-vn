@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { history } from "../../App";
 import { OPEN_MODAL_YOUTUBE } from "../../redux/actions/CarouselAction/ActionName";
 import customCss from "./CardAntd.module.scss";
 const styleCss = {
@@ -36,7 +38,7 @@ export default function CardAntd({ props }) {
           onClick={() => handleOpenTrailer()}
         >
           <div className="w-10 h-10 rounded-full border-solid border-2 border-white text-white flex items-center justify-center">
-            <i class="fas fa-play"></i>
+            <i className="fas fa-play"></i>
           </div>
         </div>
         <img
@@ -47,7 +49,8 @@ export default function CardAntd({ props }) {
       </div>
       <div className="mt-6 mb-2 flex align-items-center relative">
         <div
-          class={`${customCss["datVe"]}  py-3 font-semibold rounded bg-[#fb4226] inset-0`}
+          onClick={() => history.push(`/detail/${props.maPhim}`)}
+          className={`${customCss["datVe"]}  py-3 font-semibold rounded bg-[#fb4226] inset-0`}
         >
           <div>ĐẶT VÉ</div>
         </div>
