@@ -69,8 +69,8 @@ export default function Detail() {
                   <Rate
                     disabled
                     allowHalf
-                    count={5}
-                    defaultValue={ThongTinLichChieuPhim.danhGia / 2}
+                    count={10}
+                    value={ThongTinLichChieuPhim.danhGia}
                   />{" "}
                   <span className="text-yellow-400 ml-2 text-2xl">
                     {ThongTinLichChieuPhim.danhGia}

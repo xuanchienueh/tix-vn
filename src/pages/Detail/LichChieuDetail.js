@@ -40,7 +40,10 @@ export default function LichChieuDetail({ props }) {
               </div>
               <div className="mt-4">
                 {cumRap.lichChieuPhim?.map((lichChieu, index) => (
-                  <NavLink to="#" key={index}>
+                  <NavLink
+                    to={`/checkout/${lichChieu.maLichChieu}`}
+                    key={index}
+                  >
                     <button className="font-bold rounded-sm border border-gray-200 p-2 text-green-700  text-xs bg-[#fafafa] hover:text-[#fb4226] mr-2">
                       {moment(lichChieu.ngayChieuGioChieu).format("hh:mm A")}
                     </button>

@@ -1,25 +1,24 @@
 import { Fragment } from "react";
+import { Redirect } from "react-router-dom";
 import { Route } from "react-router-dom";
-import Footer from "../Layout/Footer/Footer";
-import Header from "../Layout/Header/Header";
+import { USER_LOGIN } from "../../util/settings/config";
 
-const HomeTemplace = (props) => {
+const UserTemplace = (props) => {
   const { Component, ...restProps } = props;
+  //   if (!localStorage.getItem(USER_LOGIN)) {
+  //     return <Redirect to="/login" />;
+  //   }
   return (
     <Route
       {...restProps}
       render={(propsRoute) => {
         return (
           <Fragment>
-            <Header {...propsRoute} />
-
             <Component {...propsRoute} />
-
-            <Footer {...propsRoute} />
           </Fragment>
         );
       }}
     />
   );
 };
-export default HomeTemplace;
+export default UserTemplace;
