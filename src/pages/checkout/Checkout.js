@@ -2,17 +2,22 @@ import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CHON_GHE } from "../../redux/actions/QuanLyDatVeAction/constName";
-import { layDanhSachPhongVe } from "../../redux/actions/QuanLyDatVeAction/QuanLyDatVeAction";
+import {
+  datVeAction,
+  layDanhSachPhongVe,
+} from "../../redux/actions/QuanLyDatVeAction/QuanLyDatVeAction";
 import "./checkout.scss";
+import { USER_LOGIN } from "../../util/settings/config";
 
 export default function Checkout() {
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
   const { chiTietPhongVe, danhSachGheDangChon } = useSelector(
     (state) => state.QuanLyDatVeReducer
   );
+  // console.log(userLogin);
   let { id } = useParams();
   const dispatch = useDispatch();
-  // console.log(chiTietPhongVe);
+
   useEffect(() => dispatch(layDanhSachPhongVe(id)), [id]);
   const renderGhe = () => {
     return chiTietPhongVe.danhSachGhe?.map((ghe, index) => {
@@ -25,6 +30,13 @@ export default function Checkout() {
       danhSachGheDangChon.forEach((gheDangChon) => {
         if (gheDangChon.maGhe === ghe.maGhe) styleGhe = "daDat";
       });
+      if (
+        JSON.parse(localStorage.getItem(USER_LOGIN)).taiKhoan ===
+        ghe.taiKhoanNguoiDat
+      ) {
+        styleGhe = "ghebanDaDat";
+      }
+      // console.log(JSON.parse(localStorage.getItem(USER_LOGIN)).taiKhoan);
       return (
         <Fragment key={index}>
           <button
@@ -41,10 +53,15 @@ export default function Checkout() {
   };
 
   let tongTien = danhSachGheDangChon
-    .reduce((tongTien, item) => {
-      return (tongTien += item.giaVe);
-    }, 0)
+    .reduce((tongTien, item) => (tongTien += item.giaVe), 0)
     .toLocaleString("en");
+
+  let danhSachVe = danhSachGheDangChon.map((item) => {
+    return { giaVe: item.giaVe, maGhe: item.maGhe };
+  });
+  let thongTinDatVe = { maLichChieu: id, danhSachVe: danhSachVe };
+  // console.log(thongTinDatVe);
+
   return (
     <div className="checkout ">
       <div className=" mx-auto ">
@@ -74,6 +91,10 @@ export default function Checkout() {
               <div className="flex items-center">
                 <button className="daBan" />{" "}
                 <span className="text-white">Ghế đã bán</span>
+              </div>
+              <div className="flex items-center">
+                <button className="ghebanDaDat" />{" "}
+                <span className="text-white">Ghế bạn đã đặt</span>
               </div>
             </div>
           </div>
@@ -131,6 +152,9 @@ export default function Checkout() {
             <hr />
             <div className=" flex flex-col justify-end">
               <button
+                onClick={() => {
+                  dispatch(datVeAction(thongTinDatVe));
+                }}
                 type="button"
                 className="m-4  text-xl py-3 font-semibold rounded bg-green-400 text-gray-100"
               >

@@ -15,3 +15,14 @@ export const layDanhSachPhongVe = (maLichChieu) => {
     }
   };
 };
+
+export const datVeAction = (thongTinDatVe) => {
+  return async (dispatch) => {
+    try {
+      let result = await QLDatVeService.datVe(thongTinDatVe);
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

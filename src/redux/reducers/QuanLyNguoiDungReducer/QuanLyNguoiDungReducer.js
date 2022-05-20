@@ -16,7 +16,7 @@ const QuanLyNguoiDungReducer = (state = initialState, { type, payload }) => {
         USER_LOGIN,
         JSON.stringify({ ...payload, soDT: "0987788654" })
       );
-      localStorage.setItem(TOKEN, JSON.stringify(payload.accessToken));
+      localStorage.setItem(TOKEN, payload.accessToken);
 
       return { ...state, userLogin: payload };
     case USER_REGISTER:

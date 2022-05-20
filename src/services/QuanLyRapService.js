@@ -1,3 +1,4 @@
+import { MA_NHOM } from "../util/settings/config";
 import { BaseServices } from "./baseServices";
 
 export class QuanLyRapService extends BaseServices {
@@ -6,7 +7,7 @@ export class QuanLyRapService extends BaseServices {
   }
   LayThongTinHeThongRap = () => {
     return this.get(
-      "/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP03"
+      `/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${MA_NHOM}`
     );
   };
   LayThongTinLichChieuPhim = (id) => {

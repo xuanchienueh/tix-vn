@@ -1,3 +1,4 @@
+import { MA_NHOM } from "../util/settings/config";
 import { BaseServices } from "./baseServices";
 export class QuanLyPhimService extends BaseServices {
   constructor() {
@@ -8,7 +9,7 @@ export class QuanLyPhimService extends BaseServices {
   };
 
   LayDanhSachPhim = () => {
-    return this.get("/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP03");
+    return this.get(`api/QuanLyPhim/LayDanhSachPhim?maNhom=${MA_NHOM}`);
   };
 }
 export const qlPhimService = new QuanLyPhimService();
