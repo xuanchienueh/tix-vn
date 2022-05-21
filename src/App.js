@@ -2,6 +2,7 @@ import { createBrowserHistory } from "history";
 import React, { lazy, Suspense } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import "./App.css";
+import "./App.scss";
 import Home from "./pages/Home/Home";
 import News from "./pages/News/News";
 import Contact from "./pages/Contact/Contact";

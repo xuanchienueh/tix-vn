@@ -1,4 +1,5 @@
 import _ from "lodash";
+import Swal from "sweetalert2";
 import {
   CHON_GHE,
   LAY_DANH_SACH_PHONG_VE,
@@ -19,14 +20,24 @@ const QuanLyDatVeReducer = (state = initialState, { type, payload }) => {
         (gheDangChon) => gheDangChon.maGhe === payload.maGhe
       );
       if (index === -1) {
-        dsGheDangChon.length < 7
+        dsGheDangChon.length < 5
           ? dsGheDangChon.push(payload)
-          : alert("Bạn chỉ được đặt tối đa 7 ghế trong 1 lần đặt!");
+          : Swal.fire({
+              icon: "info",
+              confirmButtonColor: "blue",
+              timer: 3000,
+              timerProgressBar: true,
+              title: "Không được phép!",
+              text: "Bạn chỉ được đặt tối đa 5 ghế cùng lúc!",
+              footer:
+                'Nếu có thắc mắc liên hệ &nbsp <a class="text-red-600" href="tel:+19001234">19001234</a>',
+            });
       } else {
         dsGheDangChon.splice(index, 1);
       }
       dsGheDangChon = _.sortBy(dsGheDangChon, ["tenGhe"]);
       return { ...state, danhSachGheDangChon: dsGheDangChon };
+
     default:
       return state;
   }

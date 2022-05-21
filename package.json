@@ -25,6 +25,7 @@
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.4.14",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
@@ -34,7 +35,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy":"npm run build && cd build && copy index.html 200.html && surge"
+    "deploy": "npm run build && cd build && copy index.html 200.html && surge"
   },
   "eslintConfig": {
     "extends": [

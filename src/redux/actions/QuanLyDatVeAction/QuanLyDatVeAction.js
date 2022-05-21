@@ -20,7 +20,8 @@ export const datVeAction = (thongTinDatVe) => {
   return async (dispatch) => {
     try {
       let result = await QLDatVeService.datVe(thongTinDatVe);
-      console.log(result);
+      console.log(result.data);
+      result.status === 200 && window.location.reload();
     } catch (err) {
       console.log(err);
     }

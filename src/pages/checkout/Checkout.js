@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import { CHON_GHE } from "../../redux/actions/QuanLyDatVeAction/constName";
 import {
   datVeAction,
@@ -61,6 +62,52 @@ export default function Checkout() {
   });
   let thongTinDatVe = { maLichChieu: id, danhSachVe: danhSachVe };
   // console.log(thongTinDatVe);
+  const handleBtnDatVe = () => {
+    const swalTailwinCssBottons = Swal.mixin({
+      customClass: {
+        confirmButton: "bg-green-600 text-white rounded  py-1 px-2",
+        cancelButton: "bg-red-600 text-white rounded py-1 px-2 mr-2",
+      },
+      buttonsStyling: false,
+      // didOpen: () => {
+      //   console.log(thongTinDatVe.danhSachVe.length);
+      // },
+    });
+    if (thongTinDatVe.danhSachVe.length === 0) {
+      Swal.fire({
+        title: "Bạn chưa chọn ghế!",
+        text: "Vui lòng chọn vị trí bạn muốn đặt!",
+        icon: "question",
+        showConfirmButton: true,
+      });
+    } else {
+      swalTailwinCssBottons
+        .fire({
+          title: "Bạn đang đặt vé?",
+          text: "Vé sẽ không được hoàn trả sau khi đặt!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Đặt ngay!",
+          cancelButtonText: "Hủy đặt!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            swalTailwinCssBottons.fire({
+              showConfirmButton: false,
+              title: "OK",
+              text: "Đặt vé thành công!",
+              icon: "success",
+            });
+            console.log("dat ve thanh cong");
+            dispatch(datVeAction(thongTinDatVe));
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalTailwinCssBottons.fire("Đã hủy!", "Thanks you!", "error");
+            console.log("that bai");
+          }
+        });
+    }
+  };
 
   return (
     <div className="checkout ">
@@ -153,7 +200,7 @@ export default function Checkout() {
             <div className=" flex flex-col justify-end">
               <button
                 onClick={() => {
-                  dispatch(datVeAction(thongTinDatVe));
+                  handleBtnDatVe();
                 }}
                 type="button"
                 className="m-4  text-xl py-3 font-semibold rounded bg-green-400 text-gray-100"
