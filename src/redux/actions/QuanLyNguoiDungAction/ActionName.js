@@ -1,6 +1,9 @@
 import { QLNguoiDungService } from "../../../services/QuanLyNguoiDungService";
 import { USER_LOGIN } from "../../../util/settings/config";
-import { USER_REGISTER } from "../QuanLyNguoiDungAction/constName";
+import {
+  LICH_SU_DAT_VE,
+  USER_REGISTER,
+} from "../QuanLyNguoiDungAction/constName";
 import { history } from "../../../App";
 
 export const userLoginAction = (thongTinDangNhap) => {
@@ -23,6 +26,18 @@ export const userRegisterAction = (thongTinDangKy) => {
       let result = await QLNguoiDungService.nguoiDungDangKy(thongTinDangKy);
       result.status === 200 &&
         dispatch({ type: USER_REGISTER, payload: result.data.content });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const lichSuDatVe = () => {
+  return async (dispatch) => {
+    try {
+      const result = await QLNguoiDungService.lichSuDatVe();
+      // result.status === 200 &&
+      dispatch({ type: LICH_SU_DAT_VE, payload: result.data.content });
     } catch (err) {
       console.log(err);
     }

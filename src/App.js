@@ -13,6 +13,7 @@ import Detail from "./pages/Detail/Detail";
 import CheckoutTemplace from "./templates/checkoutTemplace/CheckoutTemplace";
 import Checkout from "./pages/checkout/Checkout";
 import UserTemplace from "./templates/UserTemplace/UserTemplace";
+import Loading from "./pages/loading/Loading";
 
 const history = createBrowserHistory();
 // const CheckoutTemplace = lazy(() =>
@@ -22,6 +23,7 @@ const history = createBrowserHistory();
 function App() {
   return (
     <Router history={history}>
+      <Loading />
       <Switch>
         {/* <CheckoutTemplace path="/register" exact Component={Register} /> */}
         <HomeTemplace path="/contact" exact Component={Contact} />
@@ -31,7 +33,11 @@ function App() {
         {/* <Route path="/login" exact component={Login} /> */}
         {/* <Route path="/register" exact component={Register} /> */}
         {/* <Suspense fallback={<div>LOADING.....</div>}> */}
-        <CheckoutTemplace path="/checkout/:id" exact Component={Checkout} />
+        <CheckoutTemplace
+          path="/checkout/:maLichChieu"
+          exact
+          Component={Checkout}
+        />
         {/* </Suspense> */}
         <UserTemplace path="/login" exact Component={Login} />
         <UserTemplace path="/register" exact component={Register} />

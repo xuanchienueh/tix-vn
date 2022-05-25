@@ -1,8 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
+import { Select } from "antd";
 import { NavLink } from "react-router-dom";
 import { history } from "../../../App";
+import { useTranslation } from "react-i18next";
 
-export default function Header(props) {
+const { Option } = Select;
+
+function Header(props) {
+  const handleChange = (value) => {
+    i18n.changeLanguage(value);
+  };
+  let { t, i18n } = useTranslation();
+
   return (
     <header className="w-full bg-gray-900 fixed text-white z-10">
       <div className="container flex justify-between h-16 mx-auto">
@@ -25,7 +34,7 @@ export default function Header(props) {
               className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
               activeClassName="text-violet-600 border-violet-600"
             >
-              Home
+              {t("Home")}
             </NavLink>
           </li>
           <li className="flex">
@@ -35,7 +44,7 @@ export default function Header(props) {
               className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
               activeClassName="text-violet-600 border-violet-600"
             >
-              News
+              {t("News")}
             </NavLink>
           </li>
           <li className="flex">
@@ -45,7 +54,7 @@ export default function Header(props) {
               className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
               activeClassName="text-violet-600 border-violet-600"
             >
-              Contact
+              {t("Contact")}
             </NavLink>
           </li>
 
@@ -64,14 +73,40 @@ export default function Header(props) {
             onClick={() => history.push("/login")}
             className="self-center px-8 py-3 rounded"
           >
-            Đăng nhập
+            {t("Login")}
           </button>
           <NavLink
             to="/register"
-            className="self-center px-8 py-3 font-semibold rounded bg-violet-600 text-coolGray-50"
+            className="self-center px-8 py-3 font-semibold rounded bg-violet-600 text-coolGray-50 mr-4"
           >
-            Đăng ký
+            {t("Signup")}
           </NavLink>
+          <Select
+            defaultValue={
+              <img
+                width={50}
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/125px-Flag_of_Vietnam.svg.png"
+              />
+            }
+            style={{
+              width: 88,
+            }}
+            onChange={handleChange}
+            bordered={false}
+          >
+            <Option value="vie">
+              <img
+                width={50}
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/125px-Flag_of_Vietnam.svg.png"
+              />
+            </Option>
+            <Option value="eng">
+              <img
+                width={50}
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/125px-Flag_of_the_United_Kingdom.svg.png"
+              />
+            </Option>
+          </Select>
         </div>
         <button className="p-4 lg:hidden">
           <svg
@@ -93,3 +128,11 @@ export default function Header(props) {
     </header>
   );
 }
+export default Header;
+// export default function () {
+//   return (
+//     <Suspense fallback="loading">
+//       <Header />
+//     </Suspense>
+//   );
+// }

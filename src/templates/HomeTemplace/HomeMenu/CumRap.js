@@ -1,8 +1,9 @@
-import React, { memo } from "react";
+import { memo, Fragment } from "react";
 import { Tabs } from "antd";
 import "antd/dist/antd.css";
 import { NavLink } from "react-router-dom";
 import moment from "moment";
+import { imgNotFound } from "../../../util/settings/config";
 const { TabPane } = Tabs;
 const styleCss = {
   display: "-webkit-box",
@@ -38,11 +39,8 @@ function CumRap({ props }) {
             key={index}
           >
             {rapPhim.danhSachPhim?.map((phim, index) => (
-              <>
-                <div
-                  className="max-w-sm w-full lg:max-w-full lg:flex mt-2"
-                  key={index}
-                >
+              <Fragment key={index}>
+                <div className="max-w-sm w-full lg:max-w-full lg:flex mt-2">
                   <div
                     className="h-14 lg:h-14 lg:w-12 flex-none bg-cover  lg:rounded-t-none text-center overflow-hidden"
                     // style={{ backgroundImage: `url("${phim.hinhAnh}")` }}
@@ -50,11 +48,7 @@ function CumRap({ props }) {
                     <img
                       src={phim.hinhAnh}
                       alt={phim.tenPhim}
-                      onError={(e) => (
-                        (e.target.onerror = null),
-                        (e.target.src =
-                          "https://www.rabrotech.com/upload/default/image-not-found.png")
-                      )}
+                      onError={(e) => imgNotFound(e)}
                     />
                   </div>
                   <div className="flex-grow border-gray-400 lg:border-l-0  lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-0 flex flex-col justify-between leading-normal ml-3">
@@ -73,7 +67,10 @@ function CumRap({ props }) {
                   {phim.lstLichChieuTheoPhim
                     ?.slice(0, 12)
                     .map((lichChieu, index) => (
-                      <NavLink to="#" key={index}>
+                      <NavLink
+                        to={`/checkout/${lichChieu.maLichChieu}`}
+                        key={index}
+                      >
                         <button className="font-bold rounded-sm border border-gray-200 p-2 text-green-700  text-xs bg-[#fafafa] hover:text-[#fb4226]">
                           {moment(lichChieu.ngayChieuGioChieu).format(
                             "hh:mm A"
@@ -82,7 +79,7 @@ function CumRap({ props }) {
                       </NavLink>
                     ))}
                 </div>
-              </>
+              </Fragment>
             ))}
           </TabPane>
         ))}
