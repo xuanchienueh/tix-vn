@@ -6,5 +6,6 @@ export default {
     Home: "Trang chủ",
     News: "Tin tức",
     Contact: "Liên hệ",
+    Welcome: "Xin chào",
   },
 };

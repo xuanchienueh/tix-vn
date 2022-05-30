@@ -18,6 +18,9 @@ import "./checkout.scss";
 import { imgNotFound, USER_LOGIN } from "../../util/settings/config";
 import { lichSuDatVe } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import { connection } from "../..";
+import { NavLink } from "react-router-dom";
+import { HomeOutlined } from "@ant-design/icons";
+import Loading from "../loading/Loading";
 
 export function Checkout() {
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
@@ -266,7 +269,14 @@ export default function (props) {
         <TabPane tab="02 KẾT QUẢ ĐẶT VÉ" key="2">
           <KetQuaDatVe {...props} />
         </TabPane>
-        <TabPane tab={<a href="/home">03 TRANG CHỦ</a>} key=""></TabPane>
+        <TabPane
+          tab={
+            <a href="/home">
+              <HomeOutlined className="text-3xl" />
+            </a>
+          }
+          key="3"
+        ></TabPane>
       </Tabs>
     </div>
   );

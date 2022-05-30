@@ -3,17 +3,38 @@ import { Select } from "antd";
 import { NavLink } from "react-router-dom";
 import { history } from "../../../App";
 import { useTranslation } from "react-i18next";
+import { USER_LOGIN } from "../../../util/settings/config";
+import DropdownUser from "./DropdownUser";
 
 const { Option } = Select;
 
 function Header(props) {
-  const handleChange = (value) => {
-    i18n.changeLanguage(value);
-  };
+  const handleChange = (value) => i18n.changeLanguage(value);
   let { t, i18n } = useTranslation();
+  const renderUserName = () => {
+    const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
+    return userLogin ? (
+      <DropdownUser />
+    ) : (
+      <>
+        <button
+          onClick={() => history.push("/login")}
+          className="self-center px-8 py-3 rounded"
+        >
+          {t("Login")}
+        </button>
+        <NavLink
+          to="/register"
+          className="self-center px-8 py-3 font-semibold rounded bg-violet-600 text-coolGray-50 mr-4"
+        >
+          {t("Signup")}
+        </NavLink>
+      </>
+    );
+  };
 
   return (
-    <header className="w-full bg-gray-900 fixed text-white z-10">
+    <header className="w-full bg-gray-900 fixed text-white z-[1] h-20">
       <div className="container flex justify-between h-16 mx-auto">
         <NavLink
           rel="noopener noreferrer"
@@ -59,30 +80,19 @@ function Header(props) {
           </li>
 
           <li className="flex">
-            <a
-              rel="noopener noreferrer"
-              href="#"
+            <NavLink
+              // rel="noopener noreferrer"
+              to="/admin"
               className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
             >
               Link
-            </a>
+            </NavLink>
           </li>
         </ul>
         <div className="items-center flex-shrink-0 hidden lg:flex">
-          <button
-            onClick={() => history.push("/login")}
-            className="self-center px-8 py-3 rounded"
-          >
-            {t("Login")}
-          </button>
-          <NavLink
-            to="/register"
-            className="self-center px-8 py-3 font-semibold rounded bg-violet-600 text-coolGray-50 mr-4"
-          >
-            {t("Signup")}
-          </NavLink>
+          {renderUserName()}
           <Select
-            defaultValue={
+            placeholder={
               <img
                 width={50}
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/125px-Flag_of_Vietnam.svg.png"

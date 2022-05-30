@@ -1,5 +1,5 @@
 const DOMAIN_API = "http://movieapi.cyberlearn.vn";
-const TOKEN = "accessTokenTix-vn";
+const TOKEN = "accessToken";
 const USER_LOGIN = "USER_LOGIN";
 const MA_NHOM = "GP03";
 

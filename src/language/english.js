@@ -6,5 +6,6 @@ export default {
     Home: "Home",
     News: "News",
     Contact: "Contact",
+    Welcome: "Welcome",
   },
 };

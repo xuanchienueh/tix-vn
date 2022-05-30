@@ -12,8 +12,9 @@ const HomeTemplace = (props) => {
         return (
           <Fragment>
             <Header {...propsRoute} />
-
-            <Component {...propsRoute} />
+            <div className="pt-20">
+              <Component {...propsRoute} />
+            </div>
 
             <Footer {...propsRoute} />
           </Fragment>

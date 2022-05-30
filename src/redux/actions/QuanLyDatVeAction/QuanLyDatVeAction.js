@@ -12,13 +12,17 @@ import {
 export const layDanhSachPhongVe = (maLichChieu) => {
   return async (dispatch) => {
     try {
+      await dispatch({ type: DISPLAY_LOADING });
       let result = await QLDatVeService.LayDanhSachPhongVe(maLichChieu);
       result.status === 200 &&
-        dispatch({
+        (await dispatch({
           type: LAY_DANH_SACH_PHONG_VE,
           payload: result.data.content,
-        });
+        }));
+      await dispatch({ type: HIDDEN_LOADING });
     } catch (err) {
+      await dispatch({ type: HIDDEN_LOADING });
+
       console.log(err);
     }
   };

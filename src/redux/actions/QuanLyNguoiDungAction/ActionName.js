@@ -5,6 +5,7 @@ import {
   USER_REGISTER,
 } from "../QuanLyNguoiDungAction/constName";
 import { history } from "../../../App";
+import { DISPLAY_LOADING, HIDDEN_LOADING } from "../../reducers/LoadingReducer";
 
 export const userLoginAction = (thongTinDangNhap) => {
   return async (dispatch) => {
@@ -35,10 +36,13 @@ export const userRegisterAction = (thongTinDangKy) => {
 export const lichSuDatVe = () => {
   return async (dispatch) => {
     try {
+      await dispatch({ type: DISPLAY_LOADING });
       const result = await QLNguoiDungService.lichSuDatVe();
       // result.status === 200 &&
-      dispatch({ type: LICH_SU_DAT_VE, payload: result.data.content });
+      await dispatch({ type: LICH_SU_DAT_VE, payload: result.data.content });
+      await dispatch({ type: HIDDEN_LOADING });
     } catch (err) {
+      await dispatch({ type: HIDDEN_LOADING });
       console.log(err);
     }
   };

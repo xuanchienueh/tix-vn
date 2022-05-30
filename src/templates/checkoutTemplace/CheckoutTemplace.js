@@ -1,8 +1,7 @@
 import { Fragment } from "react";
 import { Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { Route } from "react-router-dom";
-import { TOKEN, USER_LOGIN } from "../../util/settings/config";
+import { TOKEN } from "../../util/settings/config";
 
 const CheckoutTemplace = (props) => {
   const { Component, ...restProps } = props;
