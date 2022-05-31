@@ -1,5 +1,6 @@
 import { qlPhimService } from "../../../services/QuanLyPhimService";
 import { LAY_THONG_TIN_PHIM } from "./constAction";
+import { history } from "../../../App";
 
 export const themPhim = (formData) => {
   return async (dispatch) => {
@@ -20,6 +21,18 @@ export const LayThongTinPhimAction = (maPhim) => {
       dispatch({ type: LAY_THONG_TIN_PHIM, payload: result.data.content });
     } catch (err) {
       console.log("lay thong tin phim fail", err.response);
+    }
+  };
+};
+
+export const CapNhatPhimUploadAction = (formData) => {
+  return async (dispatch) => {
+    try {
+      let result = await qlPhimService.CapNhatPhimUpload(formData);
+      alert("edit phim thanh cong");
+      history.push("/admin/films");
+    } catch (err) {
+      console.log("edit phim fail", err.response);
     }
   };
 };

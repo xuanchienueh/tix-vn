@@ -8,25 +8,31 @@ import "../addNewFilm/addNewFilm.scss";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { MA_NHOM } from "../../../util/settings/config";
-import { LayThongTinPhimAction } from "../../../redux/actions/QuanLyPhimAction/ActionName";
+import {
+  CapNhatPhimUploadAction,
+  LayThongTinPhimAction,
+} from "../../../redux/actions/QuanLyPhimAction/ActionName";
 
 export default function EditFilm() {
   const dispatch = useDispatch();
   const { maPhim } = useParams();
+
   useEffect(() => {
     dispatch(LayThongTinPhimAction(maPhim));
   }, []);
 
   const { layThongTinPhim } = useSelector((state) => state.QuanLyPhimReducer);
-  console.log(layThongTinPhim);
+  // console.log(layThongTinPhim);
 
   const [componentSize, setComponentSize] = useState("default");
   const onFormLayoutChange = ({ size }) => setComponentSize(size);
   const [srcImg, setSrcImg] = useState("");
   const handleChangeInput = (name, value) => formik.setFieldValue(name, value);
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
+      maPhim: layThongTinPhim.maPhim,
       tenPhim: layThongTinPhim?.tenPhim,
       trailer: layThongTinPhim?.trailer,
       moTa: layThongTinPhim?.moTa,
@@ -38,34 +44,35 @@ export default function EditFilm() {
       hinhAnh: null,
       maNhom: MA_NHOM,
     },
+
     onSubmit: (values) => {
       let formData = new FormData();
       for (let key in values) {
-        if (key === "hinhAnh") {
-          formData.append("File", values.hinhAnh, values.hinhAnh.name);
-        } else {
-          formData.append(key, values[key]);
-        }
+        key === "hinhAnh"
+          ? values.hinhAnh !== null && formData.append("File", values.hinhAnh, values.hinhAnh.name)
+          : formData.append(key, values[key]);
       }
-      // console.log("forrmData", formData.get("File"));
-      // dispatch(themPhim(formData));
+
+      dispatch(CapNhatPhimUploadAction(formData));
     },
   });
-  const handleChangImg = (e) => {
+
+  const handleChangImg = async (e) => {
     let file = e.target.files[0];
     if (file.type.slice(0, 5) !== "image") {
       Swal.fire("Error", "File không hợp lệ!", "info");
       setSrcImg("");
       return undefined;
     }
+    await formik.setFieldValue("hinhAnh", file);
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (e) => {
       setSrcImg(e.target.result);
     };
-    formik.setFieldValue("hinhAnh", file);
   };
+
   return (
     <div className="addNewFilm">
       <Form

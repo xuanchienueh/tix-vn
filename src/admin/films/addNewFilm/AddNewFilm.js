@@ -30,17 +30,15 @@ export default function AddNewFilm() {
     onSubmit: (values) => {
       let formData = new FormData();
       for (let key in values) {
-        if (key === "hinhAnh") {
-          formData.append("File", values.hinhAnh, values.hinhAnh.name);
-        } else {
-          formData.append(key, values[key]);
-        }
+        key === "hinhAnh"
+          ? formData.append("File", values.hinhAnh, values.hinhAnh.name)
+          : formData.append(key, values[key]);
       }
       // console.log("forrmData", formData.get("File"));
       dispatch(themPhim(formData));
     },
   });
-  const handleChangImg = (e) => {
+  const handleChangImg = async (e) => {
     let file = e.target.files[0];
     // console.log(file);
     if (file.type.slice(0, 5) !== "image") {
@@ -49,12 +47,13 @@ export default function AddNewFilm() {
       return undefined;
     }
 
+    await formik.setFieldValue("hinhAnh", file);
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (e) => {
       setSrcImg(e.target.result);
     };
-    formik.setFieldValue("hinhAnh", file);
   };
   return (
     <div className="addNewFilm">
