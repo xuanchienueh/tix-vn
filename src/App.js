@@ -20,6 +20,7 @@ import Dashboard from "./admin/dashboard/Dashboard";
 import Films from "./admin/films/Films";
 import ShowTime from "./admin/showtime/ShowTime";
 import AddNewFilm from "./admin/films/addNewFilm/AddNewFilm";
+import EditFilm from "./admin/films/edit/EditFilm";
 
 const history = createBrowserHistory();
 // const CheckoutTemplace = lazy(() =>
@@ -41,19 +42,12 @@ function App() {
         <AdminTemplace path="/admin/dashboard" exact Component={Dashboard} />
         <AdminTemplace path="/admin/films" exact Component={Films} />
         <AdminTemplace path="/admin/addfilm" exact Component={AddNewFilm} />
-        <AdminTemplace
-          path="/admin/films/addnewfilm"
-          exact
-          Component={AddNewFilm}
-        />
+        <AdminTemplace path="/admin/films/addnewfilm" exact Component={AddNewFilm} />
         <AdminTemplace path="/admin/showtime" exact Component={ShowTime} />
+        <AdminTemplace path="/admin/editfilm/:maPhim" exact Component={EditFilm} />
         {/* <Route path="/login" exact component={Login} /> */}
         {/* <Suspense fallback={<div>LOADING.....</div>}> */}
-        <CheckoutTemplace
-          path="/checkout/:maLichChieu"
-          exact
-          Component={Checkout}
-        />
+        <CheckoutTemplace path="/checkout/:maLichChieu" exact Component={Checkout} />
         {/* </Suspense> */}
         <UserTemplace path="/login" exact Component={Login} />
         <UserTemplace path="/register" exact component={Register} />
