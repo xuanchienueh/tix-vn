@@ -2,12 +2,7 @@ import Swal from "sweetalert2";
 import { connection } from "../../..";
 import { QLDatVeService } from "../../../services/QuanLyDatVeService";
 import { DISPLAY_LOADING, HIDDEN_LOADING } from "../../reducers/LoadingReducer";
-import {
-  CHON_GHE,
-  DAT_VE_DONE,
-  LAY_DANH_SACH_PHONG_VE,
-  TAB_ACTIVE,
-} from "./constName";
+import { CHON_GHE, DAT_VE_DONE, LAY_DANH_SACH_PHONG_VE, TAB_ACTIVE } from "./constName";
 
 export const layDanhSachPhongVe = (maLichChieu) => {
   return async (dispatch) => {
@@ -33,8 +28,7 @@ export const datVeAction = (thongTinDatVe) => {
     try {
       dispatch({ type: DISPLAY_LOADING });
       let result = await QLDatVeService.datVe(thongTinDatVe);
-      result.status === 200 &&
-        (await dispatch(layDanhSachPhongVe(thongTinDatVe.maLichChieu)));
+      result.status === 200 && (await dispatch(layDanhSachPhongVe(thongTinDatVe.maLichChieu)));
       await dispatch({ type: DAT_VE_DONE });
 
       await dispatch({ type: HIDDEN_LOADING });
@@ -70,4 +64,13 @@ export const chonGheAction = (ghe) => {
       console.log(error);
     }
   };
+};
+
+export const taoLichChieuAction = async (dataLichChieu) => {
+  try {
+    let result = await QLDatVeService.taoLichChieu(dataLichChieu);
+    Swal.fire({ title: "Tạo lịch chiếu thành công!", timer: 1000 });
+  } catch (err) {
+    console.log("tạo lịch chiếu fail", err.response?.data);
+  }
 };

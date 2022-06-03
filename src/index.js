@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import "antd/dist/antd.css";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./language/i18n";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./redux/types/configStore";
 import "./index.css";
+import "antd/dist/antd.css";
 import { DOMAIN_API } from "./util/settings/config";
 /* cấu hình realtime với websocket và signalR */
 import * as signalR from "@aspnet/signalr";

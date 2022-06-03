@@ -8,6 +8,7 @@ const initialState = {
   heThongRap: [],
   danhSachRapCuaMoiHeThong: [],
   ThongTinLichChieuPhim: {},
+  dsRapCuaTaoLichChieu: [],
 };
 
 const QuanLyRapReducer = (state = initialState, { type, payload }) => {
@@ -23,6 +24,7 @@ const QuanLyRapReducer = (state = initialState, { type, payload }) => {
     case LAY_THONG_TIN_LICH_CHIEU_PHIM:
       state.ThongTinLichChieuPhim = payload;
       return { ...state };
+
     default:
       return state;
   }

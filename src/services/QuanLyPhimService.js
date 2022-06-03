@@ -8,7 +8,10 @@ export class QuanLyPhimService extends BaseServices {
     return this.get("/api/QuanLyPhim/LayDanhSachBanner");
   };
 
-  LayDanhSachPhim = () => {
+  LayDanhSachPhim = (tenPhim = "") => {
+    if (tenPhim !== "") {
+      return this.get(`api/QuanLyPhim/LayDanhSachPhim?maNhom=${MA_NHOM}&tenPhim=${tenPhim}`);
+    }
     return this.get(`api/QuanLyPhim/LayDanhSachPhim?maNhom=${MA_NHOM}`);
   };
   ThemPhimUploadHinh = (formData) => {
@@ -23,6 +26,10 @@ export class QuanLyPhimService extends BaseServices {
 
   CapNhatPhimUpload = (formData) => {
     return this.post("api/QuanLyPhim/CapNhatPhimUpload", formData);
+  };
+
+  deletePhim = (maPhim) => {
+    return this.delete(`api/QuanLyPhim/XoaPhim?MaPhim=${maPhim}`);
   };
 }
 export const qlPhimService = new QuanLyPhimService();

@@ -13,10 +13,10 @@ export const getCarousel = () => {
   };
 };
 
-export const layDanhSachPhim = () => {
+export const layDanhSachPhim = (tenPhim = "") => {
   return async (dispatch) => {
     try {
-      let result = await qlPhimService.LayDanhSachPhim();
+      let result = await qlPhimService.LayDanhSachPhim(tenPhim);
       dispatch({ type: LAY_DANH_SACH_PHIM, payload: result.data.content });
     } catch (error) {
       console.log(error);

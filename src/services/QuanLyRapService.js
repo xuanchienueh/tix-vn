@@ -6,12 +6,14 @@ export class QuanLyRapService extends BaseServices {
     super();
   }
   LayThongTinHeThongRap = () => {
-    return this.get(
-      `/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${MA_NHOM}`
-    );
+    return this.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${MA_NHOM}`);
   };
   LayThongTinLichChieuPhim = (id) => {
     return this.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`);
+  };
+
+  LayThongTinCumRapTheoHeThong = (maHeThongRap) => {
+    return this.get(`api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${maHeThongRap}`);
   };
 }
 

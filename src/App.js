@@ -16,11 +16,13 @@ import UserTemplace from "./templates/UserTemplace/UserTemplace";
 import Loading from "./pages/loading/Loading";
 import Profile from "./pages/profile/Profile";
 import AdminTemplace from "./templates/AdminTemplace/AdminTemplace";
-import Dashboard from "./admin/dashboard/Dashboard";
+import DanhSachUser from "./admin/quanLyUser/DanhSachUser";
 import Films from "./admin/films/Films";
 import ShowTime from "./admin/showtime/ShowTime";
 import AddNewFilm from "./admin/films/addNewFilm/AddNewFilm";
 import EditFilm from "./admin/films/edit/EditFilm";
+import TaoLichChieu from "./admin/films/taoLichChieu/TaoLichChieu";
+import ThemUser from "./admin/quanLyUser/ThemUser";
 
 const history = createBrowserHistory();
 // const CheckoutTemplace = lazy(() =>
@@ -38,8 +40,9 @@ function App() {
         <HomeTemplace path="/profile" exact Component={Profile} />
         <HomeTemplace path="/home" exact Component={Home} />
         <HomeTemplace path="/detail/:id" exact Component={Detail} />
-        <AdminTemplace path="/admin" exact Component={Dashboard} />
-        <AdminTemplace path="/admin/dashboard" exact Component={Dashboard} />
+        <AdminTemplace path="/admin/taolichchieu/:maPhim/:tenphim" exact Component={TaoLichChieu} />
+        <AdminTemplace path="/admin/danhsachuser" exact Component={DanhSachUser} />
+        <AdminTemplace path="/admin/themuser" exact Component={ThemUser} />
         <AdminTemplace path="/admin/films" exact Component={Films} />
         <AdminTemplace path="/admin/addfilm" exact Component={AddNewFilm} />
         <AdminTemplace path="/admin/films/addnewfilm" exact Component={AddNewFilm} />

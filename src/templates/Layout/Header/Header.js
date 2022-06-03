@@ -17,10 +17,7 @@ function Header(props) {
       <DropdownUser />
     ) : (
       <>
-        <button
-          onClick={() => history.push("/login")}
-          className="self-center px-8 py-3 rounded"
-        >
+        <button onClick={() => history.push("/login")} className="self-center px-8 py-3 rounded">
           {t("Login")}
         </button>
         <NavLink
@@ -82,7 +79,7 @@ function Header(props) {
           <li className="flex">
             <NavLink
               // rel="noopener noreferrer"
-              to="/admin"
+              to="/admin/films"
               className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
             >
               Link

@@ -11,13 +11,16 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem(<a>Films</a>, "1", <i className="fas fa-video"></i>, [
-    getItem(<NavLink to="/admin/films">Film</NavLink>, "4"),
-    getItem(<NavLink to="/admin/addfilm">Add Film</NavLink>, "5"),
+  getItem(<a>Quản lý phim</a>, "1", <i className="fas fa-video"></i>, [
+    getItem(<NavLink to="/admin/films">Danh sách phim</NavLink>, "4"),
+    getItem(<NavLink to="/admin/addfilm">Thêm phim</NavLink>, "5"),
   ]),
-  getItem(<NavLink to="/admin/dashboard">Users</NavLink>, "2", <UserOutlined />),
+  getItem(<NavLink to="/admin/dashboard">tnoname</NavLink>, "2", <UserOutlined />),
   getItem(<NavLink to="/admin/showtime">ShowTime</NavLink>, "3", <DesktopOutlined />),
-  getItem("Team", "sub2", <TeamOutlined />, [getItem("Team 1", "6"), getItem("Team 2", "8")]),
+  getItem("Quản lý user", "sub2", <TeamOutlined />, [
+    getItem(<NavLink to="/admin/danhsachuser">Danh sách user</NavLink>, "6"),
+    getItem(<NavLink to="/admin/themuser">Thêm user</NavLink>, "8"),
+  ]),
   getItem("Files", "9", <FileOutlined />),
 ];
 
@@ -42,8 +45,8 @@ const AdminTemplace = (props) => {
               <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                 <NavLink to="/home" className="logo">
                   <img
-                    src="https://cdn.tgdd.vn/Files/2020/06/08/1261696/moi-tai-bo-hinh-nen-asus-rog-2020-moi-nhat-3_800x450.jpg"
-                    width={100}
+                    src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png"
+                    width={200}
                   />
                 </NavLink>
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]} items={items} />
@@ -54,7 +57,7 @@ const AdminTemplace = (props) => {
                 </Header>
                 <Content style={{ margin: "0 16px" }}>
                   <div
-                    className="site-layout-background mt-2"
+                    className="site-layout-background w-full mt-2"
                     style={{ padding: 0, minHeight: 360 }}
                   >
                     <Component {...propsRoute} />

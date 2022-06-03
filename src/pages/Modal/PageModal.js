@@ -6,9 +6,7 @@ import { OPEN_MODAL_YOUTUBE } from "../../redux/actions/CarouselAction/ActionNam
 
 export default function PageModal() {
   const [isOpen, setOpen] = useState(false);
-  let KeywordLinkYoutube = useSelector(
-    (state) => state.CarouselReducer.openTrailer.link
-  );
+  let KeywordLinkYoutube = useSelector((state) => state.CarouselReducer.openTrailer.link);
   const dispatch = useDispatch();
   const buttonOpenTrailer = useRef();
   useEffect(() => {
@@ -17,10 +15,10 @@ export default function PageModal() {
       payload: { link: "", domButtonOpenTrailer: buttonOpenTrailer.current },
     });
     return () => {
-      dispatch({
-        type: OPEN_MODAL_YOUTUBE,
-        payload: { link: "", domButtonOpenTrailer: "" },
-      });
+      // dispatch({
+      //   type: OPEN_MODAL_YOUTUBE,
+      //   payload: { link: "", domButtonOpenTrailer: "" },
+      // });
     };
   }, []);
 
@@ -34,11 +32,7 @@ export default function PageModal() {
         onClose={() => setOpen(false)}
       />
 
-      <button
-        className="btn-primary hidden"
-        ref={buttonOpenTrailer}
-        onClick={() => setOpen(true)}
-      >
+      <button className="btn-primary hidden" ref={buttonOpenTrailer} onClick={() => setOpen(true)}>
         VIEW DEMO
       </button>
     </React.Fragment>
