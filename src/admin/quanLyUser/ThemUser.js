@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Select, Radio, Button, AutoComplete } from "antd";
 import { MA_NHOM } from "../../util/settings/config";
+import {
+  listUserTypeAction,
+  themNguoiDungAction,
+} from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 const { Option } = Select;
 
 const formItemLayout = {
@@ -13,21 +17,25 @@ const formItemLayout = {
     sm: { span: 16 },
   },
 };
-
+const prefixSelector = (
+  <Form.Item name="prefix" noStyle>
+    <Select style={{ width: 70 }}>
+      <Option value="84">+84</Option>
+    </Select>
+  </Form.Item>
+);
 const ThemUser = () => {
   const [form] = Form.useForm();
-  const [value, setValue] = useState(1);
-  const [submit, setSubmit] = useState({
-    taiKhoan: "",
-    matKhau: "",
-    email: "",
-    soDt: "",
-    maLoaiNguoiDung: "QuanTri",
-    hoTen: "",
-  });
+  const [isPromise, setIsPromise] = useState(null);
+  const [listUserType, setListUserType] = useState(null);
+  useEffect(async () => {
+    setIsPromise(listUserTypeAction());
 
-  const onFinish = (values) => {
-    setSubmit({
+    return () => {};
+  }, []);
+
+  const onFinish = async (values) => {
+    let submit = {
       taiKhoan: values.taiKhoan,
       matKhau: values.nhapLaiMatKhau,
       email: values.email,
@@ -35,18 +43,11 @@ const ThemUser = () => {
       maNhom: MA_NHOM,
       maLoaiNguoiDung: values.maLoaiNguoiDung,
       hoTen: values.hoTen,
-    });
+    };
+    let resultSubmit = await themNguoiDungAction(submit);
+    resultSubmit === true && form.resetFields();
   };
-
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option value="84">+84</Option>
-      </Select>
-    </Form.Item>
-  );
-
-  console.log(submit);
+  isPromise !== null && isPromise.then((kq) => setListUserType(kq));
 
   return (
     <div className="w-4/5">
@@ -179,14 +180,20 @@ const ThemUser = () => {
 
         <Form.Item name="maLoaiNguoiDung" label="Loại người dùng">
           <Radio.Group name="radio-group">
-            <Radio value="KhachHang">Khách hàng</Radio>
-            <Radio value="QuanTri">Quản trị</Radio>
+            {listUserType?.map((item, key) => (
+              <Radio value={item.maLoaiNguoiDung} key={key}>
+                {item.tenLoai}
+              </Radio>
+            ))}
           </Radio.Group>
         </Form.Item>
 
         <div className="w-full flex justify-center">
-          <Button type="default" htmlType="submit">
+          <Button type="default" style={{ marginRight: "2rem" }} htmlType="submit">
             Thêm user
+          </Button>
+          <Button type="default" onClick={() => form.resetFields()}>
+            Reset form
           </Button>
         </div>
       </Form>

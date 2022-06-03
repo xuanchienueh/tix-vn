@@ -67,3 +67,28 @@ export const DeleteUser = (taiKhoan) => {
     }
   };
 };
+
+export const listUserTypeAction = async () => {
+  let typeUser = [];
+  try {
+    let result = await QLNguoiDungService.LayDanhSachLoaiNguoiDung();
+
+    typeUser = result.data.content;
+  } catch (err) {
+    console.log("lấy loại user fail", err.response);
+  }
+  return typeUser;
+};
+
+export const themNguoiDungAction = async (infoUser) => {
+  let ketqua = false;
+  try {
+    let result = await QLNguoiDungService.themNguoiDung(infoUser);
+    Swal.fire({ title: "Thêm thành công!", timer: 1500 });
+    ketqua = true;
+  } catch (err) {
+    console.log("thêm ng dùng fail", err.response.data.content);
+    Swal.fire(`${err.response.data.content}`);
+  }
+  return ketqua;
+};
