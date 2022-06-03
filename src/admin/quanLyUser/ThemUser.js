@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Form, Input, Select, Radio, Button, AutoComplete } from "antd";
 import { MA_NHOM } from "../../util/settings/config";
 import {
   listUserTypeAction,
   themNguoiDungAction,
 } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
+import ConfirmReload from "../../util/confirmReload/confirmReload";
+import { Prompt } from "react-router";
 const { Option } = Select;
 
 const formItemLayout = {
@@ -24,15 +26,20 @@ const prefixSelector = (
     </Select>
   </Form.Item>
 );
+
 const ThemUser = () => {
   const [form] = Form.useForm();
   const [isPromise, setIsPromise] = useState(null);
+  const [readyToNewPage, setReadyToNewPage] = useState(false);
   const [listUserType, setListUserType] = useState(null);
-  useEffect(async () => {
-    setIsPromise(listUserTypeAction());
+  useEffect(() => setIsPromise(listUserTypeAction()), []);
 
-    return () => {};
-  }, []);
+  // xử lý hành động load lại trang web
+  ConfirmReload((e) => {
+    e.preventDefault();
+    e.returnValue = "";
+  });
+  // kết thúc xử lý action reload
 
   const onFinish = async (values) => {
     let submit = {
@@ -52,6 +59,7 @@ const ThemUser = () => {
   return (
     <div className="w-4/5">
       <h1 className="text-2xl font-semibold mb-4">Thêm mới tài khoản:</h1>
+      <Prompt when={readyToNewPage} message="Dữ liệu chưa được lưu, bạn có muốn chuyển trang?" />
       <Form
         {...formItemLayout}
         form={form}
@@ -65,6 +73,7 @@ const ThemUser = () => {
           maLoaiNguoiDung: "QuanTri",
         }}
         scrollToFirstError
+        onFieldsChange={() => setReadyToNewPage(true)}
       >
         <Form.Item
           name="email"
