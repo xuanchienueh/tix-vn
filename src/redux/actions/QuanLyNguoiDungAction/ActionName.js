@@ -92,3 +92,21 @@ export const themNguoiDungAction = async (infoUser) => {
   }
   return ketqua;
 };
+
+export const capNhatThongTinNguoiDungAction = async (dataUser) => {
+  let submitSuccess = false;
+  try {
+    let result = await QLNguoiDungService.capNhatThongTinNguoiDung(dataUser);
+    submitSuccess = true;
+    history.goBack();
+    localStorage.removeItem("userEditing");
+  } catch (err) {
+    Swal.fire({
+      title: err.response.data.content,
+      text: "Vui lòng điền email khác!",
+      icon: "error",
+    });
+    console.log("cap nhat user fail", err.response.data);
+  }
+  return submitSuccess;
+};

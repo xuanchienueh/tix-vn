@@ -8,6 +8,7 @@ import {
 } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import Swal from "sweetalert2";
 import { debounce } from "lodash";
+import { NavLink } from "react-router-dom";
 
 const data = [];
 
@@ -104,11 +105,14 @@ const DanhSachUser = () => {
           >
             <i className="fas fa-trash fa-2x text-red-500"></i>
           </a>
-          <a>
-            <Space>
-              <i className="fas fa-edit fa-2x text-green-500"></i>
-            </Space>
-          </a>
+          <NavLink
+            to={`/admin/edituser/${infoUser.taiKhoan}`}
+            onClick={() => {
+              localStorage.setItem("userEditing", JSON.stringify(infoUser));
+            }}
+          >
+            <i className="fas fa-edit fa-2x text-green-500"></i>
+          </NavLink>
         </Space>
       ),
     },

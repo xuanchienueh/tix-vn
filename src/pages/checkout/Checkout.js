@@ -24,8 +24,9 @@ import Loading from "../loading/Loading";
 
 export function Checkout() {
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
-  const { chiTietPhongVe, danhSachGheDangChon, DS_GheNguoiKhacDangChon } =
-    useSelector((state) => state.QuanLyDatVeReducer);
+  const { chiTietPhongVe, danhSachGheDangChon, DS_GheNguoiKhacDangChon } = useSelector(
+    (state) => state.QuanLyDatVeReducer
+  );
   // console.log(chiTietPhongVe);
   let { maLichChieu } = useParams();
   const dispatch = useDispatch();
@@ -50,28 +51,17 @@ export function Checkout() {
       danhSachGheDangChon.forEach((gheDangChon) => {
         if (gheDangChon.maGhe === ghe.maGhe) styleGhe = "daDat";
       });
-      if (
-        JSON.parse(localStorage.getItem(USER_LOGIN)).taiKhoan ===
-        ghe.taiKhoanNguoiDat
-      ) {
+      if (JSON.parse(localStorage.getItem(USER_LOGIN)).taiKhoan === ghe.taiKhoanNguoiDat) {
         styleGhe = "ghebanDaDat";
       }
       return (
         <Fragment key={index}>
           <button
             className={styleGhe}
-            disabled={
-              ghe.taiKhoanNguoiDat || styleGhe === "gheUserKhacDangChon"
-                ? true
-                : false
-            }
+            disabled={ghe.taiKhoanNguoiDat || styleGhe === "gheUserKhacDangChon" ? true : false}
             onClick={() => dispatch(chonGheAction(ghe))}
           >
-            {styleGhe === "gheUserKhacDangChon" ? (
-              <Spin size="small" />
-            ) : (
-              ghe.tenGhe
-            )}
+            {styleGhe === "gheUserKhacDangChon" ? <Spin size="small" /> : ghe.tenGhe}
           </button>
           {(index + 1) % 16 === 0 ? <br /> : ""}
         </Fragment>
@@ -128,16 +118,13 @@ export function Checkout() {
         });
     }
   };
-  console.log("checkout render");
 
   return (
     <div className="checkout ">
       <div className=" mx-auto ">
         <div className="grid grid-cols-12 ">
           <div className="col-span-8 bg-[#565656] ">
-            <div className="bg-black w-4/5 h-4 text-white text-center mx-auto pb-5">
-              Màn hình
-            </div>
+            <div className="bg-black w-4/5 h-4 text-white text-center mx-auto pb-5">Màn hình</div>
             <div className="trapezoid"></div>
             <div className="mt-8 flex justify-center">
               <span>{renderGhe()}</span>
@@ -146,20 +133,16 @@ export function Checkout() {
               <h1 className="text-white font-bold">Chú thích:</h1>
               <div className="grid grid-cols-2">
                 <div className="flex items-center">
-                  <button className="Thuong" />{" "}
-                  <span className="text-white">Ghế trống</span>
+                  <button className="Thuong" /> <span className="text-white">Ghế trống</span>
                 </div>
                 <div className="flex items-center">
-                  <button className="Vip" />{" "}
-                  <span className="text-white">Ghế Vip</span>
+                  <button className="Vip" /> <span className="text-white">Ghế Vip</span>
                 </div>
                 <div className="flex items-center">
-                  <button className="daDat" />{" "}
-                  <span className="text-white">Ghế bạn đang chọn</span>
+                  <button className="daDat" /> <span className="text-white">Ghế bạn đang chọn</span>
                 </div>
                 <div className="flex items-center">
-                  <button className="daBan" />{" "}
-                  <span className="text-white">Ghế đã bán</span>
+                  <button className="daBan" /> <span className="text-white">Ghế đã bán</span>
                 </div>
                 <div className="flex items-center">
                   <button className="ghebanDaDat" />{" "}
@@ -176,25 +159,18 @@ export function Checkout() {
           </div>
 
           <div className="col-span-4 h-full">
-            <h1 className="text-center text-green-600 text-2xl  ">
-              {tongTien}đ
-            </h1>
+            <h1 className="text-center text-green-600 text-2xl  ">{tongTien}đ</h1>
             <hr />
 
             <div className="ml-4 my-4">
               <span className="bg-orange-600 text-white p-1 rounded">C18</span>
-              <span className="ml-2 font-bold">
-                {chiTietPhongVe.thongTinPhim?.tenPhim}
-              </span>
+              <span className="ml-2 font-bold">{chiTietPhongVe.thongTinPhim?.tenPhim}</span>
             </div>
             <div className="ml-4 my-4">
-              <h1 className="font-semibold">
-                {chiTietPhongVe.thongTinPhim?.tenCumRap}
-              </h1>
+              <h1 className="font-semibold">{chiTietPhongVe.thongTinPhim?.tenCumRap}</h1>
               <p>Địa điểm: {chiTietPhongVe.thongTinPhim?.diaChi}</p>
               <p className="font-semibold">
-                {chiTietPhongVe.thongTinPhim?.ngayChieu} -{" "}
-                {chiTietPhongVe.thongTinPhim?.gioChieu} -{" "}
+                {chiTietPhongVe.thongTinPhim?.ngayChieu} - {chiTietPhongVe.thongTinPhim?.gioChieu} -{" "}
                 {chiTietPhongVe.thongTinPhim?.tenRap}
               </p>
             </div>
@@ -284,9 +260,7 @@ export default function (props) {
 
 function KetQuaDatVe(props) {
   const dispatch = useDispatch();
-  const { thongTinNguoiDung } = useSelector(
-    (state) => state.QuanLyNguoiDungReducer
-  );
+  const { thongTinNguoiDung } = useSelector((state) => state.QuanLyNguoiDungReducer);
   useEffect(() => dispatch(lichSuDatVe()), []);
 
   // console.log(thongTinNguoiDung);
@@ -307,15 +281,12 @@ function KetQuaDatVe(props) {
               onError={(e) => imgNotFound(e)}
             />
             <div className="flex-grow">
-              <h2 className="text-gray-900 title-font font-medium">
-                {item.tenPhim}
-              </h2>
+              <h2 className="text-gray-900 title-font font-medium">{item.tenPhim}</h2>
               <p className="text-gray-500">
                 Ngày đặt: {moment(item.ngayDat).format("hh:mm A - DD/MM/YYYY")}
               </p>
               <p className="text-gray-500">
-                Địa điểm: {item.danhSachGhe[0].tenCumRap} -{" "}
-                {item.danhSachGhe[0].tenHeThongRap}
+                Địa điểm: {item.danhSachGhe[0].tenCumRap} - {item.danhSachGhe[0].tenHeThongRap}
               </p>
               <div className="text-gray-500">
                 {" "}

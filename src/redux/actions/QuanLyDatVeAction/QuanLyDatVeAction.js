@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import { connection } from "../../..";
 import { QLDatVeService } from "../../../services/QuanLyDatVeService";
 import { DISPLAY_LOADING, HIDDEN_LOADING } from "../../reducers/LoadingReducer";
+import { lichSuDatVe } from "../QuanLyNguoiDungAction/ActionName";
 import { CHON_GHE, DAT_VE_DONE, LAY_DANH_SACH_PHONG_VE, TAB_ACTIVE } from "./constName";
 
 export const layDanhSachPhongVe = (maLichChieu) => {
@@ -28,17 +29,18 @@ export const datVeAction = (thongTinDatVe) => {
     try {
       dispatch({ type: DISPLAY_LOADING });
       let result = await QLDatVeService.datVe(thongTinDatVe);
-      result.status === 200 && (await dispatch(layDanhSachPhongVe(thongTinDatVe.maLichChieu)));
+      await dispatch(layDanhSachPhongVe(thongTinDatVe.maLichChieu));
       await dispatch({ type: DAT_VE_DONE });
 
       await dispatch({ type: HIDDEN_LOADING });
-      Swal.fire({
-        icon: "success",
-        title: "Đặt vé thành công!",
-        didClose: () => {
-          dispatch({ type: TAB_ACTIVE, payload: "2" });
-        },
-      });
+      result.status === 200 &&
+        Swal.fire({
+          icon: "success",
+          title: "Đặt vé thành công!",
+          timer: 1000,
+          didOpen: () => dispatch(lichSuDatVe()),
+          didClose: () => dispatch({ type: TAB_ACTIVE, payload: "2" }),
+        });
     } catch (err) {
       dispatch({ type: HIDDEN_LOADING });
       console.log(err);

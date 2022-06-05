@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Select, Radio, Button, AutoComplete } from "antd";
+import { Prompt } from "react-router";
 import { MA_NHOM } from "../../util/settings/config";
 import {
+  capNhatThongTinNguoiDungAction,
   listUserTypeAction,
-  themNguoiDungAction,
 } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import ConfirmReload from "../../util/confirmReload/confirmReload";
-import { Prompt } from "react-router";
+import Swal from "sweetalert2";
+
 const { Option } = Select;
 
 const formItemLayout = {
@@ -28,12 +30,15 @@ const prefixSelector = (
   </Form.Item>
 );
 
-const ThemUser = () => {
+const EditUser = () => {
   const [form] = Form.useForm();
   const [isPromise, setIsPromise] = useState(null);
   const [readyToNewPage, setReadyToNewPage] = useState(false);
   const [listUserType, setListUserType] = useState(null);
-  useEffect(() => setIsPromise(listUserTypeAction()), []);
+  useEffect(() => {
+    setIsPromise(listUserTypeAction());
+    return () => localStorage.removeItem("userEditing");
+  }, []);
 
   // xử lý hành động load lại trang web
   ConfirmReload((e) => {
@@ -41,26 +46,28 @@ const ThemUser = () => {
     e.returnValue = "";
   });
   // kết thúc xử lý action reload
-
+  let userEditing = JSON.parse(localStorage.getItem("userEditing"));
   const onFinish = async (values) => {
     let submit = {
       taiKhoan: values.taiKhoan,
-      matKhau: values.nhapLaiMatKhau,
+      matKhau: values.matKhau,
       email: values.email,
       soDt: values.soDt,
       maNhom: MA_NHOM,
       maLoaiNguoiDung: values.maLoaiNguoiDung,
       hoTen: values.hoTen,
     };
-    let resultSubmit = await themNguoiDungAction(submit);
-    resultSubmit === true && form.resetFields();
+    setReadyToNewPage(false);
+    let resultSubmit = await capNhatThongTinNguoiDungAction(submit);
+    resultSubmit && Swal.fire({ title: "Cập nhật thành công!", icon: "success", timer: 1500 });
   };
   isPromise !== null && isPromise.then((kq) => setListUserType(kq));
 
   return (
     <div className="w-4/5">
-      <h1 className="text-2xl font-semibold mb-4">Thêm mới tài khoản:</h1>
+      <h1 className="text-2xl font-semibold mb-4">Cập nhật thông tin tài khoản:</h1>
       <Prompt when={readyToNewPage} message="Dữ liệu chưa được lưu, bạn có muốn chuyển trang?" />
+
       <Form
         {...formItemLayout}
         form={form}
@@ -71,7 +78,12 @@ const ThemUser = () => {
         }}
         initialValues={{
           prefix: "84",
-          maLoaiNguoiDung: "QuanTri",
+          maLoaiNguoiDung: userEditing?.maLoaiNguoiDung,
+          matKhau: userEditing?.matKhau,
+          email: userEditing?.email,
+          taiKhoan: userEditing?.taiKhoan,
+          soDt: userEditing?.soDt,
+          hoTen: userEditing?.hoTen,
         }}
         scrollToFirstError
         onFieldsChange={() => setReadyToNewPage(true)}
@@ -94,7 +106,7 @@ const ThemUser = () => {
         </Form.Item>
 
         <Form.Item
-          name="password"
+          name="matKhau"
           label="Mật khẩu"
           tooltip="Mật khẩu ít nhất có 1 ký tự viết hoa, 1 ký tự viết thường, 1 ký tự số, 1 ký tự đặc biệt và dài từ 8 đến 10 ký tự!"
           rules={[
@@ -112,48 +124,8 @@ const ThemUser = () => {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item
-          name="nhapLaiMatKhau"
-          label="Nhập lại mật khẩu"
-          dependencies={["password"]}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: "Vui lòng nhập lại mật khẩu!",
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
-                }
-
-                return Promise.reject(new Error("Mật khẩu nhập lại không đúng!"));
-              },
-            }),
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          name="taiKhoan"
-          label="Tài khoản"
-          tooltip="Tài khoản không chứa dấu và ký tự đặc biệt!"
-          rules={[
-            {
-              required: true,
-              message: "Vui lòng nhập tài khoản của bạn!",
-              whitespace: true,
-            },
-            {
-              pattern: /^[a-zA-Z0-9]*$/,
-              message: "Tài khoản không chứa dấu và ký tự đặc biệt!",
-              whitespace: true,
-            },
-          ]}
-        >
-          <Input />
+        <Form.Item name="taiKhoan" label="Tài khoản">
+          <Input disabled />
         </Form.Item>
 
         <Form.Item
@@ -200,10 +172,7 @@ const ThemUser = () => {
 
         <div className="w-full flex justify-center">
           <Button type="default" style={{ marginRight: "2rem" }} htmlType="submit">
-            Thêm user
-          </Button>
-          <Button type="default" onClick={() => form.resetFields()}>
-            Reset form
+            Cập nhật
           </Button>
         </div>
       </Form>
@@ -211,4 +180,4 @@ const ThemUser = () => {
   );
 };
 
-export default ThemUser;
+export default EditUser;
