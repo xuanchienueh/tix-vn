@@ -17,20 +17,15 @@ export default function DropdownUser() {
           {t("Welcome")}, {userLogin?.taiKhoan}
         </div>
         <div className="dropdown-menu">
-          <a className="dropdown-item " href="#">
-            Đổi mật khẩu
-          </a>
           <NavLink className="dropdown-item " to="/profile">
-            Profile
+            Đổi mật khẩu
           </NavLink>
-          <a
-            className="dropdown-item-text "
-            href="/home"
-            onClick={() => localStorage.clear()}
-          >
+          <NavLink className="dropdown-item " to="/profile">
+            Lịch sử đặt vé
+          </NavLink>
+          <a className="dropdown-item-text " href="/home" onClick={() => localStorage.clear()}>
             Đăng xuất
           </a>
-          <span className="dropdown-item-text ">Just Text</span>
         </div>
       </div>
     </>

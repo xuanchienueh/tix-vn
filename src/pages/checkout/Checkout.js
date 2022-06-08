@@ -123,13 +123,13 @@ export function Checkout() {
     <div className="checkout ">
       <div className=" mx-auto ">
         <div className="grid grid-cols-12 ">
-          <div className="col-span-8 bg-[#565656] ">
+          <div className="col-span-12 lg:col-span-8 bg-[#565656] ">
             <div className="bg-black w-4/5 h-4 text-white text-center mx-auto pb-5">Màn hình</div>
             <div className="trapezoid"></div>
             <div className="mt-8 flex justify-center">
               <span>{renderGhe()}</span>
             </div>
-            <div className="ml-8">
+            <div className="ml-0 lg:ml-8">
               <h1 className="text-white font-bold">Chú thích:</h1>
               <div className="grid grid-cols-2">
                 <div className="flex items-center">
@@ -144,21 +144,25 @@ export function Checkout() {
                 <div className="flex items-center">
                   <button className="daBan" /> <span className="text-white">Ghế đã bán</span>
                 </div>
+
+                <div className="flex items-center">
+                  <button className="gheUserKhacDangChon w-9">
+                    <Spin size="small" />
+                  </button>
+                  <span className="text-white">
+                    <span>Ghế người khác</span> <br /> <span>đang chọn</span>
+                  </span>
+                  <br />
+                </div>
                 <div className="flex items-center">
                   <button className="ghebanDaDat" />{" "}
                   <span className="text-white">Ghế bạn đã đặt</span>
-                </div>
-                <div className="flex items-center">
-                  <button className="gheUserKhacDangChon">
-                    <Spin size="small" />
-                  </button>{" "}
-                  <span className="text-white">Ghế người khác đang chọn</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="col-span-4 h-full">
+          <div className="col-span-12 lg:col-span-4 h-full">
             <h1 className="text-center text-green-600 text-2xl  ">{tongTien}đ</h1>
             <hr />
 
