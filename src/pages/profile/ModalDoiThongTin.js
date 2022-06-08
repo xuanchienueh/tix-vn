@@ -19,7 +19,6 @@ function ModalDoiThongTin({ infoUser }) {
   const [show, setShow] = useState(false);
   const [form] = Form.useForm();
   const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
-  console.log(userLogin);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
