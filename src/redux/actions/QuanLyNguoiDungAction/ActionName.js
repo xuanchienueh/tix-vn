@@ -4,6 +4,7 @@ import { LAY_DS_USER, LICH_SU_DAT_VE, USER_REGISTER } from "../QuanLyNguoiDungAc
 import { history } from "../../../App";
 import { DISPLAY_LOADING, HIDDEN_LOADING } from "../../reducers/LoadingReducer";
 import Swal from "sweetalert2";
+import { LAY_INFO_USER } from "./constName";
 
 export const userLoginAction = (thongTinDangNhap) => {
   return async (dispatch) => {
@@ -11,7 +12,7 @@ export const userLoginAction = (thongTinDangNhap) => {
       let result = await QLNguoiDungService.nguoiDungDangNhap(thongTinDangNhap);
       if (result.status === 200) {
         dispatch({ type: USER_LOGIN, payload: result.data.content });
-        history.goBack();
+        history.push("home");
       }
     } catch (err) {
       console.log(err);
@@ -25,7 +26,9 @@ export const userRegisterAction = (thongTinDangKy) => {
       let result = await QLNguoiDungService.nguoiDungDangKy(thongTinDangKy);
       result.status === 200 && dispatch({ type: USER_REGISTER, payload: result.data.content });
     } catch (err) {
-      console.log(err);
+      let messageError = err.response.data.content;
+      Swal.fire({ title: messageError, timer: 2000 });
+      console.log("đăng ký thất bại", messageError);
     }
   };
 };
@@ -106,7 +109,40 @@ export const capNhatThongTinNguoiDungAction = async (dataUser) => {
       text: "Vui lòng điền email khác!",
       icon: "error",
     });
-    console.log("cap nhat user fail", err.response.data);
+    console.log("cap nhat user fail", err);
   }
   return submitSuccess;
+};
+
+export const customerUpdateInfoAction = async (infoCustomer) => {
+  let submitSuccess = false;
+  try {
+    let result = await QLNguoiDungService.customerUpdateInfo(infoCustomer);
+    submitSuccess = true;
+  } catch (err) {
+    console.log("khach hang cap nhat thong tin fail", err);
+  }
+  return submitSuccess;
+};
+
+export const timKiemUserAction = async (taiKhoan) => {
+  let resultAPI = null;
+  try {
+    let result = await QLNguoiDungService.timKiemNguoiDung(taiKhoan);
+    resultAPI = result.data.content;
+  } catch (err) {
+    console.log("tìm kiếm user fail", err);
+  }
+  return resultAPI;
+};
+
+export const thongTinUserAction = (keyword) => {
+  return async (dispatch) => {
+    try {
+      let result = await QLNguoiDungService.thongTinUser();
+      dispatch({ type: LAY_INFO_USER, payload: result.data.content });
+    } catch (err) {
+      console.log("lay thong tin user fail", err.response);
+    }
+  };
 };

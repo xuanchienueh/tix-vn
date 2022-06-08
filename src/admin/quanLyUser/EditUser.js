@@ -57,6 +57,7 @@ const EditUser = () => {
       maLoaiNguoiDung: values.maLoaiNguoiDung,
       hoTen: values.hoTen,
     };
+    console.log(submit);
     setReadyToNewPage(false);
     let resultSubmit = await capNhatThongTinNguoiDungAction(submit);
     resultSubmit && Swal.fire({ title: "Cập nhật thành công!", icon: "success", timer: 1500 });

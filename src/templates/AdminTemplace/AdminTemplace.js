@@ -21,7 +21,7 @@ const items = [
     getItem(<NavLink to="/admin/danhsachuser">Danh sách user</NavLink>, "6"),
     getItem(<NavLink to="/admin/themuser">Thêm user</NavLink>, "8"),
   ]),
-  getItem("Files", "9", <FileOutlined />),
+  getItem(<NavLink to="/home">về home</NavLink>, "9", <FileOutlined />),
 ];
 
 const AdminTemplace = (props) => {

@@ -1,7 +1,7 @@
 import { MA_NHOM } from "../util/settings/config";
 import { BaseServices } from "./baseServices";
 
-export class QuanLyNguoiDungService extends BaseServices {
+class QuanLyNguoiDungService extends BaseServices {
   constructor() {
     super();
   }
@@ -44,6 +44,14 @@ export class QuanLyNguoiDungService extends BaseServices {
 
   capNhatThongTinNguoiDung = (dataUser) => {
     return this.post(`api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, dataUser);
+  };
+
+  thongTinUser = () => {
+    return this.post(`api/QuanLyNguoiDung/ThongTinTaiKhoan`);
+  };
+
+  customerUpdateInfo = (infoCustomer) => {
+    return this.put("api/QuanLyNguoiDung/CapNhatThongTinNguoiDung", infoCustomer);
   };
 }
 export const QLNguoiDungService = new QuanLyNguoiDungService();

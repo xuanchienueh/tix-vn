@@ -2,7 +2,6 @@ import { createBrowserHistory } from "history";
 import React, { lazy, Suspense } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import "./App.css";
-import "./App.scss";
 import Home from "./pages/Home/Home";
 import News from "./pages/News/News";
 import Contact from "./pages/Contact/Contact";
@@ -24,6 +23,7 @@ import EditFilm from "./admin/films/edit/EditFilm";
 import TaoLichChieu from "./admin/films/taoLichChieu/TaoLichChieu";
 import ThemUser from "./admin/quanLyUser/ThemUser";
 import EditUser from "./admin/quanLyUser/EditUser";
+import EditUserClassCpn from "./admin/quanLyUser/EditUserClassCpn";
 
 const history = createBrowserHistory();
 // const CheckoutTemplace = lazy(() =>
