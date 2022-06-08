@@ -4,6 +4,7 @@ import { MA_NHOM } from "../../util/settings/config";
 import { useDispatch, useSelector } from "react-redux";
 import { QLNguoiDungService } from "../../services/QuanLyNguoiDungService";
 import ModalDoiMatKhau from "./ModalDoiMatKhau";
+import ModalDoiThongTin from "./ModalDoiThongTin";
 
 const formItemLayout = {
   labelCol: {
@@ -18,9 +19,9 @@ const formItemLayout = {
 
 export default function ThongTinTaiKhoan() {
   const dispatch = useDispatch();
-  const [form] = Form.useForm();
   const [show, setShow] = useState(false);
   const [infoUser, setInfoUser] = useState({});
+  const [form] = Form.useForm();
 
   useEffect(() => {
     // let timer1 = setTimeout(() => setShow(true), 500);
@@ -67,7 +68,7 @@ export default function ThongTinTaiKhoan() {
 
         <div className="w-full flex justify-around">
           <div>
-            <button>dfádfuhsauidyuáygd</button>
+            <ModalDoiThongTin infoUser={infoUser} />
           </div>
           <div>
             <ModalDoiMatKhau infoUser={infoUser} />

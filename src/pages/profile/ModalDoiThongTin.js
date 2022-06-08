@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Form, Input, AutoComplete } from "antd";
-
 import { MA_NHOM, USER_LOGIN } from "../../util/settings/config";
 import { customerUpdateInfoAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import Swal from "sweetalert2";
@@ -16,43 +15,43 @@ const formItemLayout = {
     sm: { span: 16 },
   },
 };
-
-function ModalDoiMatKhau({ infoUser }) {
+function ModalDoiThongTin({ infoUser }) {
   const [show, setShow] = useState(false);
   const [form] = Form.useForm();
   const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
+  console.log(userLogin);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const onFinish = async (values) => {
-    let doiMatKhau = {
+    let submit = {
       taiKhoan: infoUser.taiKhoan,
-      matKhau: values.nhapLaiMatKhau,
-      email: infoUser.email,
-      soDt: infoUser.soDT,
+      matKhau: infoUser.matKhau,
+      email: values.email,
+      soDt: values.soDt,
       maNhom: MA_NHOM,
-      hoTen: infoUser.hoTen,
+      hoTen: values.hoTen,
       maLoaiNguoiDung: userLogin.maLoaiNguoiDung,
     };
-    if (infoUser.matKhau === values.matKhauCu) {
-      let resultSubmit = await customerUpdateInfoAction(doiMatKhau);
-      resultSubmit && history.push("/home") && handleClose();
+    let resultSubmit = await customerUpdateInfoAction(submit);
+    if (resultSubmit) {
+      handleClose();
+      resultSubmit && history.push("/home");
       resultSubmit &&
-        Swal.fire({ title: "Đổi mật khẩu thành công!", icon: "success", timer: 1500 });
+        Swal.fire({ title: "Đổi thông tin thành công!", icon: "success", timer: 1500 });
     } else {
-      Swal.fire({ title: "Mật khẩu cũ không đúng!", icon: "warning", timer: 1500 });
       handleShow();
     }
   };
   return (
     <>
       <button className="btn btn-primary" onClick={handleShow}>
-        Đổi mật khẩu
+        Đổi thông tin
       </button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Đổi mật khẩu</Modal.Title>
+          <Modal.Title>Đổi thông tin</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form
@@ -62,54 +61,62 @@ function ModalDoiMatKhau({ infoUser }) {
             onFinish={onFinish}
             onFinishFailed={({ values, errorFields, outOfDate }) => {
               console.log("dữ liệu submit không đúng", values);
+              console.log(infoUser);
+            }}
+            initialValues={{
+              email: infoUser.email,
+              soDt: infoUser.soDT,
+              hoTen: infoUser.hoTen,
             }}
             scrollToFirstError
           >
-            <Form.Item name="matKhauCu" label="Mật khẩu cũ">
+            <Form.Item
+              name="email"
+              label="E-mail"
+              rules={[
+                {
+                  type: "email",
+                  message: "Email không hợp lệ!",
+                },
+                {
+                  required: true,
+                  message: "Vui lòng nhập email của bạn!",
+                },
+              ]}
+            >
               <Input />
             </Form.Item>
 
             <Form.Item
-              name="password"
-              label="Mật khẩu mới"
-              tooltip="Mật khẩu ít nhất có 1 ký tự viết hoa, 1 ký tự viết thường, 1 ký tự số, 1 ký tự đặc biệt và dài từ 8 đến 10 ký tự!"
+              name="soDt"
+              label="Số điện thoại"
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập mật khẩu của bạn!",
+                  message: "Vui lòng nhập số điện thoại của bạn!",
                 },
                 {
-                  pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/,
-                  message: "Mật khẩu không đủ mạnh!",
+                  pattern: /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/,
+                  message: "Số điện thoại không đúng!",
                 },
               ]}
-              hasFeedback
             >
-              <Input.Password />
+              <Input maxLength={10} style={{ width: "100%" }} />
             </Form.Item>
 
             <Form.Item
-              name="nhapLaiMatKhau"
-              label="Nhập lại mật khẩu"
-              dependencies={["password"]}
-              hasFeedback
+              name="hoTen"
+              label="Họ và tên"
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập lại mật khẩu!",
+                  message: "Trường này không được để trống!",
                 },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue("password") === value) {
-                      return Promise.resolve();
-                    }
-
-                    return Promise.reject(new Error("Mật khẩu nhập lại không đúng!"));
-                  },
-                }),
               ]}
             >
-              <Input.Password />
+              <AutoComplete onChange={() => {}} placeholder="Họ và tên">
+                <Input />
+              </AutoComplete>
             </Form.Item>
 
             <div className="w-full flex justify-center">
@@ -137,4 +144,4 @@ function ModalDoiMatKhau({ infoUser }) {
     </>
   );
 }
-export default ModalDoiMatKhau;
+export default ModalDoiThongTin;

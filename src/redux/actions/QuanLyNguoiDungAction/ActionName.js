@@ -120,6 +120,7 @@ export const customerUpdateInfoAction = async (infoCustomer) => {
     let result = await QLNguoiDungService.customerUpdateInfo(infoCustomer);
     submitSuccess = true;
   } catch (err) {
+    Swal.fire({ title: err.response.data.content, icon: "error", timer: 1500 });
     console.log("khach hang cap nhat thong tin fail", err);
   }
   return submitSuccess;
