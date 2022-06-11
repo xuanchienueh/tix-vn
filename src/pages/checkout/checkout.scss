@@ -25,6 +25,9 @@
     color: white;
     background-color: rgb(230, 113, 11);
   }
+  button:focus {
+    outline: none;
+  }
   .daDat {
     height: 2rem;
     width: 2rem;

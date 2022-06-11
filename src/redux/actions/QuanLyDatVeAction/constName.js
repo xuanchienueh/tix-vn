@@ -3,3 +3,4 @@ export const CHON_GHE = "CHON_GHE";
 export const DAT_VE_DONE = "DAT_VE_DONE";
 export const TAB_ACTIVE = "TAB_ACTIVE";
 export const LAY_DS_GHE_USER_KHAC_DANG_CHON = "LAY_DS_GHE_USER_KHAC_DANG_CHON";
+export const CHECK_STATUS_SEAT = "CHECK_STATUS_SEAT";

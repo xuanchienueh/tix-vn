@@ -3,12 +3,18 @@ import { connection } from "../../..";
 import { QLDatVeService } from "../../../services/QuanLyDatVeService";
 import { DISPLAY_LOADING, HIDDEN_LOADING } from "../../reducers/LoadingReducer";
 import { lichSuDatVe } from "../QuanLyNguoiDungAction/ActionName";
-import { CHON_GHE, DAT_VE_DONE, LAY_DANH_SACH_PHONG_VE, TAB_ACTIVE } from "./constName";
+import {
+  CHECK_STATUS_SEAT,
+  CHON_GHE,
+  DAT_VE_DONE,
+  LAY_DANH_SACH_PHONG_VE,
+  TAB_ACTIVE,
+} from "./constName";
 
-export const layDanhSachPhongVe = (maLichChieu) => {
+export const layDanhSachPhongVe = (maLichChieu, loading = true) => {
   return async (dispatch) => {
     try {
-      await dispatch({ type: DISPLAY_LOADING });
+      loading && (await dispatch({ type: DISPLAY_LOADING }));
       let result = await QLDatVeService.LayDanhSachPhongVe(maLichChieu);
       result.status === 200 &&
         (await dispatch({
@@ -75,4 +81,11 @@ export const taoLichChieuAction = async (dataLichChieu) => {
   } catch (err) {
     console.log("tạo lịch chiếu fail", err.response?.data);
   }
+};
+
+export const checkStatusSeatAction = (danhSachGheDangChon) => {
+  return {
+    type: CHECK_STATUS_SEAT,
+    payload: danhSachGheDangChon,
+  };
 };

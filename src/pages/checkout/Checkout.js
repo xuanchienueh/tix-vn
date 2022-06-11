@@ -1,21 +1,19 @@
-import React, { Fragment, useEffect } from "react";
-import { Tabs } from "antd";
+import React, { Fragment, useEffect, useRef } from "react";
+import { Tabs, Spin } from "antd";
 import moment from "moment";
-import { Spin } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { LAY_DS_GHE_USER_KHAC_DANG_CHON } from "../../redux/actions/QuanLyDatVeAction/constName";
+import { TAB_ACTIVE } from "../../redux/actions/QuanLyDatVeAction/constName";
 import {
-  LAY_DS_GHE_USER_KHAC_DANG_CHON,
-  TAB_ACTIVE,
-} from "../../redux/actions/QuanLyDatVeAction/constName";
-import {
+  checkStatusSeatAction,
   chonGheAction,
   datVeAction,
   layDanhSachPhongVe,
 } from "../../redux/actions/QuanLyDatVeAction/QuanLyDatVeAction";
 import "./checkout.scss";
-import { imgNotFound, USER_LOGIN } from "../../util/settings/config";
+import { imgNotFound } from "../../util/settings/config";
 import { lichSuDatVe } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import { connection } from "../..";
 import { NavLink } from "react-router-dom";
@@ -24,25 +22,29 @@ import Loading from "../loading/Loading";
 
 export function Checkout() {
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
-  const { chiTietPhongVe, danhSachGheDangChon, DS_GheNguoiKhacDangChon } = useSelector(
+  const { chiTietPhongVe, danhSachGheDangChon, DS_GheNguoiKhacDangChon, DS_Ghe_Sold } = useSelector(
     (state) => state.QuanLyDatVeReducer
   );
   // console.log(chiTietPhongVe);
   let { maLichChieu } = useParams();
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(layDanhSachPhongVe(maLichChieu));
+    let timer = setInterval(() => {
+      dispatch(layDanhSachPhongVe(maLichChieu, false));
+    }, 7000);
+    return () => clearInterval(timer);
+
     /* Load danh sách ghế đang được user khác chọn từ server về */
   }, [maLichChieu]);
+
+  //
   const renderGhe = () => {
     return chiTietPhongVe.danhSachGhe?.map((ghe, index) => {
       let styleGhe = "Thuong";
-      if (ghe.taiKhoanNguoiDat) {
-        styleGhe = "daBan";
-      } else if (ghe.loaiGhe === "Vip") {
-        styleGhe = "Vip";
-      }
+      if (ghe.loaiGhe === "Vip") styleGhe = "Vip";
+      if (ghe.taiKhoanNguoiDat) styleGhe = "daBan";
+      if (userLogin.taiKhoan === ghe.taiKhoanNguoiDat) styleGhe = "ghebanDaDat";
 
       /*    DS_GheNguoiKhacDangChon.forEach((gheNguoiKhacDangChon) => {
         if (ghe.maGhe === gheNguoiKhacDangChon.maGhe)
@@ -51,15 +53,17 @@ export function Checkout() {
       danhSachGheDangChon.forEach((gheDangChon) => {
         if (gheDangChon.maGhe === ghe.maGhe) styleGhe = "daDat";
       });
-      if (JSON.parse(localStorage.getItem(USER_LOGIN)).taiKhoan === ghe.taiKhoanNguoiDat) {
-        styleGhe = "ghebanDaDat";
-      }
+
+      //
       return (
         <Fragment key={index}>
           <button
             className={styleGhe}
             disabled={ghe.taiKhoanNguoiDat || styleGhe === "gheUserKhacDangChon" ? true : false}
-            onClick={() => dispatch(chonGheAction(ghe))}
+            onClick={() => {
+              dispatch(chonGheAction(ghe));
+              checkStatusSeat();
+            }}
           >
             {styleGhe === "gheUserKhacDangChon" ? <Spin size="small" /> : ghe.tenGhe}
           </button>
@@ -69,15 +73,31 @@ export function Checkout() {
     });
   };
 
+  //
+  useEffect(() => {
+    dispatch(checkStatusSeatAction(danhSachGheDangChon));
+  }, [DS_Ghe_Sold.length]);
+
+  // debounce chọn ghế
+  const timerCheckSeat = useRef(null);
+  function checkStatusSeat() {
+    if (timerCheckSeat.current) clearTimeout(timerCheckSeat.current);
+    timerCheckSeat.current = setTimeout(() => {
+      dispatch(layDanhSachPhongVe(maLichChieu, false));
+    }, 1500);
+  }
+  //
   let tongTien = danhSachGheDangChon
     .reduce((tongTien, item) => (tongTien += item.giaVe), 0)
     .toLocaleString("en");
 
+  //
   let danhSachVe = danhSachGheDangChon.map((item) => {
     return { giaVe: item.giaVe, maGhe: item.maGhe };
   });
+
+  //
   let thongTinDatVe = { maLichChieu, danhSachVe };
-  // console.log(thongTinDatVe);
   const handleBtnDatVe = () => {
     const swalTailwinCssBottons = Swal.mixin({
       customClass: {
@@ -123,7 +143,7 @@ export function Checkout() {
     <div className="checkout ">
       <div className=" mx-auto ">
         <div className="grid grid-cols-12 ">
-          <div className="col-span-12 lg:col-span-8 bg-[#565656] ">
+          <div className="col-span-12 lg:col-span-9 bg-[#565656] ">
             <div className="bg-black w-4/5 h-4 text-white text-center mx-auto pb-5">Màn hình</div>
             <div className="trapezoid"></div>
             <div className="mt-8 flex justify-center">
@@ -162,7 +182,7 @@ export function Checkout() {
             </div>
           </div>
 
-          <div className="col-span-12 lg:col-span-4 h-full">
+          <div className="col-span-12 lg:col-span-3 h-full">
             <h1 className="text-center text-green-600 text-2xl  ">{tongTien}đ</h1>
             <hr />
 
