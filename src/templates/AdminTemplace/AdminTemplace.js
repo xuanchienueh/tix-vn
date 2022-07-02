@@ -15,13 +15,12 @@ const items = [
     getItem(<NavLink to="/admin/films">Danh sách phim</NavLink>, "4"),
     getItem(<NavLink to="/admin/addfilm">Thêm phim</NavLink>, "5"),
   ]),
-  getItem(<NavLink to="/admin/dashboard">tnoname</NavLink>, "2", <UserOutlined />),
-  getItem(<NavLink to="/admin/showtime">ShowTime</NavLink>, "3", <DesktopOutlined />),
+  // getItem(<NavLink to="/admin/dashboard">tnoname</NavLink>, "2", <UserOutlined />),
+  // getItem(<NavLink to="/admin/showtime">ShowTime</NavLink>, "3", <DesktopOutlined />),
   getItem("Quản lý user", "sub2", <TeamOutlined />, [
     getItem(<NavLink to="/admin/danhsachuser">Danh sách user</NavLink>, "6"),
     getItem(<NavLink to="/admin/themuser">Thêm user</NavLink>, "8"),
   ]),
-  getItem(<NavLink to="/home">về home</NavLink>, "9", <FileOutlined />),
 ];
 
 const AdminTemplace = (props) => {

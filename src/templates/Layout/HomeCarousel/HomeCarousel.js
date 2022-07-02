@@ -22,14 +22,8 @@ const HomeCarousel = () => {
     return carousel.map((item, index) => {
       return (
         <div key={index}>
-          <div
-            style={{ ...contentStyle, backgroundImage: `url(${item.hinhAnh})` }}
-          >
-            <img
-              className="w-full opacity-0"
-              src={item.hinhAnh}
-              alt={`${item.hinhAnh}`}
-            />
+          <div style={{ ...contentStyle, backgroundImage: `url(${item.hinhAnh})` }}>
+            <img className="w-full opacity-0" src={item.hinhAnh} alt={`${item.hinhAnh}`} />
           </div>
         </div>
       );
@@ -38,20 +32,7 @@ const HomeCarousel = () => {
 
   return (
     <div className="antd_carousel">
-      <Carousel>
-        {renderImg()}
-        {/* 
-      <div>
-        <div style={contentStyle}>
-          <img
-            className="w-full"
-            src="https://cdn.tgdd.vn/Files/2020/06/08/1261696/moi-tai-bo-hinh-nen-asus-rog-2020-moi-nhat-5_800x450.jpg"
-            alt="3"
-          />
-        </div>
-      </div>
-       */}
-      </Carousel>
+      <Carousel>{renderImg()}</Carousel>
     </div>
   );
 };

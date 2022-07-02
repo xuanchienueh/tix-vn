@@ -7,6 +7,7 @@ import { USER_LOGIN } from "../../../util/settings/config";
 import DropdownUser from "./DropdownUser";
 
 const { Option } = Select;
+const infoUser = JSON.parse(localStorage.getItem(USER_LOGIN));
 
 function Header(props) {
   const handleChange = (value) => i18n.changeLanguage(value);
@@ -31,7 +32,7 @@ function Header(props) {
   };
 
   return (
-    <header className="w-full bg-gray-900 fixed text-white z-[1] h-20">
+    <header className="w-full bg-gray-900 fixed flex items-center text-white z-[1] h-20">
       <div className="container flex justify-between h-16 mx-auto">
         <NavLink
           rel="noopener noreferrer"
@@ -40,8 +41,9 @@ function Header(props) {
           className="flex items-center p-2"
         >
           <img
-            src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png"
-            alt="cybersoft"
+            src="http://tixvn.click/static/media/logo.af00d8dd04677a4ee789.png"
+            width={70}
+            alt="tixvn"
           />
         </NavLink>
         <ul className="items-stretch hidden space-x-3 lg:flex">
@@ -75,16 +77,17 @@ function Header(props) {
               {t("Contact")}
             </NavLink>
           </li>
-
-          <li className="flex">
-            <NavLink
-              // rel="noopener noreferrer"
-              to="/admin/films"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
-            >
-              Link
-            </NavLink>
-          </li>
+          {infoUser && infoUser.maLoaiNguoiDung === "QuanTri" && (
+            <li className="flex">
+              <NavLink
+                // rel="noopener noreferrer"
+                to="/admin/films"
+                className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
+              >
+                Admin
+              </NavLink>
+            </li>
+          )}
         </ul>
         <div className="items-center flex-shrink-0 hidden lg:flex">
           {renderUserName()}

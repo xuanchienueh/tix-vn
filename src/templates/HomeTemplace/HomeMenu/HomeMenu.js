@@ -4,7 +4,6 @@ import styles from "./HomeMenu.module.scss";
 
 import { Tabs } from "antd";
 import "antd/dist/antd.css";
-import "./HomeMenu.scss";
 import CumRap from "./CumRap";
 const { TabPane } = Tabs;
 
