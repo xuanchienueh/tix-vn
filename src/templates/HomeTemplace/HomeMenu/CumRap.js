@@ -45,39 +45,25 @@ function CumRap({ props }) {
                     className="h-14 lg:h-14 lg:w-12 flex-none bg-cover  lg:rounded-t-none text-center overflow-hidden"
                     // style={{ backgroundImage: `url("${phim.hinhAnh}")` }}
                   >
-                    <img
-                      src={phim.hinhAnh}
-                      alt={phim.tenPhim}
-                      onError={(e) => imgNotFound(e)}
-                    />
+                    <img src={phim.hinhAnh} alt={phim.tenPhim} onError={(e) => imgNotFound(e)} />
                   </div>
                   <div className="flex-grow border-gray-400 lg:border-l-0  lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-0 flex flex-col justify-between leading-normal ml-3">
                     <div>
-                      <NavLink
-                        to="#"
-                        className="text-gray-900 font-semibold mb-2 text-base hover:text-[#fb4226]"
-                      >
+                      <span className="text-gray-900 font-semibold mb-2 text-base hover:text-[#fb4226]">
                         {phim.tenPhim}
-                      </NavLink>
+                      </span>
                       <p className="text-gray-700 text-xs">{rapPhim.diaChi}</p>
                     </div>
                   </div>
                 </div>
                 <div className="grid grid-cols-6 gap-4 py-2 border-b border-gray-400">
-                  {phim.lstLichChieuTheoPhim
-                    ?.slice(0, 12)
-                    .map((lichChieu, index) => (
-                      <NavLink
-                        to={`/checkout/${lichChieu.maLichChieu}`}
-                        key={index}
-                      >
-                        <button className="font-bold rounded-sm border border-gray-200 p-2 text-green-700  text-xs bg-[#fafafa] hover:text-[#fb4226]">
-                          {moment(lichChieu.ngayChieuGioChieu).format(
-                            "hh:mm A"
-                          )}
-                        </button>
-                      </NavLink>
-                    ))}
+                  {phim.lstLichChieuTheoPhim?.slice(0, 12).map((lichChieu, index) => (
+                    <NavLink to={`/checkout/${lichChieu.maLichChieu}`} key={index}>
+                      <button className="font-bold rounded-sm border border-gray-200 p-2 text-green-700  text-xs bg-[#fafafa] hover:text-[#fb4226]">
+                        {moment(lichChieu.ngayChieuGioChieu).format("hh:mm A")}
+                      </button>
+                    </NavLink>
+                  ))}
                 </div>
               </Fragment>
             ))}

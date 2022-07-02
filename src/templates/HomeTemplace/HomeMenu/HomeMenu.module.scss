@@ -1,0 +1,32 @@
+.homeMenuscss {
+  border: 1px solid #c1c1c1;
+  :global {
+    .ant-tabs-ink-bar {
+      background-color: red;
+      width: 16px;
+    }
+    .ant-tabs-tab {
+      opacity: 0.5;
+      border-bottom: 1px solid #ccc;
+      &:hover {
+        color: inherit;
+      }
+    }
+    .ant-tabs-tab-active {
+      opacity: 1;
+      h5 {
+        font-weight: 700;
+      }
+      .ant-tabs-tab-btn {
+        color: #949494;
+      }
+    }
+    .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+      color: #fb4226;
+    }
+    .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab {
+      padding: 16px 0;
+      margin: 0;
+    }
+  }
+}
