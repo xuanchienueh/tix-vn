@@ -3,8 +3,8 @@ import { Form, Input, Select, Radio, Button, AutoComplete } from "antd";
 import { Prompt } from "react-router";
 import { MA_NHOM } from "../../util/settings/config";
 import {
-  capNhatThongTinNguoiDungAction,
-  listUserTypeAction,
+  updateInfoUserAct,
+  listUserTypeAct,
 } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import ConfirmReload from "../../util/confirmReload/confirmReload";
 import Swal from "sweetalert2";
@@ -36,7 +36,7 @@ const EditUser = () => {
   const [readyToNewPage, setReadyToNewPage] = useState(false);
   const [listUserType, setListUserType] = useState(null);
   useEffect(() => {
-    setIsPromise(listUserTypeAction());
+    setIsPromise(listUserTypeAct());
     return () => localStorage.removeItem("userEditing");
   }, []);
 
@@ -57,11 +57,12 @@ const EditUser = () => {
       maLoaiNguoiDung: values.maLoaiNguoiDung,
       hoTen: values.hoTen,
     };
-    console.log(submit);
+
     setReadyToNewPage(false);
-    let resultSubmit = await capNhatThongTinNguoiDungAction(submit);
+    let resultSubmit = await updateInfoUserAct(submit);
     resultSubmit && Swal.fire({ title: "Cập nhật thành công!", icon: "success", timer: 1500 });
   };
+
   isPromise !== null && isPromise.then((kq) => setListUserType(kq));
 
   return (

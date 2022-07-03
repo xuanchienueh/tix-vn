@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Select, Radio, Button, AutoComplete } from "antd";
 import { MA_NHOM } from "../../util/settings/config";
 import {
-  listUserTypeAction,
+  listUserTypeAct,
   themNguoiDungAction,
 } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import ConfirmReload from "../../util/confirmReload/confirmReload";
@@ -28,12 +28,12 @@ const prefixSelector = (
   </Form.Item>
 );
 
-const ThemUser = () => {
+const AddUser = () => {
   const [form] = Form.useForm();
   const [isPromise, setIsPromise] = useState(null);
   const [readyToNewPage, setReadyToNewPage] = useState(false);
   const [listUserType, setListUserType] = useState(null);
-  useEffect(() => setIsPromise(listUserTypeAction()), []);
+  useEffect(() => setIsPromise(listUserTypeAct()), []);
 
   // xử lý hành động load lại trang web
   ConfirmReload((e) => {
@@ -211,4 +211,4 @@ const ThemUser = () => {
   );
 };
 
-export default ThemUser;
+export default AddUser;

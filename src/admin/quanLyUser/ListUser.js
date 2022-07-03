@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./DanhSachUser.scss";
+import "./ListUser.scss";
 import { Table, Switch, Radio, Form, Space, Input } from "antd";
 import {
   DeleteUser,
@@ -13,32 +13,17 @@ import { NavLink } from "react-router-dom";
 
 const data = [];
 
-for (let i = 1; i <= 5; i++) {
-  data.push({
-    key: i,
-    hoTen: "John Brown",
-    taiKhoan: "John Brown",
-    maLoaiNguoiDung: "khách hàng",
-    matKhau: Math.random(),
-    soDt: Number(`${i}2`),
-    email: `New York No. ${i} Lake Park`,
-    description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
-  });
-}
-
 const defaultExpandable = {
   expandedRowRender: (record) => <p>{record.description}</p>,
 };
 
-const DanhSachUser = () => {
-  const [loading, setLoading] = useState(false);
+const ListUser = () => {
   const [rowSelection, setRowSelection] = useState({});
   const [tableLayout, setTableLayout] = useState(undefined);
   const [bottom, setBottom] = useState("bottomCenter");
   const [ellipsis, setEllipsis] = useState(false);
   const [yScroll, setYScroll] = useState(false);
   const [xScroll, setXScroll] = useState(undefined);
-  const handleLoadingChange = (enable) => setLoading(enable);
   const handleTableLayoutChange = (e) => setTableLayout(e.target.value);
   const handleEllipsisChange = (enable) => setEllipsis(enable);
   const handleRowSelectionChange = (enable) => setRowSelection(enable ? {} : undefined);
@@ -131,7 +116,6 @@ const DanhSachUser = () => {
 
   const tableProps = {
     bordered: true,
-    loading,
     size: "small",
     title: undefined,
     showHeader: true,
@@ -142,10 +126,11 @@ const DanhSachUser = () => {
   // bên trên là code của thư viện antd
   const dispatch = useDispatch();
   const { dsAllUser } = useSelector((state) => state.QuanLyNguoiDungReducer);
-  console.log(dsAllUser.length);
+
   useEffect(() => {
     dispatch(layDSNguoiDungAction());
   }, []);
+
   const debounceInputSearch = useCallback(
     debounce((value) => dispatch(layDSNguoiDungAction(value)), 500),
     []
@@ -158,9 +143,9 @@ const DanhSachUser = () => {
         className="components-table-demo-control-bar"
         style={{ marginBottom: 16 }}
       >
-        <Form.Item label="Loading">
+        {/* <Form.Item label="Loading">
           <Switch checked={loading} onChange={handleLoadingChange} />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item label="Checkbox">
           <Switch checked={!!rowSelection} onChange={handleRowSelectionChange} />
@@ -210,4 +195,4 @@ const DanhSachUser = () => {
   );
 };
 
-export default DanhSachUser;
+export default ListUser;

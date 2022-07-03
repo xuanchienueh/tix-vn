@@ -71,7 +71,7 @@ export const DeleteUser = (taiKhoan) => {
   };
 };
 
-export const listUserTypeAction = async () => {
+export const listUserTypeAct = async () => {
   let typeUser = [];
   try {
     let result = await QLNguoiDungService.LayDanhSachLoaiNguoiDung();
@@ -96,7 +96,7 @@ export const themNguoiDungAction = async (infoUser) => {
   return ketqua;
 };
 
-export const capNhatThongTinNguoiDungAction = async (dataUser) => {
+export const updateInfoUserAct = async (dataUser) => {
   let submitSuccess = false;
   try {
     let result = await QLNguoiDungService.capNhatThongTinNguoiDung(dataUser);

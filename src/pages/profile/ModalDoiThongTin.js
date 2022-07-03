@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { Modal, Button } from "react-bootstrap";
 import { Form, Input, AutoComplete } from "antd";
 import { MA_NHOM, USER_LOGIN } from "../../util/settings/config";
@@ -143,4 +144,8 @@ function ModalDoiThongTin({ infoUser }) {
     </>
   );
 }
+ModalDoiThongTin.propTypes = {
+  infoUser: PropTypes.object.isRequired,
+};
+
 export default ModalDoiThongTin;

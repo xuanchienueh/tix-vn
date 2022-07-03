@@ -14,12 +14,6 @@ export default function PageModal() {
       type: OPEN_MODAL_YOUTUBE,
       payload: { link: "", domButtonOpenTrailer: buttonOpenTrailer.current },
     });
-    return () => {
-      // dispatch({
-      //   type: OPEN_MODAL_YOUTUBE,
-      //   payload: { link: "", domButtonOpenTrailer: "" },
-      // });
-    };
   }, []);
 
   return (

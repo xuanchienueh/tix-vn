@@ -2,6 +2,7 @@ import React from "react";
 import { Tabs } from "antd";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const { TabPane } = Tabs;
 const styleCss = {
@@ -17,10 +18,9 @@ const styleCss = {
   marginTop: "0.7rem",
 };
 
-export default function LichChieuDetail({ props }) {
-  // console.log(props);
+export default function LichChieuDetail({ cinemaSystem }) {
   const renderLichChieu = () =>
-    props.map((item, index) => (
+    cinemaSystem.map((item, index) => (
       <TabPane tab={<img src={item.logo} width={50} />} key={index}>
         {item.cumRapChieu?.map((cumRap, i) => {
           return (
@@ -40,10 +40,7 @@ export default function LichChieuDetail({ props }) {
               </div>
               <div className="mt-4">
                 {cumRap.lichChieuPhim?.map((lichChieu, index) => (
-                  <NavLink
-                    to={`/checkout/${lichChieu.maLichChieu}`}
-                    key={index}
-                  >
+                  <NavLink to={`/checkout/${lichChieu.maLichChieu}`} key={index}>
                     <button className="font-bold rounded-sm border border-gray-200 p-2 text-green-700  text-xs bg-[#fafafa] hover:text-[#fb4226] mr-2">
                       {moment(lichChieu.ngayChieuGioChieu).format("hh:mm A")}
                     </button>
@@ -55,7 +52,7 @@ export default function LichChieuDetail({ props }) {
         })}
       </TabPane>
     ));
-  if (Array.isArray(props) && props.length > 0) {
+  if (Array.isArray(cinemaSystem) && cinemaSystem.length > 0) {
     return (
       <div>
         <Tabs tabPosition="left">{renderLichChieu()}</Tabs>
@@ -63,9 +60,11 @@ export default function LichChieuDetail({ props }) {
     );
   } else {
     return (
-      <h1 className="text-center text-red-500 h-10 leading-10">
-        Phim này chưa có lịch chiếu!
-      </h1>
+      <h1 className="text-center text-red-500 h-10 leading-10">Phim này chưa có lịch chiếu!</h1>
     );
   }
 }
+
+LichChieuDetail.propTypes = {
+  cinemaSystem: PropTypes.array.isRequired,
+};

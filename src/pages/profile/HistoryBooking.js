@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { useSelector } from "react-redux";
 
-export default function LichSuDatVe() {
+export default function HistoryBooking() {
   const { thongTinDatVe } = useSelector((state) => state.QuanLyNguoiDungReducer.thongTinNguoiDung);
   const renderBookingHistory = () => {
     return thongTinDatVe?.map((info, i) => (

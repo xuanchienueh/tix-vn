@@ -8,14 +8,10 @@ export default function ThongTinTaiKhoan() {
   const [infoUser, setInfoUser] = useState({});
 
   useEffect(() => {
-    // let timer1 = setTimeout(() => setShow(true), 500);
     QLNguoiDungService.thongTinUser().then((kq) => {
       setInfoUser(kq.data.content);
       setShow(true);
     });
-    return () => {
-      // clearTimeout(timer1);
-    };
   }, []);
 
   return show ? (

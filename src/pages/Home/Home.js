@@ -14,7 +14,7 @@ import HomeCarousel from "../../templates/Layout/HomeCarousel/HomeCarousel";
 
 const { TabPane } = Tabs;
 
-export default function Home(props) {
+export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(layDanhSachPhim());
@@ -29,16 +29,10 @@ export default function Home(props) {
 
       <div className="xl:max-w-[1100px] mx-auto tabs-carousel">
         <Tabs defaultActiveKey="1" centered>
-          <TabPane
-            tab={<p onClick={() => DangChieu(true)}>Đang chiếu</p>}
-            key="1"
-          >
+          <TabPane tab={<p onClick={() => DangChieu(true)}>Đang chiếu</p>} key="1">
             <ListMovie props={dangChieu} />
           </TabPane>
-          <TabPane
-            tab={<p onClick={() => DangChieu(false)}>Sắp chiếu</p>}
-            key="2"
-          >
+          <TabPane tab={<p onClick={() => DangChieu(false)}>Sắp chiếu</p>} key="2">
             <ListMovie props={dangChieu} />
           </TabPane>
         </Tabs>

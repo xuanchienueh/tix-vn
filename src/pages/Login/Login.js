@@ -13,7 +13,6 @@ export default function Login() {
       matKhau: "",
     },
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
       dispatch(userLoginAction(values));
     },
   });
@@ -196,13 +195,7 @@ export default function Login() {
                 strokeWidth={2}
                 opacity="0.1"
               />
-              <ellipse
-                cx="463.21721"
-                cy="95.32341"
-                rx="39.5"
-                ry={37}
-                fill="#2f2e41"
-              />
+              <ellipse cx="463.21721" cy="95.32341" rx="39.5" ry={37} fill="#2f2e41" />
               <path
                 d="M683.8586,425.93948l-10,14s-48,10-30,25,44-14,44-14l14-18Z"
                 transform="translate(-335.6414 -100.11607)"
@@ -290,13 +283,12 @@ export default function Login() {
             Free TailwindCSS Component Kit!
           </h3>
           <p>
-            I recently released Treact, a{" "}
-            <span className="font-bold">free</span> TailwindCSS Component Kit
-            built with React.
+            I recently released Treact, a <span className="font-bold">free</span> TailwindCSS
+            Component Kit built with React.
           </p>
           <p className="mt-2">
-            It has 52 different UI components, 7 landing pages, and 8 inner
-            pages prebuilt. And they are customizable!
+            It has 52 different UI components, 7 landing pages, and 8 inner pages prebuilt. And they
+            are customizable!
           </p>
           <div className="mt-8 pt-8 sm:pt-4 border-t -mx-8 px-8 flex flex-col sm:flex-row justify-end leading-relaxed">
             <button className="close-treact-popup px-8 py-3 sm:py-2 rounded border border-gray-400 hover:bg-gray-200 transition duration-300">

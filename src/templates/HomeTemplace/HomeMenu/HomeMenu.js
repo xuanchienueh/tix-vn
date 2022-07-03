@@ -14,7 +14,7 @@ export default function HomeMenu() {
     heThongRap.map((item) => {
       return (
         <TabPane tab={<img width={50} src={item.logo} />} key={item.maHeThongRap}>
-          <CumRap props={item.lstCumRap} />
+          <CumRap listCumRap={item.lstCumRap} />
         </TabPane>
       );
     });

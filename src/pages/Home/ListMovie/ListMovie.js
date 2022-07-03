@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import Slider from "react-slick";
 // import slider from "react-slick/lib/slider";
 import CardAntd from "../../../components/FilmItem/CardAntd";
@@ -8,11 +9,7 @@ import "./ListMovie.css";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
-    <div
-      className={`${className}`}
-      style={{ ...style, display: "block" }}
-      onClick={onClick}
-    >
+    <div className={`${className}`} style={{ ...style, display: "block" }} onClick={onClick}>
       <i className="fas fa-chevron-right fa-2x"></i>
     </div>
   );
@@ -21,11 +18,7 @@ function SampleNextArrow(props) {
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
   return (
-    <div
-      className={`${className}`}
-      style={{ ...style, display: "block" }}
-      onClick={onClick}
-    >
+    <div className={`${className}`} style={{ ...style, display: "block" }} onClick={onClick}>
       <i className="fas fa-chevron-left fa-2x"></i>
     </div>
   );
@@ -96,3 +89,7 @@ export default function ListMovie({ props }) {
     </div>
   );
 }
+
+ListMovie.propTypes = {
+  props: PropTypes.bool.isRequired,
+};

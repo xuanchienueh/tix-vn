@@ -127,9 +127,6 @@ export default function Films() {
   return (
     <div className="pageAdminFilms">
       <div className="flex justify-between">
-        <NavLink to="/admin/films/addnewfilm" className="btn btn-success mb-4">
-          Thêm phim
-        </NavLink>
         <Search
           placeholder="Tìm kiếm phim"
           onSearch={(value) => dispatch(layDanhSachPhim(value))}

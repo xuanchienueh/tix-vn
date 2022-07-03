@@ -5,6 +5,7 @@ import { Form, Input, AutoComplete } from "antd";
 import { MA_NHOM, USER_LOGIN } from "../../util/settings/config";
 import { customerUpdateInfoAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import Swal from "sweetalert2";
+import Propstype from "prop-types";
 import { history } from "../../App";
 const formItemLayout = {
   labelCol: {
@@ -137,4 +138,8 @@ function ModalDoiMatKhau({ infoUser }) {
     </>
   );
 }
+ModalDoiMatKhau.propTypes = {
+  infoUser: Propstype.object.isRequired,
+};
+
 export default ModalDoiMatKhau;

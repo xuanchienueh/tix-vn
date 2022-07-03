@@ -3,7 +3,7 @@ import { Tabs } from "antd";
 import ThongTinTaiKhoan from "./ThongTinTaiKhoan";
 import { thongTinUserAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import { useDispatch } from "react-redux";
-import LichSuDatVe from "./LichSuDatVe";
+import HistoryBooking from "./HistoryBooking";
 const { TabPane } = Tabs;
 const onChange = (key) => {
   // console.log(key);
@@ -23,7 +23,7 @@ export default function Profile() {
           <ThongTinTaiKhoan />
         </TabPane>
         <TabPane tab="Lịch sử đặt vé" key="2">
-          <LichSuDatVe />
+          <HistoryBooking />
         </TabPane>
       </Tabs>
     </div>

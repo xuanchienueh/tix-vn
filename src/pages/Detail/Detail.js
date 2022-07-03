@@ -31,9 +31,7 @@ export default function Detail() {
     dispatch(LayThongTinLichChieuPhim(id));
     window.scrollTo(0, 10);
   }, [id]);
-  let { ThongTinLichChieuPhim } = useSelector(
-    (state) => state.QuanLyRapReducer
-  );
+  let { ThongTinLichChieuPhim } = useSelector((state) => state.QuanLyRapReducer);
   // console.log(ThongTinLichChieuPhim);
 
   return (
@@ -49,29 +47,15 @@ export default function Detail() {
         <div className="container mx-auto">
           <div className="py-20 lg:py-20 px-4 md:px-4  w-full lg:max-w-full md:flex items-center">
             <div className=" w-60 mx-auto md:w-72 lg:w-80 flex-none   overflow-hidden">
-              <img
-                src={ThongTinLichChieuPhim.hinhAnh}
-                alt="1"
-                className="rounded-xl mb-4"
-              />
+              <img src={ThongTinLichChieuPhim.hinhAnh} alt="1" className="rounded-xl mb-4" />
             </div>
             <div className="mx-0 lg:mx-[10%]  bg-black bg-opacity-25 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex  justify-between items-center leading-normal">
               <div className="text-white">
-                <h1 className="text-white text-4xl font-bold ">
-                  {ThongTinLichChieuPhim.tenPhim}
-                </h1>
-                <p>
-                  Tình trạng:{" "}
-                  {ThongTinLichChieuPhim.dangChieu ? "Đang chiếu" : "Sắp chiếu"}
-                </p>
+                <h1 className="text-white text-4xl font-bold ">{ThongTinLichChieuPhim.tenPhim}</h1>
+                <p>Tình trạng: {ThongTinLichChieuPhim.dangChieu ? "Đang chiếu" : "Sắp chiếu"}</p>
                 <div className="mt-4">
                   Điểm IMBb:{"   "}
-                  <Rate
-                    disabled
-                    allowHalf
-                    count={10}
-                    value={ThongTinLichChieuPhim.danhGia}
-                  />{" "}
+                  <Rate disabled allowHalf count={10} value={ThongTinLichChieuPhim.danhGia} />{" "}
                   <span className="text-yellow-400 ml-2 text-2xl">
                     {ThongTinLichChieuPhim.danhGia}
                   </span>
@@ -82,7 +66,7 @@ export default function Detail() {
           </div>
         </div>
         <div className="container mx-auto bg-white rounded-xl w-4/5">
-          <LichChieuDetail props={ThongTinLichChieuPhim.heThongRapChieu} />
+          <LichChieuDetail cinemaSystem={ThongTinLichChieuPhim.heThongRapChieu} />
         </div>
       </div>
     </>

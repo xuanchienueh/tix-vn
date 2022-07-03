@@ -31,7 +31,7 @@ export const CapNhatPhimUploadAction = (formData) => {
   return async (dispatch) => {
     try {
       let result = await qlPhimService.CapNhatPhimUpload(formData);
-      alert("edit phim thanh cong");
+      Swal.fire({ title: "Edit phim thành công!", icon: "success", timer: 1500 });
       history.push("/admin/films");
     } catch (err) {
       console.log("edit phim fail", err.response);

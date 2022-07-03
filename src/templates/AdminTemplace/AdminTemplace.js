@@ -18,8 +18,8 @@ const items = [
   // getItem(<NavLink to="/admin/dashboard">tnoname</NavLink>, "2", <UserOutlined />),
   // getItem(<NavLink to="/admin/showtime">ShowTime</NavLink>, "3", <DesktopOutlined />),
   getItem("Quản lý user", "sub2", <TeamOutlined />, [
-    getItem(<NavLink to="/admin/danhsachuser">Danh sách user</NavLink>, "6"),
-    getItem(<NavLink to="/admin/themuser">Thêm user</NavLink>, "8"),
+    getItem(<NavLink to="/admin/listuser">Danh sách user</NavLink>, "6"),
+    getItem(<NavLink to="/admin/adduser">Thêm user</NavLink>, "8"),
   ]),
 ];
 

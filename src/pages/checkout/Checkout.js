@@ -4,7 +4,6 @@ import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { LAY_DS_GHE_USER_KHAC_DANG_CHON } from "../../redux/actions/QuanLyDatVeAction/constName";
 import { TAB_ACTIVE } from "../../redux/actions/QuanLyDatVeAction/constName";
 import {
   checkStatusSeatAction,
@@ -15,14 +14,11 @@ import {
 import "./checkout.scss";
 import { imgNotFound } from "../../util/settings/config";
 import { lichSuDatVe } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
-import { connection } from "../..";
-import { NavLink } from "react-router-dom";
 import { HomeOutlined } from "@ant-design/icons";
-import Loading from "../loading/Loading";
 
 export function Checkout() {
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
-  const { chiTietPhongVe, danhSachGheDangChon, DS_GheNguoiKhacDangChon, DS_Ghe_Sold } = useSelector(
+  const { chiTietPhongVe, danhSachGheDangChon, DS_Ghe_Sold } = useSelector(
     (state) => state.QuanLyDatVeReducer
   );
   // console.log(chiTietPhongVe);
@@ -166,15 +162,6 @@ export function Checkout() {
                 </div>
 
                 <div className="flex items-center">
-                  <button className="gheUserKhacDangChon w-9">
-                    <Spin size="small" />
-                  </button>
-                  <span className="text-white">
-                    <span>Ghế người khác</span> <br /> <span>đang chọn</span>
-                  </span>
-                  <br />
-                </div>
-                <div className="flex items-center">
                   <button className="ghebanDaDat" />{" "}
                   <span className="text-white">Ghế bạn đã đặt</span>
                 </div>
@@ -247,9 +234,7 @@ const { TabPane } = Tabs;
 export default function (props) {
   const dispatch = useDispatch();
   const { tabActive } = useSelector((state) => state.QuanLyDatVeReducer);
-  function callback(key) {
-    console.log(key);
-  }
+  function callback(key) {}
   function tabClick(key) {
     dispatch({ type: TAB_ACTIVE, payload: key });
   }
