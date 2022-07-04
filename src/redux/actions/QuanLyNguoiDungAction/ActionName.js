@@ -48,7 +48,7 @@ export const lichSuDatVe = () => {
   };
 };
 
-export const layDSNguoiDungAction = (keyword) => {
+export const getListUserAction = (keyword) => {
   return async (dispatch) => {
     try {
       let result = await QLNguoiDungService.LayDanhSachNguoiDung(keyword);
@@ -64,7 +64,7 @@ export const DeleteUser = (taiKhoan) => {
     try {
       let result = await QLNguoiDungService.XoaNguoiDung(taiKhoan);
       Swal.fire({ title: "Xóa thành công!", timer: 1500 });
-      dispatch(layDSNguoiDungAction());
+      dispatch(getListUserAction());
     } catch (err) {
       console.log("xoa user fail", err.response);
     }

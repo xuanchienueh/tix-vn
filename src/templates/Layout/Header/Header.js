@@ -32,58 +32,75 @@ function Header(props) {
   };
 
   return (
-    <header className="w-full bg-gray-900 fixed flex items-center text-white z-[1] h-20">
-      <div className="container flex justify-between h-16 mx-auto">
-        <NavLink
-          rel="noopener noreferrer"
-          to="/home"
-          aria-label="Back to homepage"
-          className="flex items-center p-2"
-        >
-          <img
-            src="http://tixvn.click/static/media/logo.af00d8dd04677a4ee789.png"
-            width={70}
-            alt="tixvn"
-          />
-        </NavLink>
-        <ul className="items-stretch hidden space-x-3 lg:flex">
-          <li className="flex">
+    <nav className="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark pt-0">
+      <NavLink to="/home" className="navbar-brand">
+        <img
+          src="http://tixvn.click/static/media/logo.af00d8dd04677a4ee789.png"
+          width={70}
+          alt="tixvn"
+        />
+      </NavLink>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item active">
             <NavLink
-              rel="noopener noreferrer"
               to="/home"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
-              activeClassName="text-violet-600 border-violet-600"
+              className="nav-link"
+              // activeClassName="text-violet-600 border-violet-600"
             >
               {t("Home")}
             </NavLink>
           </li>
-          <li className="flex">
-            <NavLink
-              rel="noopener noreferrer"
-              to="/news"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
-              activeClassName="text-violet-600 border-violet-600"
-            >
+          <li className="nav-item">
+            <a href="#" className="nav-link" activeClassName="text-violet-600 border-violet-600">
               {t("News")}
-            </NavLink>
+            </a>
           </li>
-          <li className="flex">
-            <NavLink
-              rel="noopener noreferrer"
-              to="/contact"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
-              activeClassName="text-violet-600 border-violet-600"
+          <li className="nav-item dropdown">
+            <a
+              href="#"
+              className="nav-link"
+              // activeClassName="text-violet-600 border-violet-600"
             >
               {t("Contact")}
-            </NavLink>
+            </a>
+            {/*  <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="#">
+                  Action
+                </a>
+                <a className="dropdown-item" href="#">
+                  Another action
+                </a>
+                <div className="dropdown-divider" />
+                <a className="dropdown-item" href="#">
+                  Something else here
+                </a>
+              </div> */}
           </li>
           {infoUser && infoUser.maLoaiNguoiDung === "QuanTri" && (
             <li className="flex">
-              <NavLink
-                // rel="noopener noreferrer"
-                to="/admin/films"
-                className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
-              >
+              <NavLink to="/admin/films" className="nav-link">
                 Admin
               </NavLink>
             </li>
@@ -118,31 +135,8 @@ function Header(props) {
             </Option>
           </Select>
         </div>
-        <button className="p-4 lg:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-6 h-6 text-coolGray-800"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
       </div>
-    </header>
+    </nav>
   );
 }
 export default Header;
-// export default function () {
-//   return (
-//     <Suspense fallback="loading">
-//       <Header />
-//     </Suspense>
-//   );
-// }

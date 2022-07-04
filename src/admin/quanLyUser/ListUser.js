@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./ListUser.scss";
 import { Table, Switch, Radio, Form, Space, Input } from "antd";
+import { debounce } from "lodash";
+import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
+import "./ListUser.scss";
 import {
   DeleteUser,
-  layDSNguoiDungAction,
-  userEditAction,
+  getListUserAction,
 } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
-import Swal from "sweetalert2";
-import { debounce } from "lodash";
-import { NavLink } from "react-router-dom";
 
 const data = [];
 
@@ -128,11 +127,11 @@ const ListUser = () => {
   const { dsAllUser } = useSelector((state) => state.QuanLyNguoiDungReducer);
 
   useEffect(() => {
-    dispatch(layDSNguoiDungAction());
+    dispatch(getListUserAction());
   }, []);
 
   const debounceInputSearch = useCallback(
-    debounce((value) => dispatch(layDSNguoiDungAction(value)), 500),
+    debounce((value) => dispatch(getListUserAction(value)), 500),
     []
   );
 
@@ -143,10 +142,6 @@ const ListUser = () => {
         className="components-table-demo-control-bar"
         style={{ marginBottom: 16 }}
       >
-        {/* <Form.Item label="Loading">
-          <Switch checked={loading} onChange={handleLoadingChange} />
-        </Form.Item> */}
-
         <Form.Item label="Checkbox">
           <Switch checked={!!rowSelection} onChange={handleRowSelectionChange} />
         </Form.Item>

@@ -9,7 +9,7 @@ function Footer(props) {
           <div className="pb-6 col-span-full md:pb-0 md:col-span-6">
             <span
               rel="noopener noreferrer"
-              className="flex justify-center space-x-3 md:justify-start"
+              className="flex justify-center space-x-3 md:justify-start hidden md:flex"
             >
               <div className="flex items-center justify-center rounded-full">
                 <Link to="/">
@@ -55,7 +55,7 @@ function Footer(props) {
               {/**/}
             </ul>
           </div>
-          <div className="col-span-6 text-center md:text-left md:col-span-3">
+          <div className="col-span-6 text-center md:text-left md:col-span-3 ml-6">
             <p className="pb-1 text-lg font-medium text-left">Tix Việt Nam</p>
             <ul className="text-left ml-3">
               <li>
