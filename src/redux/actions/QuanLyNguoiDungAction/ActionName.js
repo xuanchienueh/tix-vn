@@ -9,10 +9,10 @@ import { LAY_INFO_USER } from "./constName";
 export const userLoginAction = (thongTinDangNhap) => {
   return async (dispatch) => {
     try {
-      let result = await QLNguoiDungService.nguoiDungDangNhap(thongTinDangNhap);
-      if (result.status === 200) {
-        dispatch({ type: USER_LOGIN, payload: result.data.content });
-        history.push("home");
+      let { status, data } = await QLNguoiDungService.userLogin(thongTinDangNhap);
+      if (status === 200) {
+        dispatch({ type: USER_LOGIN, payload: data.content });
+        history.goBack();
       }
     } catch (err) {
       console.log(err);
@@ -23,8 +23,11 @@ export const userLoginAction = (thongTinDangNhap) => {
 export const userRegisterAction = (thongTinDangKy) => {
   return async (dispatch) => {
     try {
-      let result = await QLNguoiDungService.nguoiDungDangKy(thongTinDangKy);
-      result.status === 200 && dispatch({ type: USER_REGISTER, payload: result.data.content });
+      let { status, data } = await QLNguoiDungService.nguoiDungDangKy(thongTinDangKy);
+      if (status === 200) {
+        dispatch({ type: USER_REGISTER, payload: data.content });
+        history.push("/login");
+      }
     } catch (err) {
       let messageError = err.response.data.content;
       Swal.fire({ title: messageError, timer: 2000 });
@@ -137,7 +140,7 @@ export const timKiemUserAction = async (taiKhoan) => {
   return resultAPI;
 };
 
-export const thongTinUserAction = (keyword) => {
+export const InfoUserAction = (keyword) => {
   return async (dispatch) => {
     try {
       let result = await QLNguoiDungService.thongTinUser();

@@ -51,7 +51,7 @@ export default function Login() {
                     Tài khoản
                   </label>
                   <input
-                    className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                    className="w-full text-lg p-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                     name="taiKhoan"
                     type="text"
                     onChange={formik.handleChange}
@@ -77,7 +77,7 @@ export default function Login() {
                     </div>
                   </div>
                   <input
-                    className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                    className="w-full text-lg p-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                     type="text"
                     name="matKhau"
                     onChange={formik.handleChange}

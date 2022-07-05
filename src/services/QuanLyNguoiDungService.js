@@ -5,7 +5,7 @@ class QuanLyNguoiDungService extends BaseServices {
   constructor() {
     super();
   }
-  nguoiDungDangNhap = (thongTinDangNhap) => {
+  userLogin = (thongTinDangNhap) => {
     /* tkhoan va mk */
 
     return this.post("api/QuanLyNguoiDung/DangNhap", thongTinDangNhap);

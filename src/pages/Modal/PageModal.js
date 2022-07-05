@@ -26,8 +26,8 @@ export default function PageModal() {
         onClose={() => setOpen(false)}
       />
 
-      <button className="btn-primary hidden" ref={buttonOpenTrailer} onClick={() => setOpen(true)}>
-        VIEW DEMO
+      <button className="hidden" ref={buttonOpenTrailer} onClick={() => setOpen(true)}>
+        Open Trailer
       </button>
     </React.Fragment>
   );

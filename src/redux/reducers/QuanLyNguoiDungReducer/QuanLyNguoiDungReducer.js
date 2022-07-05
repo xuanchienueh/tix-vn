@@ -1,3 +1,4 @@
+import { history } from "../../../App";
 import { TOKEN, USER_LOGIN } from "../../../util/settings/config";
 import {
   LAY_DS_USER,
@@ -23,10 +24,11 @@ const QuanLyNguoiDungReducer = (state = initialState, { type, payload }) => {
     case USER_LOGIN:
       localStorage.setItem(USER_LOGIN, JSON.stringify({ ...payload, soDT: "0987788654" }));
       localStorage.setItem(TOKEN, payload.accessToken);
+
       return { ...state, userLogin: payload };
 
     case USER_REGISTER:
-      alert("đăng ký thành công");
+      history.push("/login");
       return { ...state, userRegister: payload };
 
     case LICH_SU_DAT_VE: {

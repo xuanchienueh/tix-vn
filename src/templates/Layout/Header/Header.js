@@ -9,7 +9,7 @@ import DropdownUser from "./DropdownUser";
 const { Option } = Select;
 const infoUser = JSON.parse(localStorage.getItem(USER_LOGIN));
 
-function Header(props) {
+function Header() {
   const handleChange = (value) => i18n.changeLanguage(value);
   let { t, i18n } = useTranslation();
   const renderUserName = () => {
@@ -18,13 +18,14 @@ function Header(props) {
       <DropdownUser />
     ) : (
       <>
-        <button onClick={() => history.push("/login")} className="self-center px-8 py-3 rounded">
+        <button
+          onClick={() => history.push("/login")}
+          className="self-center font-semibold text-white py-3 rounded"
+        >
           {t("Login")}
         </button>
-        <NavLink
-          to="/register"
-          className="self-center px-8 py-3 font-semibold rounded bg-violet-600 text-coolGray-50 mr-4"
-        >
+        <span className="text-white px-1"> / </span>
+        <NavLink to="/register" className="self-center py-3 rounded font-semibold text-white mr-4">
           {t("Signup")}
         </NavLink>
       </>
@@ -54,49 +55,19 @@ function Header(props) {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <NavLink
-              to="/home"
-              className="nav-link"
-              // activeClassName="text-violet-600 border-violet-600"
-            >
+            <NavLink to="/home" className="nav-link">
               {t("Home")}
             </NavLink>
           </li>
           <li className="nav-item">
-            <a href="#" className="nav-link" activeClassName="text-violet-600 border-violet-600">
+            <a href="#" className="nav-link">
               {t("News")}
             </a>
           </li>
           <li className="nav-item dropdown">
-            <a
-              href="#"
-              className="nav-link"
-              // activeClassName="text-violet-600 border-violet-600"
-            >
+            <a href="#" className="nav-link">
               {t("Contact")}
             </a>
-            {/*  <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-                <div className="dropdown-divider" />
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </div> */}
           </li>
           {infoUser && infoUser.maLoaiNguoiDung === "QuanTri" && (
             <li className="flex">
