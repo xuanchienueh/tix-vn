@@ -23,10 +23,10 @@ export const layThongTinCumRap = (maHeThongRap) => {
   };
 };
 
-export const LayThongTinLichChieuPhim = (id) => {
+export const getInfoShowtime = (id) => {
   return async (dispatch) => {
     try {
-      let { data } = await qlRapService.LayThongTinLichChieuPhim(id);
+      let { data } = await qlRapService.getInfoShowtimeService(id);
       data.statusCode === 200 &&
         dispatch({
           type: LAY_THONG_TIN_LICH_CHIEU_PHIM,

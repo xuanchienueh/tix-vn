@@ -18,8 +18,8 @@ const styleCss = {
   marginTop: "0.7rem",
 };
 
-export default function LichChieuDetail({ cinemaSystem }) {
-  const renderLichChieu = () =>
+export default function ShowtimeDetail({ cinemaSystem }) {
+  const renderShowtime = () =>
     cinemaSystem.map((item, index) => (
       <TabPane tab={<img src={item.logo} width={50} />} key={index}>
         {item.cumRapChieu?.map((cumRap, i) => {
@@ -55,7 +55,7 @@ export default function LichChieuDetail({ cinemaSystem }) {
   if (Array.isArray(cinemaSystem) && cinemaSystem.length > 0) {
     return (
       <div>
-        <Tabs tabPosition="left">{renderLichChieu()}</Tabs>
+        <Tabs tabPosition="left">{renderShowtime()}</Tabs>
       </div>
     );
   } else {
@@ -65,6 +65,6 @@ export default function LichChieuDetail({ cinemaSystem }) {
   }
 }
 
-LichChieuDetail.propTypes = {
-  cinemaSystem: PropTypes.array.isRequired,
+ShowtimeDetail.propTypes = {
+  cinemaSystem: PropTypes.array,
 };
