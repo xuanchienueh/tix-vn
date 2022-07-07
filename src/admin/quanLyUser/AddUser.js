@@ -6,7 +6,7 @@ import {
   themNguoiDungAction,
 } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import ConfirmReload from "../../util/confirmReload/confirmReload";
-import { Prompt } from "react-router";
+// import { Prompt } from "react-router";
 const { Option } = Select;
 
 const formItemLayout = {
@@ -60,7 +60,7 @@ const AddUser = () => {
   return (
     <div className="w-4/5">
       <h1 className="text-2xl font-semibold mb-4">Thêm mới tài khoản:</h1>
-      <Prompt when={readyToNewPage} message="Dữ liệu chưa được lưu, bạn có muốn chuyển trang?" />
+      {/* <Prompt when={readyToNewPage} message="Dữ liệu chưa được lưu, bạn có muốn chuyển trang?" /> */}
       <Form
         {...formItemLayout}
         form={form}

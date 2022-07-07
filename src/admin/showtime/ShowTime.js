@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import confirmReload from "../../util/confirmReload/confirmReload";
-import { Prompt } from "react-router";
+// import { Prompt } from "react-router";
 
 export default function ShowTime() {
   confirmReload((e) => {
@@ -13,7 +13,7 @@ export default function ShowTime() {
   };
   return (
     <div>
-      <Prompt when={true} message="dsfd" />
+      {/* <Prompt when={true} message="dsfd" /> */}
       <span>ShowTime</span>
     </div>
   );

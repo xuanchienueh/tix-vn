@@ -1,6 +1,6 @@
 import { createBrowserHistory } from "history";
 import React, { lazy, Suspense } from "react";
-import { Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import News from "./pages/News/News";
 import Contact from "./pages/Contact/Contact";
@@ -30,36 +30,37 @@ const TaoLichChieu = lazy(() => import("./admin/films/taoLichChieu/TaoLichChieu"
 
 function App() {
   return (
-    <Router history={history}>
+    <BrowserRouter history={history}>
       <Loading />
       <Suspense fallback={<Loading />}>
-        <Switch>
-          <HomeTemplace path="/contact" exact Component={Contact} />
-          <HomeTemplace path="/news" exact Component={News} />
-          <HomeTemplace path="/profile" exact Component={Profile} />
-          <HomeTemplace path="/home" exact Component={Home} />
-          <HomeTemplace path="/detail/:id" exact Component={Detail} />
-          <AdminTemplace
-            path="/admin/taolichchieu/:maPhim/:tenphim"
-            exact
-            Component={TaoLichChieu}
-          />
-          <AdminTemplace path="/admin/listuser" exact Component={ListUser} />
-          <AdminTemplace path="/admin/adduser" exact Component={AddUser} />
-          <AdminTemplace path="/admin/edituser/:taiKhoan" exact Component={EditUser} />
-          <AdminTemplace path="/admin/films" exact Component={Films} />
-          <AdminTemplace path="/admin/addfilm" exact Component={AddNewFilm} />
-          <AdminTemplace path="/admin/films/addnewfilm" exact Component={AddNewFilm} />
-          <AdminTemplace path="/admin/showtime" exact Component={ShowTime} />
-          <AdminTemplace path="/admin/editfilm/:maPhim" exact Component={EditFilm} />
-          <CheckoutTemplace path="/checkout/:maLichChieu" exact Component={Checkout} />
-          <UserTemplace path="/login" exact Component={Login} />
-          <UserTemplace path="/register" exact component={Register} />
+        <Routes>
+          <Route element={<HomeTemplace />}>
+            <Route path="" element={<Home />} />
+            <Route path="detail/:id" element={<Detail />} />
+            <Route path="home" element={<Home />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
 
-          <HomeTemplace path="/" exact Component={Home} />
-        </Switch>
+          <Route path="admin" element={<AdminTemplace />}>
+            <Route path="adduser" element={<AddUser />} />
+            <Route path="films" element={<Films />} />
+            <Route path="films/addnewfilm" element={<AddNewFilm />} />
+            <Route path="editfilm/:maPhim" element={<EditFilm />} />
+            <Route path="listuser" element={<ListUser />} />
+            <Route path="addfilm" element={<AddNewFilm />} />
+            <Route path="edituser/:taiKhoan" element={<EditUser />} />
+            <Route path="taolichchieu/:maPhim/:tenphim" element={<TaoLichChieu />} />
+          </Route>
+
+          <Route element={<UserTemplace />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
+
+          <Route path="checkout/:maLichChieu" element={<Checkout />}></Route>
+        </Routes>
       </Suspense>
-    </Router>
+    </BrowserRouter>
   );
 }
 export { history };
