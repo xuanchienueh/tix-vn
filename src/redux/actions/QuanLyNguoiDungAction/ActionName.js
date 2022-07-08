@@ -12,7 +12,11 @@ export const userLoginAction = (infoLogin) => {
   return async (dispatch) => {
     try {
       let { status, data } = await QLNguoiDungService.userLogin(infoLogin);
-      if (status === 200) {
+      if (status === 200 && data.content.maLoaiNguoiDung === "QuanTri") {
+        dispatch({ type: USER_LOGIN, payload: data.content });
+        navigate("/admin/addfilm");
+      }
+      if (status === 200 && data.content.maLoaiNguoiDung !== "QuanTri") {
         dispatch({ type: USER_LOGIN, payload: data.content });
         navigate(-1);
       }
