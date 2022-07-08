@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { history } from "../../App";
+import { NavLink, useNavigate } from "react-router-dom";
 import { OPEN_MODAL_YOUTUBE } from "../../redux/actions/CarouselAction/ActionName";
 import customCss from "./CardAntd.module.scss";
 const styleCss = {
@@ -16,9 +15,9 @@ const styleCss = {
 };
 export default function CardAntd({ props }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const openTrailer = useSelector((state) => state.CarouselReducer.openTrailer);
-  const getStringLinkYoutube = (linkYoutube) =>
-    linkYoutube.slice(linkYoutube.length - 11);
+  const getStringLinkYoutube = (linkYoutube) => linkYoutube.slice(linkYoutube.length - 11);
 
   const handleOpenTrailer = () => {
     let KeywordLinkYoutube = getStringLinkYoutube(props.trailer);
@@ -49,14 +48,12 @@ export default function CardAntd({ props }) {
       </div>
       <div className="mt-6 mb-2 flex align-items-center relative">
         <div
-          onClick={() => history.push(`/detail/${props.maPhim}`)}
+          onClick={() => navigate(`/detail/${props.maPhim}`)}
           className={`${customCss["datVe"]}  py-3 font-semibold rounded bg-[#fb4226] inset-0`}
         >
           <div>ĐẶT VÉ</div>
         </div>
-        <span className="p-1 font-semibold rounded bg-[#fb4226] text-white mr-1">
-          C18
-        </span>
+        <span className="p-1 font-semibold rounded bg-[#fb4226] text-white mr-1">C18</span>
         <span className="font-semibold" style={{ ...styleCss }}>
           {props.tenPhim}
         </span>

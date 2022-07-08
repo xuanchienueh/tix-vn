@@ -6,7 +6,7 @@ import {
   themNguoiDungAction,
 } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import ConfirmReload from "../../util/confirmReload/confirmReload";
-// import { Prompt } from "react-router";
+import { usePrompt } from "../../hooks/usePrompt";
 const { Option } = Select;
 
 const formItemLayout = {
@@ -34,6 +34,7 @@ const AddUser = () => {
   const [readyToNewPage, setReadyToNewPage] = useState(false);
   const [listUserType, setListUserType] = useState(null);
   useEffect(() => setIsPromise(listUserTypeAct()), []);
+  usePrompt("Dữ liệu chưa được lưu, bạn có muốn chuyển trang?", readyToNewPage);
 
   // xử lý hành động load lại trang web
   ConfirmReload((e) => {
@@ -60,7 +61,6 @@ const AddUser = () => {
   return (
     <div className="w-4/5">
       <h1 className="text-2xl font-semibold mb-4">Thêm mới tài khoản:</h1>
-      {/* <Prompt when={readyToNewPage} message="Dữ liệu chưa được lưu, bạn có muốn chuyển trang?" /> */}
       <Form
         {...formItemLayout}
         form={form}

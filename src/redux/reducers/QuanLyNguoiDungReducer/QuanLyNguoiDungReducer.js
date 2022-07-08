@@ -1,4 +1,3 @@
-import { history } from "../../../App";
 import { TOKEN, USER_LOGIN } from "../../../util/settings/config";
 import {
   LAY_DS_USER,
@@ -28,7 +27,6 @@ const QuanLyNguoiDungReducer = (state = initialState, { type, payload }) => {
       return { ...state, userLogin: payload };
 
     case USER_REGISTER:
-      history.push("/login");
       return { ...state, userRegister: payload };
 
     case LICH_SU_DAT_VE: {

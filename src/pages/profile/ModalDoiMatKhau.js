@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Form, Input, AutoComplete } from "antd";
-
+import { useNavigate } from "react-router-dom";
 import { MA_NHOM, USER_LOGIN } from "../../util/settings/config";
 import { customerUpdateInfoAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import Swal from "sweetalert2";
 import Propstype from "prop-types";
-import { history } from "../../App";
+
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -19,6 +19,7 @@ const formItemLayout = {
 };
 
 function ModalDoiMatKhau({ infoUser }) {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [form] = Form.useForm();
   const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
@@ -37,7 +38,7 @@ function ModalDoiMatKhau({ infoUser }) {
     };
     if (infoUser.matKhau === values.matKhauCu) {
       let resultSubmit = await customerUpdateInfoAction(doiMatKhau);
-      resultSubmit && history.push("/home") && handleClose();
+      resultSubmit && navigate("/home") && handleClose();
       resultSubmit &&
         Swal.fire({ title: "Đổi mật khẩu thành công!", icon: "success", timer: 1500 });
     } else {

@@ -1,9 +1,10 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Layout, Menu } from "antd";
-import { Outlet, Navigate, NavLink } from "react-router-dom";
+import { Outlet, Navigate, NavLink, useNavigate } from "react-router-dom";
 import { TeamOutlined } from "@ant-design/icons";
 import DropdownUser from "../Layout/Header/DropdownUser";
 import { USER_LOGIN } from "../../util/settings/config";
+import { useDispatch } from "react-redux";
 const { Header, Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -22,11 +23,19 @@ const items = [
 ];
 
 const AdminTemplace = (props) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: "NAVIGATE", payload: navigate });
+  }, []);
+
   const [collapsed, setCollapsed] = useState(false);
   const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
+
   if (userLogin && userLogin.maLoaiNguoiDung === "KhachHang") {
     return <Navigate to="/profile" />;
   }
+
   if (!userLogin || userLogin.maLoaiNguoiDung !== "QuanTri") {
     return <Navigate to="/home" />;
   }

@@ -1,18 +1,11 @@
-import { createBrowserHistory } from "history";
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import News from "./pages/News/News";
-import Contact from "./pages/Contact/Contact";
 import HomeTemplace from "./templates/HomeTemplace/HomeTemplace";
 import CheckoutTemplace from "./templates/checkoutTemplace/CheckoutTemplace";
 import UserTemplace from "./templates/UserTemplace/UserTemplace";
 import Loading from "./pages/loading/Loading";
 import AdminTemplace from "./templates/AdminTemplace/AdminTemplace";
-import ShowTime from "./admin/showtime/ShowTime";
-import EditUserClassCpn from "./admin/quanLyUser/EditUserClassCpn";
-
-const history = createBrowserHistory();
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Register = lazy(() => import("./pages/Register/Register"));
@@ -30,7 +23,7 @@ const TaoLichChieu = lazy(() => import("./admin/films/taoLichChieu/TaoLichChieu"
 
 function App() {
   return (
-    <BrowserRouter history={history}>
+    <BrowserRouter>
       <Loading />
       <Suspense fallback={<Loading />}>
         <Routes>
@@ -57,11 +50,12 @@ function App() {
             <Route path="/register" element={<Register />} />
           </Route>
 
-          <Route path="checkout/:maLichChieu" element={<Checkout />}></Route>
+          <Route path="checkout" element={<CheckoutTemplace />}>
+            <Route path=":maLichChieu" element={<Checkout />} />
+          </Route>
         </Routes>
       </Suspense>
     </BrowserRouter>
   );
 }
-export { history };
 export default App;

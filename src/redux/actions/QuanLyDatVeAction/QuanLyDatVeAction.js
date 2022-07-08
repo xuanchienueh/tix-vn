@@ -1,5 +1,4 @@
 import Swal from "sweetalert2";
-import { connection } from "../../..";
 import { QLDatVeService } from "../../../services/QuanLyDatVeService";
 import { DISPLAY_LOADING, HIDDEN_LOADING } from "../../reducers/LoadingReducer";
 import { lichSuDatVe } from "../QuanLyNguoiDungAction/ActionName";

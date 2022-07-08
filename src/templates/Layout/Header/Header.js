@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import { Select } from "antd";
-import { NavLink } from "react-router-dom";
-import { history } from "../../../App";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { USER_LOGIN } from "../../../util/settings/config";
 import DropdownUser from "./DropdownUser";
@@ -10,6 +9,7 @@ const { Option } = Select;
 const infoUser = JSON.parse(localStorage.getItem(USER_LOGIN));
 
 function Header() {
+  const navigate = useNavigate();
   const handleChange = (value) => i18n.changeLanguage(value);
   let { t, i18n } = useTranslation();
   const renderUserName = () => {
@@ -19,7 +19,7 @@ function Header() {
     ) : (
       <>
         <button
-          onClick={() => history.push("/login")}
+          onClick={() => navigate("/login")}
           className="self-center font-semibold text-white py-3 rounded"
         >
           {t("Login")}
