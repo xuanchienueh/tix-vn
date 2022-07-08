@@ -13,12 +13,7 @@ function Footer() {
             >
               <div className="flex items-center justify-center rounded-full">
                 <Link to="/">
-                  <img
-                    src="http://tixvn.click/static/media/logo.af00d8dd04677a4ee789.png"
-                    width={100}
-                    alt="logo"
-                    className="ml-3"
-                  />
+                  <img src="./img/logo.png" width={100} alt="logo" className="ml-3" />
                 </Link>
               </div>
               <span className="self-center text-2xl font-semibold"></span>

@@ -33,13 +33,9 @@ function Header() {
   };
 
   return (
-    <nav className="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark pt-0">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark pt-0 relative z-10">
       <NavLink to="/home" className="navbar-brand">
-        <img
-          src="http://tixvn.click/static/media/logo.af00d8dd04677a4ee789.png"
-          width={70}
-          alt="tixvn"
-        />
+        <img src="./img/logo.png" width={70} alt="tixvn" />
       </NavLink>
       <button
         className="navbar-toggler"

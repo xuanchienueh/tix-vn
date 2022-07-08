@@ -1,11 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import HomeTemplace from "./templates/HomeTemplace/HomeTemplace";
-import CheckoutTemplace from "./templates/checkoutTemplace/CheckoutTemplace";
-import UserTemplace from "./templates/UserTemplace/UserTemplace";
 import Loading from "./pages/loading/Loading";
-import AdminTemplace from "./templates/AdminTemplace/AdminTemplace";
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Register = lazy(() => import("./pages/Register/Register"));
@@ -20,6 +16,10 @@ const Films = lazy(() => import("./admin/films/Films"));
 const AddNewFilm = lazy(() => import("./admin/films/addNewFilm/AddNewFilm"));
 const EditFilm = lazy(() => import("./admin/films/edit/EditFilm"));
 const TaoLichChieu = lazy(() => import("./admin/films/taoLichChieu/TaoLichChieu"));
+const HomeTemplace = lazy(() => import("./templates/HomeTemplace/HomeTemplace"));
+const UserTemplace = lazy(() => import("./templates/UserTemplace/UserTemplace"));
+const CheckoutTemplace = lazy(() => import("./templates/checkoutTemplace/CheckoutTemplace"));
+const AdminTemplace = lazy(() => import("./templates/AdminTemplace/AdminTemplace"));
 
 function App() {
   return (

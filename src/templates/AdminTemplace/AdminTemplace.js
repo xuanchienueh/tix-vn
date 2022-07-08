@@ -25,8 +25,13 @@ const items = [
 const AdminTemplace = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch({ type: "NAVIGATE", payload: navigate });
+    if (window.screen.width < 1000) {
+      alert("Vui lòng sử dụng màn hình rộng hơn");
+      navigate("/home", { replace: true });
+    }
   }, []);
 
   const [collapsed, setCollapsed] = useState(false);
