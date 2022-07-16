@@ -18,8 +18,3 @@ const clientConfig = {
 };
 
 module.exports = [serverConfig, clientConfig];
-// module.exports = {
-//   resolve: {
-//     fallback: { path: require.resolve("path-browserify") },
-//   },
-// };
