@@ -23,10 +23,10 @@ const QuanLyNguoiDungReducer = (state = initialState, { type, payload }) => {
     case USER_LOGIN:
       localStorage.setItem(USER_LOGIN, JSON.stringify({ ...payload, soDT: "0987788654" }));
       localStorage.setItem(TOKEN, payload.accessToken);
+
       return { ...state, userLogin: payload };
 
     case USER_REGISTER:
-      alert("đăng ký thành công");
       return { ...state, userRegister: payload };
 
     case LICH_SU_DAT_VE: {

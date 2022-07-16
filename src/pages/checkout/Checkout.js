@@ -21,17 +21,16 @@ export function Checkout() {
   const { chiTietPhongVe, danhSachGheDangChon, DS_Ghe_Sold } = useSelector(
     (state) => state.QuanLyDatVeReducer
   );
-  // console.log(chiTietPhongVe);
   let { maLichChieu } = useParams();
   const dispatch = useDispatch();
+  const timerId = useRef(null);
+
   useEffect(() => {
     dispatch(layDanhSachPhongVe(maLichChieu));
-    let timer = setInterval(() => {
+    timerId.current = setInterval(() => {
       dispatch(layDanhSachPhongVe(maLichChieu, false));
     }, 7000);
-    return () => clearInterval(timer);
-
-    /* Load danh sách ghế đang được user khác chọn từ server về */
+    return () => clearInterval(timerId.current);
   }, [maLichChieu]);
 
   //
@@ -42,10 +41,6 @@ export function Checkout() {
       if (ghe.taiKhoanNguoiDat) styleGhe = "daBan";
       if (userLogin.taiKhoan === ghe.taiKhoanNguoiDat) styleGhe = "ghebanDaDat";
 
-      /*    DS_GheNguoiKhacDangChon.forEach((gheNguoiKhacDangChon) => {
-        if (ghe.maGhe === gheNguoiKhacDangChon.maGhe)
-          styleGhe = "gheUserKhacDangChon";
-      }); */
       danhSachGheDangChon.forEach((gheDangChon) => {
         if (gheDangChon.maGhe === ghe.maGhe) styleGhe = "daDat";
       });
@@ -101,9 +96,6 @@ export function Checkout() {
         cancelButton: "bg-red-600 text-white rounded py-1 px-2 mr-2",
       },
       buttonsStyling: false,
-      // didOpen: () => {
-      //   console.log(thongTinDatVe.danhSachVe.length);
-      // },
     });
     if (thongTinDatVe.danhSachVe.length === 0) {
       Swal.fire({
@@ -125,8 +117,8 @@ export function Checkout() {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            console.log("dat ve thanh cong");
             dispatch(datVeAction(thongTinDatVe));
+            clearInterval(timerId.current);
           } else if (result.dismiss === Swal.DismissReason.cancel) {
             swalTailwinCssBottons.fire("Đã hủy!", "Thanks you!", "error");
             console.log("that bai");
@@ -145,7 +137,7 @@ export function Checkout() {
             <div className="mt-8 flex justify-center">
               <span>{renderGhe()}</span>
             </div>
-            <div className="ml-0 lg:ml-8">
+            <div className="container lg:ml-8">
               <h1 className="text-white font-bold">Chú thích:</h1>
               <div className="grid grid-cols-2">
                 <div className="flex items-center">
@@ -272,7 +264,6 @@ function KetQuaDatVe(props) {
   const { thongTinNguoiDung } = useSelector((state) => state.QuanLyNguoiDungReducer);
   useEffect(() => dispatch(lichSuDatVe()), []);
 
-  // console.log(thongTinNguoiDung);
   const renderLichSuDatVe = () => {
     return thongTinNguoiDung?.thongTinDatVe?.map((item, index) => {
       let dsGhe = [];

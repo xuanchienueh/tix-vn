@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Select, Button, AutoComplete } from "antd";
 import { MA_NHOM } from "../../util/settings/config";
-import { NavLink } from "react-router-dom";
-import { history } from "../../App";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userRegisterAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 const { Option } = Select;
@@ -19,6 +18,7 @@ const formItemLayout = {
 };
 
 const Register = () => {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -41,7 +41,7 @@ const Register = () => {
           <div className="py-8 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
             <div className="cursor-pointer flex items-center">
               <div
-                onClick={() => history.push("/home")}
+                onClick={() => navigate("/home")}
                 className="text-2xl text-indigo-800 tracking-wide ml-2 font-semibold"
               >
                 <img

@@ -1,8 +1,10 @@
 import { qlPhimService } from "../../../services/QuanLyPhimService";
 import { LAY_THONG_TIN_PHIM } from "./constAction";
-import { history } from "../../../App";
+import { store } from "../../types/configStore";
 import { layDanhSachPhim } from "../CarouselAction/carousel";
 import Swal from "sweetalert2";
+
+const navigate = store.getState().LoadingReducer.navigate;
 
 export const themPhim = (formData) => {
   return async (dispatch) => {
@@ -32,7 +34,7 @@ export const CapNhatPhimUploadAction = (formData) => {
     try {
       let result = await qlPhimService.CapNhatPhimUpload(formData);
       Swal.fire({ title: "Edit phim thành công!", icon: "success", timer: 1500 });
-      history.push("/admin/films");
+      navigate("/admin/films");
     } catch (err) {
       console.log("edit phim fail", err.response);
     }

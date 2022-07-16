@@ -1,11 +1,11 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Modal, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import { Form, Input, AutoComplete } from "antd";
 import { MA_NHOM, USER_LOGIN } from "../../util/settings/config";
 import { customerUpdateInfoAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
-import Swal from "sweetalert2";
-import { history } from "../../App";
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -19,6 +19,7 @@ const formItemLayout = {
 function ModalDoiThongTin({ infoUser }) {
   const [show, setShow] = useState(false);
   const [form] = Form.useForm();
+  const navigate = useNavigate();
   const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
 
   const handleClose = () => setShow(false);
@@ -36,7 +37,7 @@ function ModalDoiThongTin({ infoUser }) {
     let resultSubmit = await customerUpdateInfoAction(submit);
     if (resultSubmit) {
       handleClose();
-      resultSubmit && history.push("/home");
+      resultSubmit && navigate("/home");
       resultSubmit &&
         Swal.fire({ title: "Đổi thông tin thành công!", icon: "success", timer: 1500 });
     } else {

@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
 import ThongTinTaiKhoan from "./ThongTinTaiKhoan";
-import { thongTinUserAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
+import { InfoUserAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import { useDispatch } from "react-redux";
 import HistoryBooking from "./HistoryBooking";
 const { TabPane } = Tabs;
-const onChange = (key) => {
-  // console.log(key);
-};
+const onChange = (key) => {};
 export default function Profile() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(thongTinUserAction());
+    dispatch(InfoUserAction());
 
     return () => {};
   }, []);

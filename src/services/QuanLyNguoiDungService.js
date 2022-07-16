@@ -5,14 +5,14 @@ class QuanLyNguoiDungService extends BaseServices {
   constructor() {
     super();
   }
-  nguoiDungDangNhap = (thongTinDangNhap) => {
+  userLogin = (infoLogin) => {
     /* tkhoan va mk */
 
-    return this.post("api/QuanLyNguoiDung/DangNhap", thongTinDangNhap);
+    return this.post("api/QuanLyNguoiDung/DangNhap", infoLogin);
   };
 
-  nguoiDungDangKy = (thongTinDangKy) => {
-    return this.post("api/QuanLyNguoiDung/DangKy", thongTinDangKy);
+  nguoiDungDangKy = (infoSignup) => {
+    return this.post("api/QuanLyNguoiDung/DangKy", infoSignup);
   };
 
   lichSuDatVe = () => {
@@ -26,7 +26,7 @@ class QuanLyNguoiDungService extends BaseServices {
     return this.get(`api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${MA_NHOM}`);
   };
 
-  XoaNguoiDung = (taiKhoan) => {
+  DeleteUser = (taiKhoan) => {
     return this.delete(`api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`);
   };
 

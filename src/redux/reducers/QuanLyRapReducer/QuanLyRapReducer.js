@@ -7,7 +7,7 @@ import {
 const initialState = {
   heThongRap: [],
   danhSachRapCuaMoiHeThong: [],
-  ThongTinLichChieuPhim: {},
+  infoShowtime: {},
   dsRapCuaTaoLichChieu: [],
 };
 
@@ -22,7 +22,7 @@ const QuanLyRapReducer = (state = initialState, { type, payload }) => {
       return { ...state };
 
     case LAY_THONG_TIN_LICH_CHIEU_PHIM:
-      state.ThongTinLichChieuPhim = payload;
+      state.infoShowtime = payload;
       return { ...state };
 
     default:

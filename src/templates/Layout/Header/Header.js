@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import { Select } from "antd";
-import { NavLink } from "react-router-dom";
-import { history } from "../../../App";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { USER_LOGIN } from "../../../util/settings/config";
 import DropdownUser from "./DropdownUser";
@@ -9,7 +8,8 @@ import DropdownUser from "./DropdownUser";
 const { Option } = Select;
 const infoUser = JSON.parse(localStorage.getItem(USER_LOGIN));
 
-function Header(props) {
+function Header() {
+  const navigate = useNavigate();
   const handleChange = (value) => i18n.changeLanguage(value);
   let { t, i18n } = useTranslation();
   const renderUserName = () => {
@@ -18,13 +18,14 @@ function Header(props) {
       <DropdownUser />
     ) : (
       <>
-        <button onClick={() => history.push("/login")} className="self-center px-8 py-3 rounded">
+        <button
+          onClick={() => navigate("/login")}
+          className="self-center font-semibold text-white py-3 rounded"
+        >
           {t("Login")}
         </button>
-        <NavLink
-          to="/register"
-          className="self-center px-8 py-3 font-semibold rounded bg-violet-600 text-coolGray-50 mr-4"
-        >
+        <span className="text-white px-1"> / </span>
+        <NavLink to="/register" className="self-center py-3 rounded font-semibold text-white mr-4">
           {t("Signup")}
         </NavLink>
       </>
@@ -32,58 +33,41 @@ function Header(props) {
   };
 
   return (
-    <header className="w-full bg-gray-900 fixed flex items-center text-white z-[1] h-20">
-      <div className="container flex justify-between h-16 mx-auto">
-        <NavLink
-          rel="noopener noreferrer"
-          to="/home"
-          aria-label="Back to homepage"
-          className="flex items-center p-2"
-        >
-          <img
-            src="http://tixvn.click/static/media/logo.af00d8dd04677a4ee789.png"
-            width={70}
-            alt="tixvn"
-          />
-        </NavLink>
-        <ul className="items-stretch hidden space-x-3 lg:flex">
-          <li className="flex">
-            <NavLink
-              rel="noopener noreferrer"
-              to="/home"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
-              activeClassName="text-violet-600 border-violet-600"
-            >
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark pt-0 relative z-10">
+      <NavLink to="/home" className="navbar-brand">
+        <img src="./img/logo.png" width={70} alt="tixvn" />
+      </NavLink>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item active">
+            <NavLink to="/home" className="nav-link">
               {t("Home")}
             </NavLink>
           </li>
-          <li className="flex">
-            <NavLink
-              rel="noopener noreferrer"
-              to="/news"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
-              activeClassName="text-violet-600 border-violet-600"
-            >
+          <li className="nav-item">
+            <a href="#" className="nav-link">
               {t("News")}
-            </NavLink>
+            </a>
           </li>
-          <li className="flex">
-            <NavLink
-              rel="noopener noreferrer"
-              to="/contact"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
-              activeClassName="text-violet-600 border-violet-600"
-            >
+          <li className="nav-item dropdown">
+            <a href="#" className="nav-link">
               {t("Contact")}
-            </NavLink>
+            </a>
           </li>
           {infoUser && infoUser.maLoaiNguoiDung === "QuanTri" && (
             <li className="flex">
-              <NavLink
-                // rel="noopener noreferrer"
-                to="/admin/films"
-                className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
-              >
+              <NavLink to="/admin/films" className="nav-link">
                 Admin
               </NavLink>
             </li>
@@ -118,31 +102,8 @@ function Header(props) {
             </Option>
           </Select>
         </div>
-        <button className="p-4 lg:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-6 h-6 text-coolGray-800"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
       </div>
-    </header>
+    </nav>
   );
 }
 export default Header;
-// export default function () {
-//   return (
-//     <Suspense fallback="loading">
-//       <Header />
-//     </Suspense>
-//   );
-// }

@@ -1,11 +1,11 @@
 import React from "react";
 import { useFormik } from "formik";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLoginAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
-import { history } from "../../App";
 
 export default function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -23,7 +23,7 @@ export default function Login() {
           <div className="py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
             <div className="cursor-pointer flex items-center">
               <div
-                onClick={() => history.push("/home")}
+                onClick={() => navigate("/home")}
                 className="text-2xl text-indigo-800 tracking-wide ml-2 font-semibold"
               >
                 <img
@@ -51,7 +51,7 @@ export default function Login() {
                     Tài khoản
                   </label>
                   <input
-                    className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                    className="w-full text-lg p-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                     name="taiKhoan"
                     type="text"
                     onChange={formik.handleChange}
@@ -77,7 +77,7 @@ export default function Login() {
                     </div>
                   </div>
                   <input
-                    className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                    className="w-full text-lg p-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                     type="text"
                     name="matKhau"
                     onChange={formik.handleChange}

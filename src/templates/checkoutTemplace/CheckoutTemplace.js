@@ -1,30 +1,24 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
-import { Route } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { TOKEN } from "../../util/settings/config";
+import { useDispatch } from "react-redux";
 
-const CheckoutTemplace = (props) => {
-  const { Component, ...restProps } = props;
+const CheckoutTemplace = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: "NAVIGATE", payload: navigate });
+  }, []);
 
   if (!localStorage.getItem(TOKEN)) {
-    return <Redirect to="/login" />;
+    return <Navigate to="/login" />;
   }
   return (
-    <Route
-      {...restProps}
-      render={(propsRoute) => {
-        return (
-          <Fragment>
-            <Component {...propsRoute} />
-          </Fragment>
-        );
-      }}
-    />
+    <Fragment>
+      <Outlet />
+    </Fragment>
   );
 };
 
-CheckoutTemplace.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-};
 export default CheckoutTemplace;

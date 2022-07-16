@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Select, Radio, Button, AutoComplete } from "antd";
-import { Prompt } from "react-router";
+import { usePrompt } from "../../hooks/usePrompt";
 import { MA_NHOM } from "../../util/settings/config";
 import {
   updateInfoUserAct,
@@ -40,6 +40,8 @@ const EditUser = () => {
     return () => localStorage.removeItem("userEditing");
   }, []);
 
+  usePrompt("Dữ liệu chưa được lưu, bạn có muốn chuyển trang?", readyToNewPage);
+
   // xử lý hành động load lại trang web
   ConfirmReload((e) => {
     e.preventDefault();
@@ -68,7 +70,6 @@ const EditUser = () => {
   return (
     <div className="w-4/5">
       <h1 className="text-2xl font-semibold mb-4">Cập nhật thông tin tài khoản:</h1>
-      <Prompt when={readyToNewPage} message="Dữ liệu chưa được lưu, bạn có muốn chuyển trang?" />
 
       <Form
         {...formItemLayout}

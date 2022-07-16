@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DOMAIN_API, TOKEN } from "../util/settings/config";
+import { DOMAIN_API, TOKEN, TokenCybersoft } from "../util/settings/config";
 
 export class BaseServices {
   put = (url, model) => {
@@ -7,7 +7,10 @@ export class BaseServices {
       method: "PUT",
       url: `${DOMAIN_API}/${url}`,
       data: model,
-      headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN)}` },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
+        TokenCybersoft,
+      },
     });
   };
 
@@ -16,7 +19,10 @@ export class BaseServices {
       method: "POST",
       url: `${DOMAIN_API}/${url}`,
       data: model,
-      headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN)}` },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
+        TokenCybersoft,
+      },
     });
   };
 
@@ -24,7 +30,10 @@ export class BaseServices {
     return axios({
       method: "GET",
       url: `${DOMAIN_API}/${url}`,
-      headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN)}` },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
+        TokenCybersoft,
+      },
     });
   };
 
@@ -32,7 +41,10 @@ export class BaseServices {
     return axios({
       method: "DELETE",
       url: `${DOMAIN_API}/${url}`,
-      headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN)}` },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
+        TokenCybersoft,
+      },
     });
   };
 }

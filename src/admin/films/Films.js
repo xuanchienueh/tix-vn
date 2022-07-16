@@ -2,9 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { Table, Input, Space, Form, Switch } from "antd";
 import { AudioOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { history } from "../../App";
 import { layDanhSachPhim } from "../../redux/actions/CarouselAction/carousel";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./Films.scss";
 import { deletePhimAction } from "../../redux/actions/QuanLyPhimAction/ActionName";
@@ -15,6 +14,7 @@ const { Search } = Input;
 const suffix = <AudioOutlined style={{ fontSize: 16, color: "#1890ff" }} />;
 export default function Films() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [pageCurrent, setPageCurrent] = useState(1);
 
   const { danhSachPhim } = useSelector((state) => state.CarouselReducer);
@@ -92,12 +92,12 @@ export default function Films() {
           <i className="text-red-500 fas fa-trash fa-2x" onClick={() => popupDelete(infoPhim)}></i>
           <i
             className="ml-2 fas fa-wrench fa-2x"
-            onClick={() => history.push(`/admin/editfilm/${infoPhim.maPhim}`)}
+            onClick={() => navigate(`/admin/editfilm/${infoPhim.maPhim}`)}
           ></i>
           <i
             className="fas fa-calendar fa-2x text-blue-600 ml-2"
             onClick={() => {
-              history.push(`/admin/taolichchieu/${infoPhim.maPhim}/${infoPhim.tenPhim}`);
+              navigate(`/admin/taolichchieu/${infoPhim.maPhim}/${infoPhim.tenPhim}`);
               localStorage.setItem("infoPhim", JSON.stringify(infoPhim));
             }}
           ></i>

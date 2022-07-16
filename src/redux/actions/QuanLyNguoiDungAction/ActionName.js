@@ -1,18 +1,24 @@
 import { QLNguoiDungService } from "../../../services/QuanLyNguoiDungService";
 import { USER_LOGIN } from "../../../util/settings/config";
 import { LAY_DS_USER, LICH_SU_DAT_VE, USER_REGISTER } from "../QuanLyNguoiDungAction/constName";
-import { history } from "../../../App";
+import { store } from "../../types/configStore";
 import { DISPLAY_LOADING, HIDDEN_LOADING } from "../../reducers/LoadingReducer";
 import Swal from "sweetalert2";
 import { LAY_INFO_USER } from "./constName";
+const { LoadingReducer } = store.getState();
+const navigate = LoadingReducer.navigate;
 
-export const userLoginAction = (thongTinDangNhap) => {
+export const userLoginAction = (infoLogin) => {
   return async (dispatch) => {
     try {
-      let result = await QLNguoiDungService.nguoiDungDangNhap(thongTinDangNhap);
-      if (result.status === 200) {
-        dispatch({ type: USER_LOGIN, payload: result.data.content });
-        history.push("home");
+      let { status, data } = await QLNguoiDungService.userLogin(infoLogin);
+      if (status === 200 && data.content.maLoaiNguoiDung === "QuanTri") {
+        dispatch({ type: USER_LOGIN, payload: data.content });
+        navigate("/admin/addfilm");
+      }
+      if (status === 200 && data.content.maLoaiNguoiDung !== "QuanTri") {
+        dispatch({ type: USER_LOGIN, payload: data.content });
+        navigate(-1);
       }
     } catch (err) {
       console.log(err);
@@ -20,11 +26,14 @@ export const userLoginAction = (thongTinDangNhap) => {
   };
 };
 
-export const userRegisterAction = (thongTinDangKy) => {
+export const userRegisterAction = (infoSignup) => {
   return async (dispatch) => {
     try {
-      let result = await QLNguoiDungService.nguoiDungDangKy(thongTinDangKy);
-      result.status === 200 && dispatch({ type: USER_REGISTER, payload: result.data.content });
+      let { status, data } = await QLNguoiDungService.nguoiDungDangKy(infoSignup);
+      if (status === 200) {
+        dispatch({ type: USER_REGISTER, payload: data.content });
+        navigate("/login");
+      }
     } catch (err) {
       let messageError = err.response.data.content;
       Swal.fire({ title: messageError, timer: 2000 });
@@ -38,7 +47,6 @@ export const lichSuDatVe = () => {
     try {
       await dispatch({ type: DISPLAY_LOADING });
       const result = await QLNguoiDungService.lichSuDatVe();
-      // result.status === 200 &&
       await dispatch({ type: LICH_SU_DAT_VE, payload: result.data.content });
       await dispatch({ type: HIDDEN_LOADING });
     } catch (err) {
@@ -48,7 +56,7 @@ export const lichSuDatVe = () => {
   };
 };
 
-export const layDSNguoiDungAction = (keyword) => {
+export const getListUserAction = (keyword) => {
   return async (dispatch) => {
     try {
       let result = await QLNguoiDungService.LayDanhSachNguoiDung(keyword);
@@ -62,9 +70,9 @@ export const layDSNguoiDungAction = (keyword) => {
 export const DeleteUser = (taiKhoan) => {
   return async (dispatch) => {
     try {
-      let result = await QLNguoiDungService.XoaNguoiDung(taiKhoan);
+      let result = await QLNguoiDungService.DeleteUser(taiKhoan);
       Swal.fire({ title: "Xóa thành công!", timer: 1500 });
-      dispatch(layDSNguoiDungAction());
+      dispatch(getListUserAction());
     } catch (err) {
       console.log("xoa user fail", err.response);
     }
@@ -101,7 +109,7 @@ export const updateInfoUserAct = async (dataUser) => {
   try {
     let result = await QLNguoiDungService.capNhatThongTinNguoiDung(dataUser);
     submitSuccess = true;
-    history.goBack();
+    navigate(-1);
     localStorage.removeItem("userEditing");
   } catch (err) {
     Swal.fire({
@@ -137,7 +145,7 @@ export const timKiemUserAction = async (taiKhoan) => {
   return resultAPI;
 };
 
-export const thongTinUserAction = (keyword) => {
+export const InfoUserAction = (keyword) => {
   return async (dispatch) => {
     try {
       let result = await QLNguoiDungService.thongTinUser();

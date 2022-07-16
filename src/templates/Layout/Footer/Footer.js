@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Footer(props) {
+function Footer() {
   return (
     <footer className="py-6 bg-coolGray-100 text-[#949494] bg-[#222] ">
       <div className="container px-6 mx-auto space-y-6 divide-y divide-coolGray-400 md:space-y-12 divide-opacity-50">
@@ -9,16 +9,11 @@ function Footer(props) {
           <div className="pb-6 col-span-full md:pb-0 md:col-span-6">
             <span
               rel="noopener noreferrer"
-              className="flex justify-center space-x-3 md:justify-start"
+              className="flex justify-center space-x-3 md:justify-start hidden md:flex"
             >
               <div className="flex items-center justify-center rounded-full">
                 <Link to="/">
-                  <img
-                    src="http://tixvn.click/static/media/logo.af00d8dd04677a4ee789.png"
-                    width={100}
-                    alt="logo"
-                    className="ml-3"
-                  />
+                  <img src="./img/logo.png" width={100} alt="logo" className="ml-3" />
                 </Link>
               </div>
               <span className="self-center text-2xl font-semibold"></span>
@@ -28,58 +23,62 @@ function Footer(props) {
             <p className="pb-1 text-lg font-medium text-left">Điều khoản sử dụng</p>
             <ul className="text-left ml-3">
               <li>
-                <a rel="noopener noreferrer" href="#" className="hover:text-red-600">
+                <a rel="noopener noreferrer" href="#" className="hover:text-red-600 text-gray-300">
                   Điều khoản chung
                 </a>
               </li>
               <li>
-                <a rel="noopener noreferrer" href="#" className="hover:text-red-600">
+                <a rel="noopener noreferrer" href="#" className="hover:text-red-600 text-gray-300">
                   Điều khoản giao dịch
                 </a>
               </li>
               <li>
-                <a rel="noopener noreferrer" href="#" className="hover:text-red-600">
+                <a rel="noopener noreferrer" href="#" className="hover:text-red-600 text-gray-300">
                   Chính sách thanh toán
                 </a>
               </li>
               <li>
-                <a rel="noopener noreferrer" href="#" className="hover:text-red-600">
+                <a rel="noopener noreferrer" href="#" className="hover:text-red-600 text-gray-300">
                   Chính sách bảo mật
                 </a>
               </li>
               <li>
-                <a rel="noopener noreferrer" href="#" className="hover:text-red-600">
+                <a rel="noopener noreferrer" href="#" className="hover:text-red-600 text-gray-300">
                   Câu hỏi thường gặp
                 </a>
               </li>
               {/**/}
             </ul>
           </div>
-          <div className="col-span-6 text-center md:text-left md:col-span-3">
+          <div className="col-span-6 text-center md:text-left md:col-span-3 ml-6">
             <p className="pb-1 text-lg font-medium text-left">Tix Việt Nam</p>
-            <ul className="text-left ml-3">
+            <ul className="text-left ml-3 ">
               <li>
-                <a rel="noopener noreferrer" href="#" className="hover:text-red-600">
+                <a
+                  rel="noopener noreferrer"
+                  href="#"
+                  className="text-gray-300 hover:text-red-600 text-gray-300"
+                >
                   Giới thiệu
                 </a>
               </li>
               <li>
-                <a rel="noopener noreferrer" href="#" className="hover:text-red-600">
+                <a rel="noopener noreferrer" href="#" className="hover:text-red-600 text-gray-300">
                   Tiện ích online
                 </a>
               </li>
               <li>
-                <a rel="noopener noreferrer" href="#" className="hover:text-red-600">
+                <a rel="noopener noreferrer" href="#" className="hover:text-red-600 text-gray-300">
                   Thẻ quà tặng
                 </a>
               </li>
               <li>
-                <a rel="noopener noreferrer" href="#" className="hover:text-red-600">
+                <a rel="noopener noreferrer" href="#" className="hover:text-red-600 text-gray-300">
                   Tuyển dụng
                 </a>
               </li>
               <li>
-                <a rel="noopener noreferrer" href="#" className="hover:text-red-600">
+                <a rel="noopener noreferrer" href="#" className="hover:text-red-600 text-gray-300">
                   Liên hệ quảng cáo
                 </a>
               </li>

@@ -1,4 +1,3 @@
-// import { DOMAIN_API } from "../../../util/settings/config";
 import { GET_CAROUSEL, LAY_DANH_SACH_PHIM } from "./ActionName";
 import { qlPhimService } from "../../../services/QuanLyPhimService";
 
