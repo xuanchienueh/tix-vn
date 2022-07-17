@@ -31,10 +31,10 @@ function App() {
         <Routes>
           <Route element={<HomeTemplace />}>
             <Route path="" element={<Home />} />
-            <Route path="detail/:id" element={<Detail />} />
             <Route path="home" element={<Home />} />
             <Route path="profile" element={<Profile />} />
           </Route>
+          <Route path="detail/:id" element={<Detail />} />
 
           <Route path="admin" element={<AdminTemplace />}>
             <Route path="adduser" element={<AddUser />} />
