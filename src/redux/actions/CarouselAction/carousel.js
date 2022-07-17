@@ -1,10 +1,10 @@
-import { GET_CAROUSEL, LAY_DANH_SACH_PHIM } from "./ActionName";
-import { qlPhimService } from "../../../services/QuanLyPhimService";
+import { manageFilmService } from "../../../services/FilmServices";
+import { GET_CAROUSEL, GET_LIST_MOVIE } from "./ActionName";
 
 export const getCarousel = () => {
   return async (dispatch) => {
     try {
-      let result = await qlPhimService.LayDanhSachBanner();
+      let result = await manageFilmService.getListBannerService();
       dispatch({ type: GET_CAROUSEL, payload: result.data.content });
     } catch (error) {
       console.log(error);
@@ -12,11 +12,11 @@ export const getCarousel = () => {
   };
 };
 
-export const layDanhSachPhim = (tenPhim = "") => {
+export const getListFilm = (movieName = "") => {
   return async (dispatch) => {
     try {
-      let result = await qlPhimService.LayDanhSachPhim(tenPhim);
-      dispatch({ type: LAY_DANH_SACH_PHIM, payload: result.data.content });
+      let result = await manageFilmService.getListFilmService(movieName);
+      dispatch({ type: GET_LIST_MOVIE, payload: result.data.content });
     } catch (error) {
       console.log(error);
     }

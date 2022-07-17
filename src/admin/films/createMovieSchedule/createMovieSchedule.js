@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, DatePicker, Button, Select, Cascader, InputNumber } from "antd";
+import { Form, DatePicker, Select, Cascader, InputNumber } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import {
-  layDSRap,
-  LayThongTinCumRapTheoHeThongAction,
+  getListCinemas,
+  getInfoMovieClusterFollowSystemAction,
 } from "../../../redux/actions/QuanLyRapAction/ActionName";
-import { taoLichChieuAction } from "../../../redux/actions/QuanLyDatVeAction/QuanLyDatVeAction";
+import { createMovieScheduleAction } from "../../../redux/actions/QuanLyDatVeAction/QuanLyDatVeAction";
 import Swal from "sweetalert2";
 
-const TaoLichChieu = () => {
+const CreateMovieSchedule = () => {
   const dispatch = useDispatch();
   const { maPhim, tenphim } = useParams();
-  const { heThongRap } = useSelector((state) => state.QuanLyRapReducer);
+  const { heThongRap } = useSelector((state) => state.cinemaManagerReducer);
   const [maHeThongRap, setMaHeThongRap] = useState("");
   const [arrRap, setArrRap] = useState(null);
   const [isPromise, setisPromise] = useState(null);
@@ -24,10 +24,10 @@ const TaoLichChieu = () => {
     giaVe: 0,
   });
 
-  useEffect(() => dispatch(layDSRap()), []);
+  useEffect(() => dispatch(getListCinemas()), []);
 
   useEffect(() => {
-    if (maHeThongRap !== "") setisPromise(LayThongTinCumRapTheoHeThongAction(maHeThongRap));
+    if (maHeThongRap !== "") setisPromise(getInfoMovieClusterFollowSystemAction(maHeThongRap));
   }, [maHeThongRap]);
 
   isPromise !== null && isPromise.then((result) => setArrRap(result));
@@ -36,7 +36,7 @@ const TaoLichChieu = () => {
     let rightNow = new Date().getTime();
     if (dataSubmit.ngayChieuGioChieu._d.getTime() > rightNow) {
       let ngayChieuGioChieu = moment(dataSubmit.ngayChieuGioChieu).format("DD/MM/YYYY HH:mm:ss");
-      taoLichChieuAction({ ...dataSubmit, ngayChieuGioChieu });
+      createMovieScheduleAction({ ...dataSubmit, ngayChieuGioChieu });
     } else {
       Swal.fire({ title: "Ngày giờ chiếu là quá khứ!", icon: "error", timer: 1500 });
     }
@@ -107,4 +107,4 @@ const TaoLichChieu = () => {
   );
 };
 
-export default TaoLichChieu;
+export default CreateMovieSchedule;

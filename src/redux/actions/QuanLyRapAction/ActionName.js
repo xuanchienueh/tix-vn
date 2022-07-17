@@ -1,22 +1,22 @@
-import { qlRapService } from "../../../services/QuanLyRapService";
-import { LAY_DS_RAP, LAY_THONG_TIN_CUM_RAP, LAY_THONG_TIN_LICH_CHIEU_PHIM } from "./ConstName";
+import { manageCinemaService } from "../../../services/CinemaService";
+import { GET_LIST_CINEMA, GET_INFO_PICTURE_THEATER, GET_INFO_SHOWTIME } from "./ConstName";
 
-export const layDSRap = () => {
+export const getListCinemas = () => {
   return async (dispatch) => {
     try {
-      let result = await qlRapService.LayThongTinHeThongRap();
-      result.status === 200 && dispatch({ type: LAY_DS_RAP, payload: result.data.content });
+      let result = await manageCinemaService.getInfoCinemaSystems();
+      result.status === 200 && dispatch({ type: GET_LIST_CINEMA, payload: result.data.content });
     } catch (err) {
       console.log(err);
     }
   };
 };
 
-export const layThongTinCumRap = (maHeThongRap) => {
+export const getInfoCinemaCluster = (maHeThongRap) => {
   return async (dispatch) => {
     try {
-      let result = await qlRapService.LayThongTinCumRapTheoHeThong(maHeThongRap);
-      dispatch({ type: LAY_THONG_TIN_CUM_RAP, payload: result.data.content });
+      let result = await manageCinemaService.LayThongTinCumRapTheoHeThong(maHeThongRap);
+      dispatch({ type: GET_INFO_PICTURE_THEATER, payload: result.data.content });
     } catch (err) {
       console.log(err);
     }
@@ -26,10 +26,10 @@ export const layThongTinCumRap = (maHeThongRap) => {
 export const getInfoShowtime = (id) => {
   return async (dispatch) => {
     try {
-      let { data } = await qlRapService.getInfoShowtimeService(id);
+      let { data } = await manageCinemaService.getInfoShowtimeService(id);
       data.statusCode === 200 &&
         dispatch({
-          type: LAY_THONG_TIN_LICH_CHIEU_PHIM,
+          type: GET_INFO_SHOWTIME,
           payload: data.content,
         });
     } catch (err) {
@@ -38,16 +38,16 @@ export const getInfoShowtime = (id) => {
   };
 };
 
-export const LayThongTinCumRapTheoHeThongAction = async (maHeThongRap) => {
-  let ketqua = undefined;
+export const getInfoMovieClusterFollowSystemAction = async (IdGroupCinema) => {
+  let result = undefined;
   let infoRap;
   try {
-    let result = await qlRapService.LayThongTinCumRapTheoHeThong(maHeThongRap);
-    ketqua = result.data.content;
+    let result = await manageCinemaService.LayThongTinCumRapTheoHeThong(IdGroupCinema);
+    result = result.data.content;
   } catch (err) {
     console.log("lay thong tin cum rap fail", err);
   }
-  infoRap = await ketqua.map((i) => {
+  infoRap = await result.map((i) => {
     return {
       value: i.maCumRap,
       label: i.tenCumRap,

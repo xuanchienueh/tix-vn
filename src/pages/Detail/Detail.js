@@ -31,7 +31,7 @@ export default function Detail() {
     dispatch(getInfoShowtime(id));
     window.scrollTo(0, 10);
   }, [id]);
-  let { infoShowtime } = useSelector((state) => state.QuanLyRapReducer);
+  let { infoShowtime } = useSelector((state) => state.cinemaManagerReducer);
 
   return (
     <>

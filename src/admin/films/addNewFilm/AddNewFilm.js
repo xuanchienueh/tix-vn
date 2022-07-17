@@ -1,12 +1,12 @@
 import { Input, InputNumber, Radio, Switch } from "antd";
-import { Button, DatePicker, Form } from "antd";
+import { DatePicker, Form } from "antd";
 import Swal from "sweetalert2";
 import React, { useState } from "react";
 import "./addNewFilm.scss";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { themPhim } from "../../../redux/actions/QuanLyPhimAction/ActionName";
-import { MA_NHOM } from "../../../util/settings/config";
+import { addMovie } from "../../../redux/actions/QuanLyPhimAction/ActionName";
+import { GROUP_ID } from "../../../util/settings/config";
 
 export default function AddNewFilm() {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export default function AddNewFilm() {
       hot: false,
       ngayKhoiChieu: "",
       hinhAnh: {},
-      maNhom: MA_NHOM,
+      maNhom: GROUP_ID,
     },
     onSubmit: (values) => {
       let formData = new FormData();
@@ -34,13 +34,11 @@ export default function AddNewFilm() {
           ? formData.append("File", values.hinhAnh, values.hinhAnh.name)
           : formData.append(key, values[key]);
       }
-      // console.log("forrmData", formData.get("File"));
-      dispatch(themPhim(formData));
+      dispatch(addMovie(formData));
     },
   });
   const handleChangImg = async (e) => {
     let file = e.target.files[0];
-    // console.log(file);
     if (file.type.slice(0, 5) !== "image") {
       Swal.fire("Error", "File không hợp lệ!", "info");
       setSrcImg("");

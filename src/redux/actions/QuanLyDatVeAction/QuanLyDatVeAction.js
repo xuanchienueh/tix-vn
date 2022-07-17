@@ -73,7 +73,7 @@ export const chonGheAction = (ghe) => {
   };
 };
 
-export const taoLichChieuAction = async (dataLichChieu) => {
+export const createMovieScheduleAction = async (dataLichChieu) => {
   try {
     let result = await QLDatVeService.taoLichChieu(dataLichChieu);
     Swal.fire({ title: "Tạo lịch chiếu thành công!", timer: 1000 });

@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
-// import slider from "react-slick/lib/slider";
 import CardAntd from "../../../components/FilmItem/CardAntd";
 import "./ListMovie.css";
 
@@ -67,9 +66,9 @@ export default function ListMovie({ props }) {
       },
     ],
   };
-  const arrFilm = useSelector((state) => state.CarouselReducer.danhSachPhim);
-  const arrFilmDangChieu = arrFilm.filter((item) => item.dangChieu === true);
-  const arrFilmSapChieu = arrFilm.filter((item) => item.sapChieu === true);
+  const arrFilm = useSelector((state) => state.CarouselReducer.listFilm);
+  const filmDangChieu = arrFilm.filter((item) => item.dangChieu === true);
+  const filmSapChieu = arrFilm.filter((item) => item.sapChieu === true);
 
   const renderFilm = (arr) =>
     arr.map((item) => {
@@ -83,7 +82,7 @@ export default function ListMovie({ props }) {
     <div className="relative">
       <div className="container mx-auto sm:px-0 xl:px-[60px] ">
         <Slider {...settings}>
-          {props ? renderFilm(arrFilmDangChieu) : renderFilm(arrFilmSapChieu)}
+          {props ? renderFilm(filmDangChieu) : renderFilm(filmSapChieu)}
         </Slider>
       </div>
     </div>

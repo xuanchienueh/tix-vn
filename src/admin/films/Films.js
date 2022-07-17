@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Table, Input, Space, Form, Switch } from "antd";
 import { AudioOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { layDanhSachPhim } from "../../redux/actions/CarouselAction/carousel";
+import { getListFilm } from "../../redux/actions/CarouselAction/carousel";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./Films.scss";
@@ -17,12 +17,11 @@ export default function Films() {
   const navigate = useNavigate();
   const [pageCurrent, setPageCurrent] = useState(1);
 
-  const { danhSachPhim } = useSelector((state) => state.CarouselReducer);
-  useEffect(() => dispatch(layDanhSachPhim()), []);
+  const { listFilm } = useSelector((state) => state.CarouselReducer);
+  useEffect(() => dispatch(getListFilm()), []);
 
   const onChange = (pagination, filters, sorter, extra) => {
     setPageCurrent(pagination.current);
-    // console.log("params", pagination, filters, sorter, extra);
   };
   useEffect(() => window.scrollTo(0, 0), [pageCurrent]);
   // xử lý header position fixed
@@ -47,7 +46,7 @@ export default function Films() {
 
   //xử lý phần search phim
   const debounceSearch = useRef(
-    debounce((nextValue) => dispatch(layDanhSachPhim(nextValue)), 500)
+    debounce((nextValue) => dispatch(getListFilm(nextValue)), 500)
   ).current;
   // kết thúc phần search phim
   const columns = [
@@ -129,7 +128,7 @@ export default function Films() {
       <div className="flex justify-between">
         <Search
           placeholder="Tìm kiếm phim"
-          onSearch={(value) => dispatch(layDanhSachPhim(value))}
+          onSearch={(value) => dispatch(getListFilm(value))}
           enterButton={<i className="fas fa-search"></i>}
           className="mb-1 w-1/2"
           onChange={(e) => debounceSearch(e.target.value)}
@@ -143,7 +142,7 @@ export default function Films() {
           {...tableProps}
           scroll={scroll}
           columns={columns}
-          dataSource={danhSachPhim}
+          dataSource={listFilm}
           onChange={onChange}
           rowKey="maPhim"
         />

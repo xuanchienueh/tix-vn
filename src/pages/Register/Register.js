@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Select, Button, AutoComplete } from "antd";
-import { MA_NHOM } from "../../util/settings/config";
+import { GROUP_ID } from "../../util/settings/config";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userRegisterAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
@@ -28,7 +28,7 @@ const Register = () => {
       matKhau: values.nhapLaiMatKhau,
       email: values.email,
       soDt: values.soDt,
-      maNhom: MA_NHOM,
+      maNhom: GROUP_ID,
       hoTen: values.hoTen,
     };
     dispatch(userRegisterAction(submit));

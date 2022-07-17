@@ -1,51 +1,50 @@
-import { qlPhimService } from "../../../services/QuanLyPhimService";
-import { LAY_THONG_TIN_PHIM } from "./constAction";
+import { GET_INFO_FILM } from "./constAction";
 import { store } from "../../types/configStore";
-import { layDanhSachPhim } from "../CarouselAction/carousel";
+import { getListFilm } from "../CarouselAction/carousel";
 import Swal from "sweetalert2";
+import { manageFilmService } from "../../../services/FilmServices";
 
 const navigate = store.getState().LoadingReducer.navigate;
 
-export const themPhim = (formData) => {
+export const addMovie = (formData) => {
   return async (dispatch) => {
     try {
-      let result = await qlPhimService.ThemPhimUploadHinh(formData);
-      alert("them phim success");
-      console.log("result", result);
+      let result = await manageFilmService.addMovieService(formData);
+      alert("Thêm phim thành công!");
     } catch (err) {
-      console.log("them phim that bai", err.response?.data);
+      console.log("add film fail", err.response?.data);
     }
   };
 };
 
-export const LayThongTinPhimAction = (maPhim) => {
+export const getInfoFilmAction = (Film_Id) => {
   return async (dispatch) => {
     try {
-      let result = await qlPhimService.layThongTinPhim(maPhim);
-      dispatch({ type: LAY_THONG_TIN_PHIM, payload: result.data.content });
+      let result = await manageFilmService.getInfoFilmService(Film_Id);
+      dispatch({ type: GET_INFO_FILM, payload: result.data.content });
     } catch (err) {
       console.log("lay thong tin phim fail", err.response);
     }
   };
 };
 
-export const CapNhatPhimUploadAction = (formData) => {
+export const updateFilmAction = (formData) => {
   return async (dispatch) => {
     try {
-      let result = await qlPhimService.CapNhatPhimUpload(formData);
+      let result = await manageFilmService.updateFilmService(formData);
       Swal.fire({ title: "Edit phim thành công!", icon: "success", timer: 1500 });
       navigate("/admin/films");
     } catch (err) {
-      console.log("edit phim fail", err.response);
+      console.log("edit film fail", err.response);
     }
   };
 };
 
-export const deletePhimAction = (maPhim) => {
+export const deletePhimAction = (Film_id) => {
   return async (dispatch) => {
     try {
-      let result = await qlPhimService.deletePhim(maPhim);
-      dispatch(layDanhSachPhim());
+      let result = await manageFilmService.deleteFilmService(Film_id);
+      dispatch(getListFilm());
       Swal.fire({ title: "Xóa phim thành công!", icon: "success", timer: 1500 });
     } catch (err) {
       console.log("xoa phim fail", err);

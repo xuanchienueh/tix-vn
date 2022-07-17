@@ -1,4 +1,4 @@
-import { MA_NHOM } from "../util/settings/config";
+import { GROUP_ID } from "../util/settings/config";
 import { BaseServices } from "./baseServices";
 
 class QuanLyNguoiDungService extends BaseServices {
@@ -21,9 +21,9 @@ class QuanLyNguoiDungService extends BaseServices {
 
   LayDanhSachNguoiDung = (keyword = "") => {
     if (keyword !== "") {
-      return this.get(`api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${MA_NHOM}&tuKhoa=${keyword}`);
+      return this.get(`api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${GROUP_ID}&tuKhoa=${keyword}`);
     }
-    return this.get(`api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${MA_NHOM}`);
+    return this.get(`api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${GROUP_ID}`);
   };
 
   DeleteUser = (taiKhoan) => {
@@ -39,7 +39,7 @@ class QuanLyNguoiDungService extends BaseServices {
   };
 
   timKiemNguoiDung = (taiKhoan) => {
-    return this.get(`api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${MA_NHOM}&tuKhoa=${taiKhoan}`);
+    return this.get(`api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${GROUP_ID}&tuKhoa=${taiKhoan}`);
   };
 
   capNhatThongTinNguoiDung = (dataUser) => {

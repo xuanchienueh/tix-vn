@@ -15,7 +15,9 @@ const EditUser = lazy(() => import("./admin/quanLyUser/EditUser"));
 const Films = lazy(() => import("./admin/films/Films"));
 const AddNewFilm = lazy(() => import("./admin/films/addNewFilm/AddNewFilm"));
 const EditFilm = lazy(() => import("./admin/films/edit/EditFilm"));
-const TaoLichChieu = lazy(() => import("./admin/films/taoLichChieu/TaoLichChieu"));
+const CreateMovieSchedule = lazy(() =>
+  import("./admin/films/createMovieSchedule/createMovieSchedule")
+);
 const HomeTemplace = lazy(() => import("./templates/HomeTemplace/HomeTemplace"));
 const UserTemplace = lazy(() => import("./templates/UserTemplace/UserTemplace"));
 const CheckoutTemplace = lazy(() => import("./templates/checkoutTemplace/CheckoutTemplace"));
@@ -42,7 +44,7 @@ function App() {
             <Route path="listuser" element={<ListUser />} />
             <Route path="addfilm" element={<AddNewFilm />} />
             <Route path="edituser/:taiKhoan" element={<EditUser />} />
-            <Route path="taolichchieu/:maPhim/:tenphim" element={<TaoLichChieu />} />
+            <Route path="taolichchieu/:maPhim/:tenphim" element={<CreateMovieSchedule />} />
           </Route>
 
           <Route element={<UserTemplace />}>

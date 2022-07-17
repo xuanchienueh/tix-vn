@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Select, Radio, Button, AutoComplete } from "antd";
 import { usePrompt } from "../../hooks/usePrompt";
-import { MA_NHOM } from "../../util/settings/config";
+import { GROUP_ID } from "../../util/settings/config";
 import {
   updateInfoUserAct,
   listUserTypeAct,
@@ -55,7 +55,7 @@ const EditUser = () => {
       matKhau: values.matKhau,
       email: values.email,
       soDt: values.soDt,
-      maNhom: MA_NHOM,
+      maNhom: GROUP_ID,
       maLoaiNguoiDung: values.maLoaiNguoiDung,
       hoTen: values.hoTen,
     };

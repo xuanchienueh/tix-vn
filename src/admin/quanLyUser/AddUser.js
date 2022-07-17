@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Select, Radio, Button, AutoComplete } from "antd";
-import { MA_NHOM } from "../../util/settings/config";
+import { GROUP_ID } from "../../util/settings/config";
 import {
   listUserTypeAct,
   themNguoiDungAction,
@@ -49,7 +49,7 @@ const AddUser = () => {
       matKhau: values.nhapLaiMatKhau,
       email: values.email,
       soDt: values.soDt,
-      maNhom: MA_NHOM,
+      maNhom: GROUP_ID,
       maLoaiNguoiDung: values.maLoaiNguoiDung,
       hoTen: values.hoTen,
     };

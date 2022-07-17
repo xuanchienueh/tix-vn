@@ -1,12 +1,12 @@
 import {
   GET_CAROUSEL,
-  LAY_DANH_SACH_PHIM,
+  GET_LIST_MOVIE,
   OPEN_MODAL_YOUTUBE,
 } from "../../actions/CarouselAction/ActionName";
 
 const initialStateCarousel = {
   carousel: [],
-  danhSachPhim: [],
+  listFilm: [],
   openTrailer: { link: "", domButtonOpenTrailer: "" },
 };
 
@@ -16,8 +16,8 @@ const CarouselReducer = (state = initialStateCarousel, { type, payload }) => {
       state.carousel = payload;
       return { ...state };
 
-    case LAY_DANH_SACH_PHIM:
-      return { ...state, danhSachPhim: payload };
+    case GET_LIST_MOVIE:
+      return { ...state, listFilm: payload };
 
     case OPEN_MODAL_YOUTUBE:
       state.openTrailer.link = payload.link;

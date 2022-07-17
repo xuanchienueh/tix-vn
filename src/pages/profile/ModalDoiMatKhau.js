@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Form, Input, AutoComplete } from "antd";
 import { useNavigate } from "react-router-dom";
-import { MA_NHOM, USER_LOGIN } from "../../util/settings/config";
+import { GROUP_ID, USER_LOGIN } from "../../util/settings/config";
 import { customerUpdateInfoAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 import Swal from "sweetalert2";
 import Propstype from "prop-types";
@@ -32,7 +32,7 @@ function ModalDoiMatKhau({ infoUser }) {
       matKhau: values.nhapLaiMatKhau,
       email: infoUser.email,
       soDt: infoUser.soDT,
-      maNhom: MA_NHOM,
+      maNhom: GROUP_ID,
       hoTen: infoUser.hoTen,
       maLoaiNguoiDung: userLogin.maLoaiNguoiDung,
     };

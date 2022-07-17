@@ -4,7 +4,7 @@ import { Modal, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { Form, Input, AutoComplete } from "antd";
-import { MA_NHOM, USER_LOGIN } from "../../util/settings/config";
+import { GROUP_ID, USER_LOGIN } from "../../util/settings/config";
 import { customerUpdateInfoAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 const formItemLayout = {
   labelCol: {
@@ -30,7 +30,7 @@ function ModalDoiThongTin({ infoUser }) {
       matKhau: infoUser.matKhau,
       email: values.email,
       soDt: values.soDt,
-      maNhom: MA_NHOM,
+      maNhom: GROUP_ID,
       hoTen: values.hoTen,
       maLoaiNguoiDung: userLogin.maLoaiNguoiDung,
     };

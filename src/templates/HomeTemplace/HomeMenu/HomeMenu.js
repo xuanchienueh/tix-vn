@@ -8,7 +8,7 @@ import CumRap from "./CumRap";
 const { TabPane } = Tabs;
 
 export default function HomeMenu() {
-  const { heThongRap } = useSelector((state) => state.QuanLyRapReducer);
+  const { heThongRap } = useSelector((state) => state.cinemaManagerReducer);
   function callback(key) {}
   const renderHeThongRap = () =>
     heThongRap.map((item) => {

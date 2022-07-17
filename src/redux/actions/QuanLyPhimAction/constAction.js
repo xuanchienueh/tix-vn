@@ -1,1 +1,1 @@
-export const LAY_THONG_TIN_PHIM = "LAY_THONG_TIN_PHIM";
+export const GET_INFO_FILM = "GET_INFO_FILM";

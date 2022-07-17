@@ -1,12 +1,12 @@
-import { MA_NHOM } from "../util/settings/config";
+import { GROUP_ID } from "../util/settings/config";
 import { BaseServices } from "./baseServices";
 
-export class QuanLyRapService extends BaseServices {
+export class cinemaService extends BaseServices {
   constructor() {
     super();
   }
-  LayThongTinHeThongRap = () => {
-    return this.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${MA_NHOM}`);
+  getInfoCinemaSystems = () => {
+    return this.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`);
   };
   getInfoShowtimeService = (id) => {
     return this.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`);
@@ -17,4 +17,4 @@ export class QuanLyRapService extends BaseServices {
   };
 }
 
-export const qlRapService = new QuanLyRapService();
+export const manageCinemaService = new cinemaService();

@@ -6,10 +6,10 @@ import "slick-carousel/slick/slick-theme.css";
 import HomeMenu from "../../templates/HomeTemplace/HomeMenu/HomeMenu";
 import "./Home.scss";
 import { useDispatch } from "react-redux";
-import { layDanhSachPhim } from "../../redux/actions/CarouselAction/carousel";
+import { getListFilm } from "../../redux/actions/CarouselAction/carousel";
 import ListMovie from "./ListMovie/ListMovie";
 import PageModal from "../Modal/PageModal";
-import { layDSRap } from "../../redux/actions/QuanLyRapAction/ActionName";
+import { getListCinemas } from "../../redux/actions/QuanLyRapAction/ActionName";
 import HomeCarousel from "../../templates/Layout/HomeCarousel/HomeCarousel";
 
 const { TabPane } = Tabs;
@@ -17,8 +17,8 @@ const { TabPane } = Tabs;
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(layDanhSachPhim());
-    dispatch(layDSRap());
+    dispatch(getListFilm());
+    dispatch(getListCinemas());
   }, []);
   const [dangChieu, setDangChieu] = useState(true);
   const DangChieu = (value) => setDangChieu(value);

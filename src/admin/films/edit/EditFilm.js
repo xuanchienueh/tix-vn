@@ -1,16 +1,17 @@
+import React, { useState, useEffect } from "react";
 import { Input, InputNumber, Radio, Switch } from "antd";
-import { Button, DatePicker, Form } from "antd";
+import { DatePicker, Form } from "antd";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import moment from "moment";
-import React, { useState, useEffect } from "react";
-import "../addNewFilm/addNewFilm.scss";
-import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { MA_NHOM } from "../../../util/settings/config";
+import { useFormik } from "formik";
+import moment from "moment";
+
+import "../addNewFilm/addNewFilm.scss";
+import { GROUP_ID } from "../../../util/settings/config";
 import {
-  CapNhatPhimUploadAction,
-  LayThongTinPhimAction,
+  updateFilmAction,
+  getInfoFilmAction,
 } from "../../../redux/actions/QuanLyPhimAction/ActionName";
 
 export default function EditFilm() {
@@ -18,11 +19,10 @@ export default function EditFilm() {
   const { maPhim } = useParams();
 
   useEffect(() => {
-    dispatch(LayThongTinPhimAction(maPhim));
+    dispatch(getInfoFilmAction(maPhim));
   }, []);
 
-  const { layThongTinPhim } = useSelector((state) => state.QuanLyPhimReducer);
-  // console.log(layThongTinPhim);
+  const { getInfoFilm } = useSelector((state) => state.manageFilmRuducer);
 
   const [componentSize, setComponentSize] = useState("default");
   const onFormLayoutChange = ({ size }) => setComponentSize(size);
@@ -32,17 +32,17 @@ export default function EditFilm() {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      maPhim: layThongTinPhim.maPhim,
-      tenPhim: layThongTinPhim?.tenPhim,
-      trailer: layThongTinPhim?.trailer,
-      moTa: layThongTinPhim?.moTa,
-      danhGia: layThongTinPhim?.danhGia,
-      dangChieu: layThongTinPhim?.dangChieu,
-      sapChieu: layThongTinPhim?.sapChieu,
-      hot: layThongTinPhim?.hot,
-      ngayKhoiChieu: moment(layThongTinPhim?.ngayKhoiChieu).format("DD-MM-YYYY"),
+      maPhim: getInfoFilm.maPhim,
+      tenPhim: getInfoFilm?.tenPhim,
+      trailer: getInfoFilm?.trailer,
+      moTa: getInfoFilm?.moTa,
+      danhGia: getInfoFilm?.danhGia,
+      dangChieu: getInfoFilm?.dangChieu,
+      sapChieu: getInfoFilm?.sapChieu,
+      hot: getInfoFilm?.hot,
+      ngayKhoiChieu: moment(getInfoFilm?.ngayKhoiChieu).format("DD-MM-YYYY"),
       hinhAnh: null,
-      maNhom: MA_NHOM,
+      maNhom: GROUP_ID,
     },
 
     onSubmit: (values) => {
@@ -53,7 +53,7 @@ export default function EditFilm() {
           : formData.append(key, values[key]);
       }
 
-      dispatch(CapNhatPhimUploadAction(formData));
+      dispatch(updateFilmAction(formData));
     },
   });
 
@@ -134,7 +134,7 @@ export default function EditFilm() {
         </Form.Item>
         <Form.Item
           label="Hình ảnh"
-          extra={<img src={srcImg == "" ? layThongTinPhim.hinhAnh : srcImg} width={100} />}
+          extra={<img src={srcImg == "" ? getInfoFilm.hinhAnh : srcImg} width={100} />}
         >
           <input type="file" onChange={handleChangImg} accept="image/*" />
         </Form.Item>
