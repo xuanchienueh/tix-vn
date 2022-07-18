@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const ConfirmReload = (fn) => {
   const cb = useRef(fn); // init with fn, so that type checkers won't assume that current might be undefined

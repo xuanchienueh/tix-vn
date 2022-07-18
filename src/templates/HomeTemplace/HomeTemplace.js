@@ -14,7 +14,7 @@ const HomeTemplace = () => {
   return (
     <Fragment>
       <Header />
-      <div className="">
+      <div>
         <Outlet />
       </div>
 

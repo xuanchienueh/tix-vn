@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
 import CardAntd from "../../../components/FilmItem/CardAntd";
-import "./ListMovie.css";
+import styles from "./listMovie.module.scss";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -79,11 +79,13 @@ export default function ListMovie({ props }) {
       );
     });
   return (
-    <div className="relative">
-      <div className="container mx-auto sm:px-0 xl:px-[60px] ">
-        <Slider {...settings}>
-          {props ? renderFilm(filmDangChieu) : renderFilm(filmSapChieu)}
-        </Slider>
+    <div className={styles.listMovie}>
+      <div className="relative">
+        <div className="container mx-auto sm:px-0 xl:px-[60px] ">
+          <Slider {...settings}>
+            {props ? renderFilm(filmDangChieu) : renderFilm(filmSapChieu)}
+          </Slider>
+        </div>
       </div>
     </div>
   );
