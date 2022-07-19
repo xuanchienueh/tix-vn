@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Form, Input, Select, Button, AutoComplete } from "antd";
+import React from "react";
+import { Form, Input, Select, AutoComplete } from "antd";
 import { GROUP_ID } from "../../util/settings/config";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { userRegisterAction } from "../../redux/actions/QuanLyNguoiDungAction/ActionName";
 const { Option } = Select;
 
@@ -21,6 +21,7 @@ const Register = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
 
   const onFinish = (values) => {
     let submit = {
@@ -33,6 +34,9 @@ const Register = () => {
     };
     dispatch(userRegisterAction(submit));
   };
+  if (userLogin.taiKhoan) {
+    return <Navigate to="/" replace={true} />;
+  }
 
   return (
     <div>
