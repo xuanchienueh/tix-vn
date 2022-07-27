@@ -25,7 +25,6 @@ const ListUser = () => {
   const [xScroll, setXScroll] = useState(undefined);
   const handleTableLayoutChange = (e) => setTableLayout(e.target.value);
   const handleEllipsisChange = (enable) => setEllipsis(enable);
-  const handleRowSelectionChange = (enable) => setRowSelection(enable ? {} : undefined);
   const handleYScrollChange = (enable) => setYScroll(enable);
   const handleXScrollChange = (e) => setXScroll(e.target.value);
   const columns = [
@@ -118,7 +117,6 @@ const ListUser = () => {
     size: "small",
     title: undefined,
     showHeader: true,
-    rowSelection,
     scroll,
     tableLayout,
   };
@@ -142,9 +140,6 @@ const ListUser = () => {
         className="components-table-demo-control-bar"
         style={{ marginBottom: 16 }}
       >
-        <Form.Item label="Checkbox">
-          <Switch checked={!!rowSelection} onChange={handleRowSelectionChange} />
-        </Form.Item>
         <Form.Item label="Fixed Header">
           <Switch checked={!!yScroll} onChange={handleYScrollChange} />
         </Form.Item>

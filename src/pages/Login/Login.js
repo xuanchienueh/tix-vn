@@ -78,7 +78,7 @@ export default function Login() {
                   </div>
                   <input
                     className="w-full text-lg p-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-                    type="text"
+                    type="password"
                     name="matKhau"
                     onChange={formik.handleChange}
                     value={formik.values.matKhau}

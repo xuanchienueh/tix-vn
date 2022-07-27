@@ -1,11 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { USER_LOGIN } from "../../../util/settings/config";
 
 export default function DropdownUser() {
   const { t } = useTranslation();
-  const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
+  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
 
   return (
     <>

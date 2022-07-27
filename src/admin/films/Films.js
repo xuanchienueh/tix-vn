@@ -32,15 +32,11 @@ export default function Films() {
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
+
   const hasSelected = selectedRowKeys.length > 0;
   //các props của table
   const tableProps = {
     bordered: true,
-    rowSelection,
     showHeader: true,
   };
 
@@ -109,13 +105,11 @@ export default function Films() {
       title: "Bạn đang xóa phim?",
 
       showDenyButton: true,
-      // showCancelButton: true,
       text: `Bạn đang xóa ${infoPhim.tenPhim}`,
       confirmButtonText: "YES!",
       denyButtonText: `NO!`,
     }).then((result) => {
       if (result.isConfirmed) {
-        // Swal.fire("Saved!", "", "success");
         dispatch(deletePhimAction(infoPhim.maPhim));
       } else if (result.isDenied) {
         Swal.fire({ title: "Phim của bạn chưa được xóa!", icon: "info", timer: 1000 });

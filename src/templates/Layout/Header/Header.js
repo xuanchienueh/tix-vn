@@ -1,20 +1,20 @@
 import React, { Suspense } from "react";
 import { Select } from "antd";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { USER_LOGIN } from "../../../util/settings/config";
 import DropdownUser from "./DropdownUser";
+import { useSelector } from "react-redux";
 
 const { Option } = Select;
-const infoUser = JSON.parse(localStorage.getItem(USER_LOGIN));
 
 function Header() {
   const navigate = useNavigate();
+  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
+
   const handleChange = (value) => i18n.changeLanguage(value);
   let { t, i18n } = useTranslation();
   const renderUserName = () => {
-    const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
-    return userLogin ? (
+    return Object.keys(userLogin).length > 0 ? (
       <DropdownUser />
     ) : (
       <>
@@ -65,11 +65,29 @@ function Header() {
               {t("Contact")}
             </a>
           </li>
-          {infoUser && infoUser.maLoaiNguoiDung === "QuanTri" && (
+
+          {userLogin && userLogin.maLoaiNguoiDung === "QuanTri" && (
             <li className="flex">
-              <NavLink to="/admin/films" className="nav-link">
+              <NavLink to="/admin/films" className="nav-link d-none d-lg-block">
                 Admin
               </NavLink>
+            </li>
+          )}
+
+          {Object.keys(userLogin).length > 0 ? (
+            <li
+              className="nav-item dropdown d-block d-lg-none"
+              onClick={() => localStorage.clear()}
+            >
+              <a href="/" className="nav-link">
+                {t("Logout")}
+              </a>
+            </li>
+          ) : (
+            <li className="nav-item dropdown d-block d-lg-none">
+              <Link to="/login" className="nav-link">
+                {t("Login")}
+              </Link>
             </li>
           )}
         </ul>
