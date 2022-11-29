@@ -51,7 +51,7 @@ const AdminTemplace = (props) => {
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
           <NavLink to="/home" className="logo">
             <img
-              src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png"
+              src="https://cdn.akamai.steamstatic.com/steam/apps/1067900/header.jpg?t=1584846243"
               width={200}
             />
           </NavLink>
